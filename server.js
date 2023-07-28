@@ -5,6 +5,7 @@ import morgan from "morgan";
 
 //local imports
 import connectDB from "./config/database.js";
+import authRoute from "./routes/authRoute.js";
 
 //rest object
 const app = express();
@@ -21,6 +22,9 @@ connectDB();
 
 //port
 const PORT = process.env.PORT || 8080;
+
+//routes
+app.use("/api/v1/auth", authRoute);
 
 app.get("/", (req, res) => {
     res.send("<h1>Welcome to E-Commerce App</h1>");
