@@ -12,6 +12,7 @@ export const requireSignIn = async (req, res, next) => {
             });
         }
         const decode = JWT.verify(token, process.env.JWT_SECRET);
+        // Set the user information given in token payload
         req.user = decode;
         next();
     } catch (error) {
