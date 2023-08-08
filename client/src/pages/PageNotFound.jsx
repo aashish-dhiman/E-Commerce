@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const PageNotFound = () => {
     return (
@@ -15,12 +15,12 @@ const PageNotFound = () => {
                                 Sorry about that! Please visit our homepage to
                                 get where you need to go.
                             </p>
-                            <NavLink
+                            <Link
                                 to="/"
                                 className="sm:w-full lg:w-auto border rounded-md py-2 px-4 text-center bg-indigo-600 text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-700 focus:ring-opacity-50"
                             >
                                 Take me there!
-                            </NavLink>
+                            </Link>
                         </div>
                     </div>
                     <div>
