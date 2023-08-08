@@ -6,7 +6,7 @@ export default {
             colors: {
                 primaryBlack: "#00000080",
                 secondaryBlack:"#00000333", 
-                hover: "#708090",
+                textHover: "#666666",
             },
         },
     },

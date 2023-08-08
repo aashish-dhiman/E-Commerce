@@ -9,33 +9,3 @@
 body {
     font-family: "Inter", sans-serif;
 }
-
-
-
-@media only screen and (max-width: 768px) {
-    .navigation {
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        max-width: 100vw;
-        padding: 5px 0 5px 0;
-    }
-
-    .menu {
-        width: 15rem;
-        height: 100%;
-        position: absolute;
-        top: 0;
-        right: 0;
-        background: #fff;
-        z-index: 200;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        line-height: 30px;
-    }
-
-    .show__menu {
-        display: block;
-    }
-}
