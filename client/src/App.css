@@ -1,0 +1,41 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@300;400;500;600;700;800&family=Roboto&family=Ubuntu:wght@300;400&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Inter", sans-serif;
+}
+
+
+
+@media only screen and (max-width: 768px) {
+    .navigation {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        max-width: 100vw;
+        padding: 5px 0 5px 0;
+    }
+
+    .menu {
+        width: 15rem;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        right: 0;
+        background: #fff;
+        z-index: 200;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        line-height: 30px;
+    }
+
+    .show__menu {
+        display: block;
+    }
+}

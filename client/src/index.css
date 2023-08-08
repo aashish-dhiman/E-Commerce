@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    section {
+        @apply py-[75px];
+    }
+}
+
+@layer components {
+    .container {
+        @apply px-5 max-w-[100vw];
+    }
+
+    .active {
+        @apply 
+    }
+
+    .pending {
+        @apply 
+    }
+
+    .hover{
+        @apply hover:text-[#7a7c81];
+    }
+}
