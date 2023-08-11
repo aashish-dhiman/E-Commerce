@@ -5,6 +5,7 @@ const Home = () => {
     return (
         <>
             <SeoMetadata title="Home - Flipkart" />
+            <div className="min-h-[60vh]"></div>
         </>
     );
 };

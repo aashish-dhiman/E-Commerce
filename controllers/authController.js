@@ -19,8 +19,8 @@ export const registerController = async (req, res) => {
         if (existingUser) {
             return res.status(200).send({
                 success: false,
-                    message: "Email already registered!",
-                error: "EmailConflict",
+                message: "Email already registered!",
+                errorType: "emailConflict",
             });
         }
 
@@ -60,6 +60,7 @@ export const loginController = async (req, res) => {
             return res.status(401).send({
                 success: false,
                 message: "Invalid username or password",
+                errorType: "invalidCredentials",
             });
         }
 
@@ -70,6 +71,7 @@ export const loginController = async (req, res) => {
             return res.status(401).send({
                 success: false,
                 message: "User Not Registered!",
+                errorType: "invalidUser",
             });
         }
 
@@ -79,6 +81,7 @@ export const loginController = async (req, res) => {
             return res.status(401).send({
                 success: false,
                 message: "Invalid Password!",
+                errorType: "invalidPassword",
             });
         }
 
@@ -92,7 +95,7 @@ export const loginController = async (req, res) => {
         //SUCCESS RESPONSE
         res.status(200).send({
             success: true,
-            message: "LoggedIn Successfully!",
+            message: "Logged in Successfully!",
             user: {
                 name: user.name,
                 email: user.email,
