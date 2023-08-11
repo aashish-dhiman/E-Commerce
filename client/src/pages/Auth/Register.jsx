@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import auth from "../../assets/images/auth.png";
 import { Link } from "react-router-dom";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
@@ -8,7 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 const Register = () => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
-    const [mobile, setMobile] = useState("");
+    const [phone, setPhone] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [address, setAddress] = useState("");
@@ -17,28 +19,46 @@ const Register = () => {
     const handlePasswordToggle = () => {
         setShowPassword(!showPassword);
     };
-    const notify = () =>
-        toast.error("Password do not match!", {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-        });
-    const handleFormSubmit = (e) => {
+
+    const navigate = useNavigate();
+
+    const handleFormSubmit = async (e) => {
         e.preventDefault();
+        try {
+            if (password !== confirmPassword) {
+                toast.error("Password does not match!");
+                return;
+            }
+            const response = await axios.post("/api/v1/auth/register", {
+                name,
+                email,
+                phone,
+                password,
+                address,
+            });
+            console.log(response);
 
-        // Check if passwords match
-        if (password !== confirmPassword) {
-            // alert("Passwords do not match");
-            notify();
-            return;
+            if (response.status === 201) {
+                // Registration successful
+                toast.success("Registered Successfully!");
+                navigate("/login");
+                // console.log(
+                //     "Form submitted with details:",
+                //     name,
+                //     email,
+                //     phone,
+                //     address
+                // );
+            } else if (response.status === 200) {
+                // Email already registered
+                toast.error("Email is already registered! Please Login...");
+                navigate("/login");
+            } else if (response.status === 500) {
+                toast.error("Something went wrong! Please try after sometime.");
+            }
+        } catch (error) {
+            console.error("Error:", error);
         }
-
-        console.log("Form submitted");
     };
     return (
         <div className="container bg-primaryBg mt-5 sm:mt-0 md:mt-0 lg:mt-0 py-[2px]">
@@ -104,7 +124,7 @@ const Register = () => {
                                         className="peer placeholder-transparent h-8 w-full border-b-2 text-gray-900 text-sm focus:outline-none focus:border-blue-400"
                                         placeholder="Email address"
                                         required
-                                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" // Email pattern
+                                        pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" // Email pattern
                                     />
                                     <label
                                         htmlFor="email"
@@ -119,9 +139,9 @@ const Register = () => {
                                         id="phone"
                                         name="phone"
                                         type="text"
-                                        value={mobile}
+                                        value={phone}
                                         onChange={(e) =>
-                                            setMobile(e.target.value)
+                                            setPhone(e.target.value)
                                         }
                                         className="peer placeholder-transparent h-8 w-full border-b-2 text-gray-900 text-sm focus:outline-none focus:border-blue-400"
                                         placeholder="Mobile Number"

@@ -2,6 +2,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import morgan from "morgan";
+import cors from "cors";
 
 //local imports
 import connectDB from "./config/database.js";
@@ -14,6 +15,7 @@ const app = express();
 dotenv.config();
 
 //middleware
+app.use(cors());
 app.use(express.json());
 app.use(morgan("dev"));
 

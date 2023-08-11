@@ -5,21 +5,22 @@ import JWT from "jsonwebtoken";
 //POST REGISTER
 export const registerController = async (req, res) => {
     try {
-        const { name, email, password, phone, address } = req.body;
+        const { name, email, phone, password, address } = req.body;
 
         //setup validations
-        if (!name) res.send({ error: "Name is Required" });
-        if (!email) res.send({ error: "Email is Required" });
-        if (!password) res.send({ error: "Password is Required" });
-        if (!phone) res.send({ error: "Mobile No. is Required" });
-        if (!address) res.send({ error: "Address is Required" });
+        if (!name) res.send({ message: "Name is Required" });
+        if (!email) res.send({ message: "Email is Required" });
+        if (!password) res.send({ message: "Password is Required" });
+        if (!phone) res.send({ message: "Phone No. is Required" });
+        if (!address) res.send({ message: "Address is Required" });
 
         //check for existing users
         const existingUser = await userModel.findOne({ email });
         if (existingUser) {
             return res.status(200).send({
-                success: true,
-                message: "Email already registered! Please Login...",
+                success: false,
+                    message: "Email already registered!",
+                error: "EmailConflict",
             });
         }
 
