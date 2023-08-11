@@ -58,7 +58,7 @@ const Header = () => {
                     </div>
 
                     {/* secondary div */}
-                    <div className="flex items-center gap-[20px] w-[50%]">
+                    <div className="flex items-center justify-between gap-[20px] w-[50%]">
                         {/* home */}
                         <div className="flex items-center group">
                             <NavLink to="/" className="flex items-center gap-1">
