@@ -13,12 +13,12 @@ const Header = () => {
     const toggleDropdown = () => {
         setDropdownOpen(!isDropdownOpen);
     };
+    const closeDropdown = () => {
+        setDropdownOpen(false);
+    };
     return (
         <header>
-            <div
-                className="container"
-                onMouseLeave={isDropdownOpen && toggleDropdown}
-            >
+            <div className="container" onMouseLeave={closeDropdown}>
                 <div className=" flex items-center justify-between gap-5 w-[100%] flex-col md:flex-row sm:flex-row lg:flex-row">
                     {/* primary div */}
                     <div className=" sm:h-[100px] md:h-[60px] lg:h-[60px] flex items-center justify-between w-[100%] max-w-[650px]">
@@ -100,7 +100,7 @@ const Header = () => {
                                     <ul>
                                         <li className="p-1 hover:bg-slate-100 rounded-md">
                                             <Link
-                                                to="/logout"
+                                                to="/user"
                                                 className="flex items-center gap-1"
                                             >
                                                 <AiOutlineUser className="text-[12px]" />
@@ -128,6 +128,17 @@ const Header = () => {
                                                 <MdLogin className="text-[12px]" />
                                                 <span className="text-[14px]">
                                                     Login
+                                                </span>
+                                            </Link>
+                                        </li>
+                                        <li className="p-1 hover:bg-slate-100 rounded-md">
+                                            <Link
+                                                to="/register"
+                                                className="flex items-center gap-1"
+                                            >
+                                                <MdLogin className="text-[12px]" />
+                                                <span className="text-[14px]">
+                                                    Register
                                                 </span>
                                             </Link>
                                         </li>

@@ -4,9 +4,13 @@ export default {
     theme: {
         extend: {
             colors: {
-                primaryBlack: "#00000080",
-                secondaryBlack:"#00000333", 
+                primaryBlue: "#2874f0",
+                orange: "#fb641b",
+                primaryBg: "#f1f3f6",
                 textHover: "#666666",
+            },
+            boxShadow: {
+                primaryShadow: "0px_0px_8px_2px_rgba(212,212,212,0.6)",
             },
         },
     },

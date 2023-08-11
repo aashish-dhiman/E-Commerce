@@ -4,7 +4,7 @@ import SeoMetadata from "../SEO/seoMetadata";
 const Home = () => {
     return (
         <>
-            <SeoMetadata title="Home-Flipkart" />
+            <SeoMetadata title="Home - Flipkart" />
         </>
     );
 };
