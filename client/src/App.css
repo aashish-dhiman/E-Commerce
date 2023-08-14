@@ -9,3 +9,14 @@
 body {
     font-family: "Inter", sans-serif;
 }
+.sticky__header {
+    width: 100%;
+    will-change: position;
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 99999;
+    box-shadow: 3px 3px -8px 3px #ddd;
+    transition: all 0.3s ease-in;
+    background-color: white;
+}

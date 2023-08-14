@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { NavLink, Link } from "react-router-dom";
 import logo from "../../assets/images/logo.png";
 import { BiHomeSmile, BiCategoryAlt } from "react-icons/bi";
@@ -9,6 +9,7 @@ import { MdLogin, MdLogout } from "react-icons/md";
 
 const Header = () => {
     const [isDropdownOpen, setDropdownOpen] = useState(false);
+    const headerRef = useRef(null);
 
     const toggleDropdown = () => {
         setDropdownOpen(!isDropdownOpen);
@@ -16,16 +17,40 @@ const Header = () => {
     const closeDropdown = () => {
         setDropdownOpen(false);
     };
+
+    const handleStickyHeader = () => {
+        if (
+            document.body.scrollTop > 10 ||
+            document.documentElement.scrollTop > 10
+        ) {
+            headerRef.current.classList.add("sticky__header");
+        } else {
+            headerRef.current.classList.remove("sticky__header");
+        }
+    };
+
+    useEffect(() => {
+        window.addEventListener("scroll", handleStickyHeader);
+        //clean up function
+        return () => {
+            window.removeEventListener("scroll", handleStickyHeader);
+        };
+    });
     return (
-        <header>
+        <header ref={headerRef}>
             <div className="container" onMouseLeave={closeDropdown}>
                 <div className=" flex items-center justify-between gap-5 w-[100%] flex-col md:flex-row sm:flex-row lg:flex-row">
                     {/* primary div */}
                     <div className=" sm:h-[100px] md:h-[60px] lg:h-[60px] flex items-center justify-between w-[100%] max-w-[650px]">
                         <div className=" flex gap-[20px] items-center w-[100%] flex-col md:flex-row sm:flex-row lg:flex-row">
                             {/* logo */}
-
-                            <img src={logo} alt="logo" className=" max-h-fit" />
+                            <Link to="/">
+                                <img
+                                    src={logo}
+                                    alt="logo"
+                                    className=" max-h-fit"
+                                />
+                            </Link>
 
                             {/* search bar*/}
                             <div className="w-[100%]">
