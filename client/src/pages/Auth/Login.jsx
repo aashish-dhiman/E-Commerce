@@ -1,16 +1,19 @@
 import { useState } from "react";
-import auth from "../../assets/images/auth.png";
+import authImg from "../../assets/images/auth.png";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import SeoMetadata from "../../SEO/seoMetadata";
+import { useAuth } from "../../context/auth";
 
 const Login = () => {
+    //hooks->
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
+    const [auth, setAuth] = useAuth();
 
     const handlePasswordToggle = () => {
         setShowPassword(!showPassword);
@@ -26,10 +29,17 @@ const Login = () => {
                 email,
                 password,
             });
-            console.log(response);
+            // console.log(response);
 
             if (response.status === 200) {
                 toast.success("Logged in Successfully!");
+                setAuth({
+                    ...auth,
+                    user: response.data.user,
+                    token: response.data.token,
+                });
+                // Store token in localStorage
+                localStorage.setItem("auth", JSON.stringify(response.data));
                 navigate("/");
             }
         } catch (error) {
@@ -53,7 +63,7 @@ const Login = () => {
         <>
             <SeoMetadata
                 title="Log in - Existing User"
-                description="Log in user with details"
+                description="Log in with user details"
             />
 
             <div className="container bg-primaryBg mt-5 sm:mt-0 md:mt-0 lg:mt-0 py-[2px]">
@@ -71,7 +81,7 @@ const Login = () => {
                                 </p>
                             </div>
                             <div className="mt-8">
-                                <img src={auth} alt="auth image" />
+                                <img src={authImg} alt="auth image" />
                             </div>
                         </div>
                     </div>

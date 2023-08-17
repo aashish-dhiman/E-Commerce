@@ -6,16 +6,30 @@ import { AiOutlineUser, AiOutlineHeart } from "react-icons/ai";
 import { BsSearch, BsCart2 } from "react-icons/bs";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { MdLogin, MdLogout } from "react-icons/md";
+import { useAuth } from "../../context/auth";
+import { toast } from "react-toastify";
 
 const Header = () => {
     const [isDropdownOpen, setDropdownOpen] = useState(false);
     const headerRef = useRef(null);
+
+    const [auth, setAuth] = useAuth();
 
     const toggleDropdown = () => {
         setDropdownOpen(!isDropdownOpen);
     };
     const closeDropdown = () => {
         setDropdownOpen(false);
+    };
+
+    const handleLogout = () => {
+        setAuth({
+            ...auth,
+            user: null,
+            token: "",
+        });
+        localStorage.removeItem("auth");
+        toast.success("Logged out Successfully!");
     };
 
     const handleStickyHeader = () => {
@@ -167,9 +181,10 @@ const Header = () => {
                                                 </span>
                                             </Link>
                                         </li>
-                                        <li className="p-1 hover:bg-slate-100 rounded-md hidden">
+                                        <li className="p-1 hover:bg-slate-100 rounded-md ">
                                             <Link
-                                                to="/logout"
+                                                onClick={handleLogout}
+                                                to="/login"
                                                 className="flex items-center gap-1"
                                             >
                                                 <MdLogout className="text-[12px]" />

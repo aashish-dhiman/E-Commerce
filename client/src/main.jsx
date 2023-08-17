@@ -5,12 +5,15 @@ import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { AuthProvider } from "./context/auth.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
     <React.StrictMode>
-        <BrowserRouter scrollRestoration="auto">
-            <App />
-            <ToastContainer />
-        </BrowserRouter>
+        <AuthProvider>
+            <BrowserRouter scrollRestoration="auto">
+                <App />
+                <ToastContainer />
+            </BrowserRouter>
+        </AuthProvider>
     </React.StrictMode>
 );
