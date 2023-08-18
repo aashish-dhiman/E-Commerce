@@ -7,7 +7,7 @@ const Home = () => {
     return (
         <>
             <SeoMetadata title="Home - Flipkart" />
-            <div className="min-h-[60vh]">{JSON.stringify(auth)}</div>
+            <pre className="min-h-[60vh]">{JSON.stringify(auth,null,3)}</pre>
         </>
     );
 };

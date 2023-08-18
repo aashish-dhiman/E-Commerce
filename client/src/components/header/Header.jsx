@@ -120,27 +120,65 @@ const Header = () => {
                             </NavLink>
                         </div>
                         {/* Account */}
-                        <div className="flex items-center relative cursor-pointer group hover:bg-slate-100 rounded-md">
-                            <div
-                                className="flex items-center gap-1 "
-                                onMouseEnter={toggleDropdown}
-                            >
-                                <AiOutlineUser className="text-[20px]" />
-                                <span className="text-[16px] hidden md:block lg:block">
-                                    <p className="text-[16px]"> Account</p>
+                        <div
+                            className={`flex items-center relative cursor-pointer group ${
+                                auth.user
+                                    ? "hover:bg-slate-100"
+                                    : "hover:bg-primaryBlue"
+                            } rounded-md p-1`}
+                            onMouseEnter={toggleDropdown}
+                        >
+                            <div className="flex items-center gap-1 ">
+                                <AiOutlineUser
+                                    className={`text-[20px] ${
+                                        !auth.user && "group-hover:text-white"
+                                    }`}
+                                />
+                                <span className="text-[16px] w-[50px] max-w-fit hidden md:block lg:block ">
+                                    {auth.user ? (
+                                        <p className="text-[14px]">
+                                            {auth.user.name.split(" ")[0]}
+                                        </p>
+                                    ) : (
+                                        <Link
+                                            to="/login"
+                                            className=" text-[14px] group-hover:text-white"
+                                        >
+                                            Sign in
+                                        </Link>
+                                    )}
                                 </span>
                                 <span>
-                                    <RiArrowDropDownLine className="group-hover:rotate-[180deg] transition-all" />
+                                    <RiArrowDropDownLine
+                                        className={`group-hover:rotate-[180deg] transition-all ${
+                                            !auth.user &&
+                                            "group-hover:text-white"
+                                        }`}
+                                    />
                                 </span>
                             </div>
+
                             {/* dropdown menu */}
                             {isDropdownOpen && (
-                                <div className="absolute top-[28px] -left-[16px] bg-white border border-gray-300 rounded-md p-2 z-10 w-[140px] transition-all flex flex-col">
+                                <div className="absolute top-[30px] -left-[2px] bg-white border border-gray-300 rounded-md p-2 z-10 w-[140px] transition-all flex flex-col">
                                     <ul>
+                                        {!auth.user && (
+                                            <li className="p-1 hover:bg-slate-100 rounded-md">
+                                                <Link
+                                                    to="/register"
+                                                    className="flex items-center gap-2"
+                                                >
+                                                    <MdLogin className="text-[12px]" />
+                                                    <span className="text-[14px]">
+                                                        Sign up
+                                                    </span>
+                                                </Link>
+                                            </li>
+                                        )}
                                         <li className="p-1 hover:bg-slate-100 rounded-md">
                                             <Link
                                                 to="/user"
-                                                className="flex items-center gap-1"
+                                                className="flex items-center gap-2"
                                             >
                                                 <AiOutlineUser className="text-[12px]" />
                                                 <span className="text-[14px]">
@@ -151,7 +189,7 @@ const Header = () => {
                                         <li className="p-1 hover:bg-slate-100 rounded-md">
                                             <Link
                                                 to="/wishlist"
-                                                className="flex items-center gap-1"
+                                                className="flex items-center gap-2"
                                             >
                                                 <AiOutlineHeart className="text-[12px]" />
                                                 <span className="text-[14px]">
@@ -159,40 +197,21 @@ const Header = () => {
                                                 </span>
                                             </Link>
                                         </li>
-                                        <li className="p-1 hover:bg-slate-100 rounded-md">
-                                            <Link
-                                                to="/login"
-                                                className="flex items-center gap-1"
-                                            >
-                                                <MdLogin className="text-[12px]" />
-                                                <span className="text-[14px]">
-                                                    Login
-                                                </span>
-                                            </Link>
-                                        </li>
-                                        <li className="p-1 hover:bg-slate-100 rounded-md">
-                                            <Link
-                                                to="/register"
-                                                className="flex items-center gap-1"
-                                            >
-                                                <MdLogin className="text-[12px]" />
-                                                <span className="text-[14px]">
-                                                    Register
-                                                </span>
-                                            </Link>
-                                        </li>
-                                        <li className="p-1 hover:bg-slate-100 rounded-md ">
-                                            <Link
-                                                onClick={handleLogout}
-                                                to="/login"
-                                                className="flex items-center gap-1"
-                                            >
-                                                <MdLogout className="text-[12px]" />
-                                                <span className="text-[14px]">
-                                                    Logout
-                                                </span>
-                                            </Link>
-                                        </li>
+
+                                        {auth.user && (
+                                            <li className="p-1 hover:bg-slate-100 rounded-md ">
+                                                <Link
+                                                    onClick={handleLogout}
+                                                    to="/login"
+                                                    className="flex items-center gap-2"
+                                                >
+                                                    <MdLogout className="text-[12px]" />
+                                                    <span className="text-[14px]">
+                                                        Logout
+                                                    </span>
+                                                </Link>
+                                            </li>
+                                        )}
                                     </ul>
                                 </div>
                             )}
