@@ -119,6 +119,7 @@ const Header = () => {
                                 </span>
                             </NavLink>
                         </div>
+
                         {/* Account */}
                         <div
                             className={`flex items-center relative cursor-pointer group ${
@@ -128,35 +129,39 @@ const Header = () => {
                             } rounded-md p-1`}
                             onMouseEnter={toggleDropdown}
                         >
-                            <div className="flex items-center gap-1 ">
-                                <AiOutlineUser
-                                    className={`text-[20px] ${
-                                        !auth.user && "group-hover:text-white"
-                                    }`}
-                                />
-                                <span className="text-[16px] w-[50px] max-w-fit hidden md:block lg:block ">
-                                    {auth.user ? (
+                            {auth.user ? (
+                                <div className="flex items-center gap-1 ">
+                                    <AiOutlineUser className="text-[20px] " />
+                                    <span className="text-[16px] w-[50px] max-w-fit hidden md:block lg:block ">
                                         <p className="text-[14px]">
                                             {auth.user.name.split(" ")[0]}
                                         </p>
-                                    ) : (
-                                        <Link
-                                            to="/login"
-                                            className=" text-[14px] group-hover:text-white"
-                                        >
-                                            Sign in
-                                        </Link>
-                                    )}
-                                </span>
-                                <span>
-                                    <RiArrowDropDownLine
-                                        className={`group-hover:rotate-[180deg] transition-all ${
-                                            !auth.user &&
-                                            "group-hover:text-white"
-                                        }`}
-                                    />
-                                </span>
-                            </div>
+                                    </span>
+                                    <span>
+                                        <RiArrowDropDownLine className="group-hover:rotate-[180deg] transition-all " />
+                                    </span>
+                                </div>
+                            ) : (
+                                <Link
+                                    to="/login"
+                                    className=" text-[14px] group-hover:text-white"
+                                >
+                                    <div className="flex items-center gap-1 ">
+                                        <AiOutlineUser className="text-[20px] group-hover:text-white" />
+                                        <span className="text-[14px] w-[50px] max-w-fit hidden md:block lg:block ">
+                                            <p className="text-[14px]">
+                                                Sign in
+                                            </p>
+                                        </span>
+                                        <span>
+                                            <RiArrowDropDownLine
+                                                className="group-hover:rotate-[180deg] transition-all 
+                                                    group-hover:text-white"
+                                            />
+                                        </span>
+                                    </div>
+                                </Link>
+                            )}
 
                             {/* dropdown menu */}
                             {isDropdownOpen && (
