@@ -97,6 +97,7 @@ export const loginController = async (req, res) => {
             success: true,
             message: "Logged in Successfully!",
             user: {
+                id: user._id,
                 name: user.name,
                 email: user.email,
                 phone: user.phone,
@@ -109,6 +110,97 @@ export const loginController = async (req, res) => {
         res.status(500).send({
             success: false,
             message: "Error in Login",
+            error,
+        });
+    }
+};
+
+//USER EXIST
+export const userCheckController = async (req, res) => {
+    try {
+        const { email } = req.body;
+
+        //Checking the EMAIL and PASSWORD
+        if (!email) {
+            return res.status(401).send({
+                success: false,
+                message: "Invalid username",
+                errorType: "invalidCredentials",
+            });
+        }
+
+        //FINDING THE USER
+        const user = await userModel.findOne({ email });
+
+        if (!user) {
+            return res.status(401).send({
+                success: false,
+                message: "User Not Registered!",
+                errorType: "invalidUser",
+            });
+        }
+
+        //SUCCESS RESPONSE
+        res.status(200).send({
+            success: true,
+            message: "User Found!",
+        });
+    } catch (error) {
+        console.log("User Check Error: " + error);
+        res.status(500).send({
+            success: false,
+            message: "Error in User Checking",
+            error,
+        });
+    }
+};
+
+// POST Forgot Password
+export const forgotPasswordController = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+
+        //Checking the EMAIL and PASSWORD
+        if (!email || !password) {
+            return res.status(401).send({
+                success: false,
+                message: "Invalid username or password",
+                errorType: "invalidCredentials",
+            });
+        }
+
+        //FINDING THE USER
+        const user = await userModel.findOne({ email });
+
+        if (!user) {
+            return res.status(401).send({
+                success: false,
+                message: "User Not Registered!",
+                errorType: "invalidUser",
+            });
+        }
+        const newPassword = await hashPassword(password);
+
+        //IF USER EXISTS-
+        console.log(email, newPassword);
+        const response = await userModel.findOneAndUpdate(
+            { email: email },
+            {
+                password: newPassword,
+            }
+        );
+
+        //SUCCESS RESPONSE
+        res.status(200).send({
+            success: true,
+            message: "Password Reset Successfully!",
+            response,
+        });
+    } catch (error) {
+        console.log("Forgot Password Error: " + error);
+        res.status(500).send({
+            success: false,
+            message: "Error in Forgot Password",
             error,
         });
     }

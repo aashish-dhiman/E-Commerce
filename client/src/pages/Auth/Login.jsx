@@ -1,7 +1,7 @@
 import { useState } from "react";
 import authImg from "../../assets/images/auth.png";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -14,6 +14,7 @@ const Login = () => {
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
     const [auth, setAuth] = useAuth();
+    const location = useLocation();
 
     const handlePasswordToggle = () => {
         setShowPassword(!showPassword);
@@ -40,7 +41,7 @@ const Login = () => {
                 });
                 // Store token in localStorage
                 localStorage.setItem("auth", JSON.stringify(response.data));
-                navigate("/");
+                navigate(location.state || "/");
             }
         } catch (error) {
             console.error("Error:", error);
@@ -109,7 +110,7 @@ const Login = () => {
                                             className="peer placeholder-transparent h-8 w-full border-b-2 text-gray-900 text-sm focus:outline-none focus:border-blue-400"
                                             placeholder="Email address"
                                             required
-                                            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" // Email pattern
+                                            pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" // Email pattern
                                         />
                                         <label
                                             htmlFor="email"
@@ -171,6 +172,14 @@ const Login = () => {
                             </form>
                         </div>
 
+                        <div className="relative -mt-6 w-full text-center">
+                            <Link
+                                to="/forgot-password"
+                                className=" text-primaryBlue font-[500] text-[12px] "
+                            >
+                                Forgot Password ?
+                            </Link>
+                        </div>
                         <div className="relative mt-4 w-full text-center">
                             <Link
                                 to="/register"

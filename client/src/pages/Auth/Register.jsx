@@ -44,13 +44,6 @@ const Register = () => {
                 // Registration successful
                 toast.success("Registered Successfully!");
                 navigate("/login");
-                // console.log(
-                //     "Form submitted with details:",
-                //     name,
-                //     email,
-                //     phone,
-                //     address
-                // );
             }
         } catch (error) {
             console.error("Error:", error);

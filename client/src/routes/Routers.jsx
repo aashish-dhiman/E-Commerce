@@ -3,6 +3,11 @@ import Home from "../pages/Home";
 import PageNotFound from "./../pages/PageNotFound";
 import Login from "../pages/Auth/Login";
 import Register from "../pages/Auth/Register";
+import ForgotPassword from "../pages/Auth/ForgotPassword";
+import Dashboard from "../pages/user/Dashboard";
+import Wishlist from "../pages/user/Wishlist";
+import PrivateRoute from "./PrivateRoute";
+import Orders from "../pages/user/Orders";
 
 const Routers = () => {
     return (
@@ -10,6 +15,16 @@ const Routers = () => {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/dashboard" element={<PrivateRoute />}>
+                <Route path="" element={<Dashboard />} />
+            </Route>
+            <Route path="/wishlist" element={<PrivateRoute />}>
+                <Route path="" element={<Wishlist />} />
+            </Route>
+            <Route path="/orders" element={<PrivateRoute />}>
+                <Route path="" element={<Orders />} />
+            </Route>
             <Route path="*" element={<PageNotFound />} />
         </Routes>
     );

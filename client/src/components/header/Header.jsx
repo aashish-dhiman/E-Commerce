@@ -3,7 +3,7 @@ import { NavLink, Link } from "react-router-dom";
 import logo from "../../assets/images/logo.png";
 import { BiHomeSmile, BiCategoryAlt } from "react-icons/bi";
 import { AiOutlineUser, AiOutlineHeart } from "react-icons/ai";
-import { BsSearch, BsCart2 } from "react-icons/bs";
+import { BsSearch, BsCart2, BsBox } from "react-icons/bs";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { MdLogin, MdLogout } from "react-icons/md";
 import { useAuth } from "../../context/auth";
@@ -182,12 +182,12 @@ const Header = () => {
                                         )}
                                         <li className="p-1 hover:bg-slate-100 rounded-md">
                                             <Link
-                                                to="/user"
+                                                to="/dashboard"
                                                 className="flex items-center gap-2"
                                             >
                                                 <AiOutlineUser className="text-[12px]" />
                                                 <span className="text-[14px]">
-                                                    My Account
+                                                    My Profile
                                                 </span>
                                             </Link>
                                         </li>
@@ -199,6 +199,17 @@ const Header = () => {
                                                 <AiOutlineHeart className="text-[12px]" />
                                                 <span className="text-[14px]">
                                                     Wishlist
+                                                </span>
+                                            </Link>
+                                        </li>
+                                        <li className="p-1 hover:bg-slate-100 rounded-md">
+                                            <Link
+                                                to="/orders"
+                                                className="flex items-center gap-2"
+                                            >
+                                                <BsBox className="text-[12px]" />
+                                                <span className="text-[14px]">
+                                                    Orders
                                                 </span>
                                             </Link>
                                         </li>
