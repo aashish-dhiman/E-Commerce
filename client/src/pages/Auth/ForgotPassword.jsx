@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import SeoMetadata from "../../SEO/seoMetadata";
 import { useNavigate } from "react-router-dom";
+import Spinner from "./../../components/Spinner";
 
 const ForgotPassword = () => {
     //hooks->
@@ -15,6 +16,7 @@ const ForgotPassword = () => {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
     const [userFound, setUserFound] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const handlePasswordToggle = () => {
         setShowPassword(!showPassword);
@@ -25,6 +27,7 @@ const ForgotPassword = () => {
     //form submission handler
     const handleFormSubmit = async (e) => {
         e.preventDefault();
+        setIsSubmitting(true);
         try {
             if (userFound) {
                 if (password !== confirmPassword) {
@@ -41,15 +44,16 @@ const ForgotPassword = () => {
                 console.log(response);
 
                 if (response.status === 200) {
-                    toast.success("Password Reset Successfully!");
-                    navigate("/login");
                     setUserFound(false);
+                    toast.success("Password Reset Successfully!", {
+                        toastId: "passwordReset",
+                    });
+                    navigate("/login");
                 }
             } else {
                 const response = await axios.post("/api/v1/auth/user-exist", {
                     email,
                 });
-                // console.log(response);
 
                 if (response.status === 200) {
                     setUserFound(true);
@@ -63,7 +67,12 @@ const ForgotPassword = () => {
                 toast.error("User not Found!");
             //server error
             error.response?.status === 500 &&
-                toast.error("Something went wrong! Please try after sometime.");
+                toast.error(
+                    "Something went wrong! Please try after sometime."
+                ) &&
+                navigate("/forgot-password");
+        } finally {
+            setIsSubmitting(false);
         }
     };
 
@@ -96,122 +105,128 @@ const ForgotPassword = () => {
                     </div>
 
                     {/* forgot password form */}
-                    <div className="p-10 w-full h-full sm:w-[60%] md:w-[60%] lg:w-[60%] flex flex-col gap-y-10 ">
-                        <div className=" h-full w-full">
-                            <form
-                                action="/login"
-                                method="post"
-                                className="w-[90%] mx-auto transition-all"
-                                onSubmit={handleFormSubmit}
-                            >
-                                <div className="text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7 pt-3 ">
-                                    <div className="relative">
-                                        <input
-                                            autoComplete="on"
-                                            id="email"
-                                            name="email"
-                                            type="email"
-                                            value={email}
-                                            onChange={(e) =>
-                                                setEmail(e.target.value)
-                                            }
-                                            className="peer placeholder-transparent h-8 w-full border-b-2 text-gray-900 text-sm focus:outline-none focus:border-blue-400"
-                                            placeholder="Email address"
-                                            required
-                                            pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" // Email pattern
-                                        />
-                                        <label
-                                            htmlFor="email"
-                                            className="absolute left-0 -top-3 text-gray-600 text-xs peer-placeholder-shown:text-sm peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3 peer-focus:text-gray-600 peer-focus:text-xs"
-                                        >
-                                            Enter Your Email Address
-                                        </label>
-                                    </div>
-                                    {userFound && (
-                                        <>
-                                            <div className="relative">
-                                                <input
-                                                    autoComplete="off"
-                                                    id="password"
-                                                    name="password"
-                                                    type="password"
-                                                    value={password}
-                                                    onChange={(e) =>
-                                                        setPassword(
-                                                            e.target.value
-                                                        )
-                                                    }
-                                                    className="peer placeholder-transparent h-8 w-full border-b-2 focus:border-blue-400 text-gray-900 focus:outline-none text-sm"
-                                                    placeholder="Password"
-                                                    required
-                                                    minLength="5"
-                                                />
-                                                <label
-                                                    htmlFor="password"
-                                                    className="absolute left-0 -top-3 text-gray-600 text-xs peer-placeholder-shown:text-sm peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3 peer-focus:text-gray-600 peer-focus:text-xs"
-                                                >
-                                                    New Password
-                                                </label>
-                                            </div>
+                    <div className="relative p-10 w-full h-full sm:w-[60%] md:w-[60%] lg:w-[60%] flex flex-col gap-y-10 ">
+                        {isSubmitting ? (
+                            <div className="flex items-center justify-center ">
+                                <Spinner />
+                            </div>
+                        ) : (
+                            <div className=" h-full w-full">
+                                <form
+                                    action="/login"
+                                    method="post"
+                                    className="w-[90%] mx-auto transition-all"
+                                    onSubmit={handleFormSubmit}
+                                >
+                                    <div className="text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7 pt-3 ">
+                                        <div className="relative">
+                                            <input
+                                                autoComplete="on"
+                                                id="email"
+                                                name="email"
+                                                type="email"
+                                                value={email}
+                                                onChange={(e) =>
+                                                    setEmail(e.target.value)
+                                                }
+                                                className="peer placeholder-transparent h-8 w-full border-b-2 text-gray-900 text-sm focus:outline-none focus:border-blue-400"
+                                                placeholder="Email address"
+                                                required
+                                                pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" // Email pattern
+                                            />
+                                            <label
+                                                htmlFor="email"
+                                                className="absolute left-0 -top-3 text-gray-600 text-xs peer-placeholder-shown:text-sm peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3 peer-focus:text-gray-600 peer-focus:text-xs"
+                                            >
+                                                Enter Your Email Address
+                                            </label>
+                                        </div>
+                                        {userFound && (
+                                            <>
+                                                <div className="relative">
+                                                    <input
+                                                        autoComplete="off"
+                                                        id="password"
+                                                        name="password"
+                                                        type="password"
+                                                        value={password}
+                                                        onChange={(e) =>
+                                                            setPassword(
+                                                                e.target.value
+                                                            )
+                                                        }
+                                                        className="peer placeholder-transparent h-8 w-full border-b-2 focus:border-blue-400 text-gray-900 focus:outline-none text-sm"
+                                                        placeholder="Password"
+                                                        required
+                                                        minLength="5"
+                                                    />
+                                                    <label
+                                                        htmlFor="password"
+                                                        className="absolute left-0 -top-3 text-gray-600 text-xs peer-placeholder-shown:text-sm peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3 peer-focus:text-gray-600 peer-focus:text-xs"
+                                                    >
+                                                        New Password
+                                                    </label>
+                                                </div>
 
-                                            <div className="relative">
-                                                <input
-                                                    autoComplete="off"
-                                                    id="confirm_password"
-                                                    name="confirm_password"
-                                                    value={confirmPassword}
-                                                    type={
-                                                        showPassword
-                                                            ? "text"
-                                                            : "password"
-                                                    }
-                                                    onChange={(e) =>
-                                                        setConfirmPassword(
-                                                            e.target.value
-                                                        )
-                                                    }
-                                                    className="peer placeholder-transparent h-8 w-full border-b-2 focus:border-blue-400 text-gray-900 focus:outline-none text-sm"
-                                                    placeholder="Confirm Password"
-                                                    required
-                                                />
-                                                <label
-                                                    htmlFor="confirm_password"
-                                                    className="absolute left-0 -top-3 text-gray-600 text-xs peer-placeholder-shown:text-sm peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3 peer-focus:text-gray-600 peer-focus:text-xs"
-                                                >
-                                                    Confirm Password
-                                                </label>
-                                                <span
-                                                    className="absolute right-3 bottom-2 hover:text-black cursor-pointer"
-                                                    onClick={
-                                                        handlePasswordToggle
-                                                    }
-                                                >
-                                                    {!showPassword && (
-                                                        <AiFillEye />
-                                                    )}
-                                                    {showPassword && (
-                                                        <AiFillEyeInvisible />
-                                                    )}
-                                                </span>
-                                            </div>
-                                        </>
-                                    )}
-                                    <div className="text-[9px] text-slate-500 ">
-                                        <p>
-                                            By continuing, you agree to
-                                            Flipkart's Terms of Use and Privacy
-                                            Policy.
-                                        </p>
-                                    </div>
+                                                <div className="relative">
+                                                    <input
+                                                        autoComplete="off"
+                                                        id="confirm_password"
+                                                        name="confirm_password"
+                                                        value={confirmPassword}
+                                                        type={
+                                                            showPassword
+                                                                ? "text"
+                                                                : "password"
+                                                        }
+                                                        onChange={(e) =>
+                                                            setConfirmPassword(
+                                                                e.target.value
+                                                            )
+                                                        }
+                                                        className="peer placeholder-transparent h-8 w-full border-b-2 focus:border-blue-400 text-gray-900 focus:outline-none text-sm"
+                                                        placeholder="Confirm Password"
+                                                        required
+                                                    />
+                                                    <label
+                                                        htmlFor="confirm_password"
+                                                        className="absolute left-0 -top-3 text-gray-600 text-xs peer-placeholder-shown:text-sm peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3 peer-focus:text-gray-600 peer-focus:text-xs"
+                                                    >
+                                                        Confirm Password
+                                                    </label>
+                                                    <span
+                                                        className="absolute right-3 bottom-2 hover:text-black cursor-pointer"
+                                                        onClick={
+                                                            handlePasswordToggle
+                                                        }
+                                                    >
+                                                        {!showPassword && (
+                                                            <AiFillEye />
+                                                        )}
+                                                        {showPassword && (
+                                                            <AiFillEyeInvisible />
+                                                        )}
+                                                    </span>
+                                                </div>
+                                            </>
+                                        )}
+                                        <div className="text-[9px] text-slate-500 ">
+                                            <p>
+                                                By continuing, you agree to
+                                                Flipkart's Terms of Use and
+                                                Privacy Policy.
+                                            </p>
+                                        </div>
 
-                                    <div className="relative flex flex-col">
-                                        <button className="bg-orange uppercase text-white text-[14px] font-[500] rounded-sm px-2 py-1">
-                                            Submit
-                                        </button>
+                                        <div className="relative flex flex-col">
+                                            <button className="bg-orange uppercase text-white text-[14px] font-[500] rounded-sm px-2 py-1">
+                                                Submit
+                                            </button>
+                                        </div>
                                     </div>
-                                </div>
-                            </form>
-                        </div>
+                                </form>
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>

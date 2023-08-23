@@ -7,13 +7,14 @@ import { BsSearch, BsCart2, BsBox } from "react-icons/bs";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { MdLogin, MdLogout } from "react-icons/md";
 import { useAuth } from "../../context/auth";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
+// import LogOut from "../../pages/Auth/LogOut";
 
 const Header = () => {
     const [isDropdownOpen, setDropdownOpen] = useState(false);
     const headerRef = useRef(null);
 
-    const [auth, setAuth] = useAuth();
+    const [auth, setAuth, LogOut] = useAuth();
 
     const toggleDropdown = () => {
         setDropdownOpen(!isDropdownOpen);
@@ -23,13 +24,14 @@ const Header = () => {
     };
 
     const handleLogout = () => {
-        setAuth({
-            ...auth,
-            user: null,
-            token: "",
-        });
-        localStorage.removeItem("auth");
-        toast.success("Logged out Successfully!");
+        // setAuth({
+        //     ...auth,
+        //     user: null,
+        //     token: "",
+        // });
+        // localStorage.removeItem("auth");
+        // toast.success("Logged out Successfully!");
+        LogOut();
     };
 
     const handleStickyHeader = () => {
@@ -182,7 +184,11 @@ const Header = () => {
                                         )}
                                         <li className="p-1 hover:bg-slate-100 rounded-md">
                                             <Link
-                                                to="/dashboard"
+                                                to={`/dashboard${
+                                                    auth?.user?.role === 1
+                                                        ? "/admin"
+                                                        : "/user"
+                                                }`}
                                                 className="flex items-center gap-2"
                                             >
                                                 <AiOutlineUser className="text-[12px]" />

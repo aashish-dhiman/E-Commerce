@@ -38,4 +38,15 @@ router.get("/user-auth", requireSignIn, (req, res) => {
     }
 });
 
+//protected Admin route
+router.get("/admin-auth", requireSignIn, isAdmin, (req, res) => {
+    try {
+        res.status(200).send({
+            ok: true,
+        });
+    } catch (error) {
+        console.log(error);
+    }
+});
+
 export default router;

@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/display-name */
 import { useState, useEffect } from "react";
@@ -9,7 +8,7 @@ import Spinner from "../components/Spinner";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const PrivateRoute = () => {
+const AdminRoute = () => {
     const [ok, setOk] = useState(false);
     const [auth, setAuth, LogOut] = useAuth();
     const navigate = useNavigate();
@@ -17,7 +16,7 @@ const PrivateRoute = () => {
 
     useEffect(() => {
         const authCheck = async () => {
-            const res = await axios.get("/api/v1/auth/user-auth", {
+            const res = await axios.get("/api/v1/auth/admin-auth", {
                 headers: {
                     Authorization: auth?.token,
                 },
@@ -37,9 +36,10 @@ const PrivateRoute = () => {
                 });
             }, 500);
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [auth.token, navigate, location.pathname]);
 
     return ok ? <Outlet /> : <Spinner />;
 };
 
-export default PrivateRoute;
+export default AdminRoute;
