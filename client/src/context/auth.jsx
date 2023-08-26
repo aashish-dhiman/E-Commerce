@@ -19,7 +19,7 @@ const AuthProvider = ({ children }) => {
                 token: parsedData.token,
             });
         }
-    }, []);
+    },[]);
     //Function to Logout user
     const LogOut = () => {
         setAuth({
@@ -44,4 +44,5 @@ const useAuth = () => {
     return useContext(AuthContext);
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export { AuthProvider, useAuth };

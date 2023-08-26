@@ -64,7 +64,7 @@ const Header = () => {
                                 <img
                                     src={logo}
                                     alt="logo"
-                                    className=" max-h-fit"
+                                    className="max-h-fit"
                                 />
                             </Link>
 

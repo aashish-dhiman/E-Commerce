@@ -4,7 +4,8 @@ import {
     loginController,
     userCheckController,
     forgotPasswordController,
-    testController,
+    updateDetailsController,
+    deactivateController
 } from "../controllers/authController.js";
 import { isAdmin, requireSignIn } from "../middleware/authMiddleware.js";
 
@@ -23,9 +24,6 @@ router.post("/user-exist", userCheckController);
 
 // FORGOT PASSWORD ROUTE
 router.post("/forgot-password", forgotPasswordController);
-
-//test route
-router.get("/test", requireSignIn, isAdmin, testController);
 
 //protected route-user
 router.get("/user-auth", requireSignIn, (req, res) => {
@@ -48,5 +46,11 @@ router.get("/admin-auth", requireSignIn, isAdmin, (req, res) => {
         console.log(error);
     }
 });
+
+// update details POST route\
+router.post("/update-details", updateDetailsController);
+
+// deactivate account
+router.post("/deactivate", deactivateController);
 
 export default router;

@@ -28,16 +28,15 @@ const AdminRoute = () => {
         } else {
             // If user is not logged in, wait for some seconds and then navigate to login
             setTimeout(() => {
-                toast.error("Please Log in to access Details!", {
-                    toastId: "userNotLoggedIn",
+                toast.error("User is not an Admin!", {
+                    toastId: "userNotAdmin",
                 });
-                navigate("/login", {
+                navigate("/", {
                     state: location.pathname,
                 });
             }, 500);
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [auth.token, navigate, location.pathname]);
+    }, [auth.token, location.pathname, navigate]);
 
     return ok ? <Outlet /> : <Spinner />;
 };

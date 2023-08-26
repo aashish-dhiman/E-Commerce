@@ -19,10 +19,10 @@ const Routers = () => {
             <Route path="/register" element={<Register />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/dashboard" element={<PrivateRoute />}>
-                <Route path="user" element={<Dashboard />} />
+                <Route path="user/*" element={<Dashboard />} />
             </Route>
             <Route path="/dashboard" element={<AdminRoute />}>
-                <Route path="admin" element={<AdminDashboard />} />
+                <Route path="admin/*" element={<AdminDashboard />} />
             </Route>
             <Route path="/wishlist" element={<PrivateRoute />}>
                 <Route path="" element={<Wishlist />} />
