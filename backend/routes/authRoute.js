@@ -1,12 +1,10 @@
 import express from "express";
-import {
-    registerController,
-    loginController,
-    userCheckController,
-    forgotPasswordController,
-    updateDetailsController,
-    deactivateController
-} from "../controllers/authController.js";
+import { registerController } from "../controllers/registerController.js";
+import { loginController } from "../controllers/loginController.js";
+import { userCheckController } from "../controllers/userExist.js";
+import { forgotPasswordController } from "../controllers/forgotPassword.js";
+import { updateDetailsController } from "../controllers/updateDetails.js";
+import { deactivateController } from "../controllers/deactivateAccount.js";
 import { isAdmin, requireSignIn } from "../middleware/authMiddleware.js";
 
 //router object
