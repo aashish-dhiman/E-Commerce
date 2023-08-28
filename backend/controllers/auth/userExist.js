@@ -1,4 +1,4 @@
-import userModel from "../models/userModel.js";
+import userModel from "../../models/userModel.js";
 
 //USER EXIST
 export const userCheckController = async (req, res) => {

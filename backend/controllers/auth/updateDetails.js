@@ -1,4 +1,4 @@
-import userModel from "../models/userModel.js";
+import userModel from "../../models/userModel.js";
 
 // Update Details controller
 export const updateDetailsController = async (req, res) => {

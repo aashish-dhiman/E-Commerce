@@ -1,5 +1,5 @@
-import { hashPassword, comparePassword } from "../helper/authHelper.js";
-import userModel from "../models/userModel.js";
+import { hashPassword, comparePassword } from "../../helper/authHelper.js";
+import userModel from "../../models/userModel.js";
 
 //POST REGISTER
 export const registerController = async (req, res) => {

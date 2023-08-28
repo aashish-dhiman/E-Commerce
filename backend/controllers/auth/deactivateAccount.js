@@ -1,4 +1,4 @@
-import userModel from "../models/userModel.js";
+import userModel from "../../models/userModel.js";
 //account Deactivate
 export const deactivateController = async (req, res) => {
     try {

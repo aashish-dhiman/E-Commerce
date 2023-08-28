@@ -1,5 +1,5 @@
-import { hashPassword, comparePassword } from "../helper/authHelper.js";
-import userModel from "../models/userModel.js";
+import { hashPassword, comparePassword } from "../../helper/authHelper.js";
+import userModel from "../../models/userModel.js";
 
 // POST Forgot Password
 export const forgotPasswordController = async (req, res) => {
