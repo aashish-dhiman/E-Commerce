@@ -35,7 +35,7 @@ router.get("/user-auth", requireSignIn, (req, res) => {
 });
 
 //protected Admin route
-router.get("/admin-auth", requireSignIn, isAdmin, (req, res) => {
+router.get("/admin-auth", isAdmin, (req, res) => {
     res.status(200).send({
         ok: true,
     });
@@ -46,6 +46,5 @@ router.post("/update-details", updateDetailsController);
 
 // deactivate account
 router.post("/deactivate", deactivateController);
-
 
 export default router;

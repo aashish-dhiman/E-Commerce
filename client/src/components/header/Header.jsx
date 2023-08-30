@@ -24,20 +24,13 @@ const Header = () => {
     };
 
     const handleLogout = () => {
-        // setAuth({
-        //     ...auth,
-        //     user: null,
-        //     token: "",
-        // });
-        // localStorage.removeItem("auth");
-        // toast.success("Logged out Successfully!");
         LogOut();
     };
 
     const handleStickyHeader = () => {
         if (
-            document.body.scrollTop > 10 ||
-            document.documentElement.scrollTop > 10
+            document.body.scrollTop > 0 ||
+            document.documentElement.scrollTop > 0
         ) {
             headerRef.current.classList.add("sticky__header");
         } else {
@@ -167,7 +160,7 @@ const Header = () => {
 
                             {/* dropdown menu */}
                             {isDropdownOpen && (
-                                <div className="absolute top-[30px] -left-[2px] bg-white border border-gray-300 rounded-md p-2 z-10 w-[140px] transition-all flex flex-col">
+                                <div className="absolute top-[28px] -left-[2px] bg-white border border-gray-300 rounded-md p-2 z-10 w-[140px] transition-all flex flex-col">
                                     <ul>
                                         {!auth.user && (
                                             <li className="p-1 hover:bg-slate-100 rounded-md">
@@ -184,11 +177,11 @@ const Header = () => {
                                         )}
                                         <li className="p-1 hover:bg-slate-100 rounded-md">
                                             <Link
-                                                to={`/dashboard${
+                                                to={`${
                                                     auth?.user?.role === 1
                                                         ? "/admin"
                                                         : "/user"
-                                                }`}
+                                                }/dashboard`}
                                                 className="flex items-center gap-2"
                                             >
                                                 <AiOutlineUser className="text-[12px]" />
@@ -197,20 +190,27 @@ const Header = () => {
                                                 </span>
                                             </Link>
                                         </li>
+                                        {/* if user is not admin */}
+                                        {auth.user?.role !== 1 && (
+                                            <li className="p-1 hover:bg-slate-100 rounded-md">
+                                                <Link
+                                                    to="/user/dashboard/wishlist"
+                                                    className="flex items-center gap-2"
+                                                >
+                                                    <AiOutlineHeart className="text-[12px]" />
+                                                    <span className="text-[14px]">
+                                                        Wishlist
+                                                    </span>
+                                                </Link>
+                                            </li>
+                                        )}
                                         <li className="p-1 hover:bg-slate-100 rounded-md">
                                             <Link
-                                                to="/wishlist"
-                                                className="flex items-center gap-2"
-                                            >
-                                                <AiOutlineHeart className="text-[12px]" />
-                                                <span className="text-[14px]">
-                                                    Wishlist
-                                                </span>
-                                            </Link>
-                                        </li>
-                                        <li className="p-1 hover:bg-slate-100 rounded-md">
-                                            <Link
-                                                to="/orders"
+                                                to={`${
+                                                    auth?.user?.role === 1
+                                                        ? "/admin"
+                                                        : "/user"
+                                                }/dashboard/orders`}
                                                 className="flex items-center gap-2"
                                             >
                                                 <BsBox className="text-[12px]" />

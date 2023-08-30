@@ -27,11 +27,11 @@ const CreateProduct = () => {
 
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
-    const [price, setPrice] = useState(0);
-    const [discountPrice, setDiscountPrice] = useState(0);
+    const [price, setPrice] = useState();
+    const [discountPrice, setDiscountPrice] = useState();
     const [category, setCategory] = useState("");
-    const [stock, setStock] = useState(0);
-    const [warranty, setWarranty] = useState(0);
+    const [stock, setStock] = useState();
+    const [warranty, setWarranty] = useState();
     const [brand, setBrand] = useState("");
     const [images, setImages] = useState([]);
     const [imagesPreview, setImagesPreview] = useState([]);
@@ -100,6 +100,10 @@ const CreateProduct = () => {
 
     const newProductSubmitHandler = async (e) => {
         e.preventDefault();
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+        });
         setIsSubmit(true);
         try {
             // required field checks
@@ -157,10 +161,11 @@ const CreateProduct = () => {
                     // header: { "Content-Type": "application/json" },
                 }
             );
-            console.log(response);
+            // console.log(response);
             // on success->
-            response && toast.success("Product Added Successfully!");
-            navigate("/dashboard/admin/all-products");
+            response.status === 201 &&
+                toast.success("Product Added Successfully!");
+            navigate("/admin/dashboard/all-products");
         } catch (error) {
             console.error("Error:", error);
             setIsSubmit(false);

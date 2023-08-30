@@ -8,7 +8,7 @@ const Deactivate = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");
-    const [LogOut] = useAuth();
+    const [auth, setAuth, LogOut] = useAuth();
 
     const handleDeactivate = async (e) => {
         e.preventDefault();

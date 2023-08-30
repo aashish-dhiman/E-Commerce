@@ -6,8 +6,7 @@ import Register from "../pages/Auth/Register";
 import ForgotPassword from "../pages/Auth/ForgotPassword";
 import Dashboard from "../pages/user/Dashboard";
 import AdminDashboard from "../pages/Admin/AdminDashboard";
-import Wishlist from "../pages/user/Wishlist";
-import Orders from "../pages/user/Orders";
+
 import PrivateRoute from "./PrivateRoute";
 import AdminRoute from "./AdminRoute";
 
@@ -18,17 +17,11 @@ const Routers = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
-            <Route path="/dashboard" element={<PrivateRoute />}>
-                <Route path="user/*" element={<Dashboard />} />
+            <Route path="/user" element={<PrivateRoute />}>
+                <Route path="dashboard/*" element={<Dashboard />} />
             </Route>
-            <Route path="/dashboard" element={<AdminRoute />}>
-                <Route path="admin/*" element={<AdminDashboard />} />
-            </Route>
-            <Route path="/wishlist" element={<PrivateRoute />}>
-                <Route path="" element={<Wishlist />} />
-            </Route>
-            <Route path="/orders" element={<PrivateRoute />}>
-                <Route path="" element={<Orders />} />
+            <Route path="/admin" element={<AdminRoute />}>
+                <Route path="dashboard/*" element={<AdminDashboard />} />
             </Route>
             <Route path="*" element={<PageNotFound />} />
         </Routes>

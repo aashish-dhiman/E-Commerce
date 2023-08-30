@@ -1,9 +1,8 @@
-import productModel from "../models/productModel.js";
+import productModel from "../../models/productModel.js";
 import cloudinary from "cloudinary";
 
 const newProduct = async (req, res) => {
-    console.log(req.body);
-
+    // console.log(req.body);
     try {
         let images = [];
         if (typeof req.body.images === "string") {

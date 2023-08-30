@@ -4,7 +4,7 @@ import SeoMetadata from "../../SEO/seoMetadata";
 import UserProfile from "../UserProfile";
 import AddressComponent from "../AddressComponent";
 import PanCardComponent from "../PanCardComponent";
-import Orders from "../user/Orders";
+import Orders from "./Orders";
 import CreateProduct from "./CreateProduct";
 import AllProducts from "./AllProducts";
 import Users from "./Users";
@@ -16,7 +16,7 @@ const AdminDashboard = () => {
             <SeoMetadata title="Admin Dashboard" />
             <div className="px-[50px] py-[5px]">
                 <div className="flex text-[14px] mx-[50px] my-[40px] gap-6">
-                    <div className="w-[30%]">
+                    <div className="min-w-[30%]">
                         <AdminMenu />
                     </div>
                     <div className="w-[70%] bg-white shadow-md rounded-sm">

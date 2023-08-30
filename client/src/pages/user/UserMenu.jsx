@@ -4,7 +4,7 @@ import PersonIcon from "@mui/icons-material/Person";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import PowerSettingsNewIcon from "@mui/icons-material/PowerSettingsNew";
 
-const AdminMenu = () => {
+const UserMenu = () => {
     const [auth, setAuth, LogOut] = useAuth();
     const navigate = useNavigate();
     const handleLogout = () => {
@@ -102,12 +102,12 @@ const AdminMenu = () => {
                             }
                         >
                             <div className=" h-[40px] px-[60px] flex items-center hover:text-primaryBlue hover:bg-[#f1f3f5]">
-                                Orders
+                                My Orders
                             </div>
                         </NavLink>
 
                         <NavLink
-                            to="./all-products"
+                            to="./wishlist"
                             onClick={scrollToTop}
                             className={({ isActive }) =>
                                 isActive
@@ -116,12 +116,12 @@ const AdminMenu = () => {
                             }
                         >
                             <div className=" h-[40px] px-[60px] flex items-center hover:text-primaryBlue hover:bg-[#f1f3f5]">
-                                Products
+                                My Wishlist
                             </div>
                         </NavLink>
 
                         <NavLink
-                            to="./add-product"
+                            to="./payment-cards"
                             onClick={scrollToTop}
                             className={({ isActive }) =>
                                 isActive
@@ -130,12 +130,12 @@ const AdminMenu = () => {
                             }
                         >
                             <div className=" h-[40px] px-[60px] flex items-center hover:text-primaryBlue hover:bg-[#f1f3f5]">
-                                Add Product
+                                Saved Cards
                             </div>
                         </NavLink>
 
                         <NavLink
-                            to="./users"
+                            to=""
                             onClick={scrollToTop}
                             className={({ isActive }) =>
                                 isActive
@@ -143,9 +143,7 @@ const AdminMenu = () => {
                                     : ""
                             }
                         >
-                            <div className=" h-[40px] px-[60px] flex items-center hover:text-primaryBlue hover:bg-[#f1f3f5]">
-                                Users
-                            </div>
+                            <div className=" h-[40px] px-[60px] flex items-center hover:text-primaryBlue hover:bg-[#f1f3f5]"></div>
                         </NavLink>
                     </div>
                 </div>
@@ -166,4 +164,4 @@ const AdminMenu = () => {
     );
 };
 
-export default AdminMenu;
+export default UserMenu;

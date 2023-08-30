@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import authImg from "../../assets/images/auth.png";
 import axios from "axios";
 import { Link, useNavigate, useLocation } from "react-router-dom";
@@ -8,6 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 import SeoMetadata from "../../SEO/seoMetadata";
 import { useAuth } from "../../context/auth";
 import Spinner from "../../components/Spinner";
+import Cookies from "js-cookie";
 
 const Login = () => {
     //hooks->
@@ -23,6 +24,7 @@ const Login = () => {
     };
 
     const navigate = useNavigate();
+    // axios.defaults.headers.common["Authorization"] = auth.token;
 
     //form submission handler
     const handleFormSubmit = async (e) => {
@@ -42,9 +44,12 @@ const Login = () => {
                     user: response.data.user,
                     token: response.data.token,
                 });
-                // Store token in localStorage
-                localStorage.setItem("auth", JSON.stringify(response.data));
+
+                Cookies.set("auth", JSON.stringify(response.data), {
+                    expires: 7,
+                });
                 navigate(location.state || "/");
+
             }
         } catch (error) {
             console.error("Error:", error);
