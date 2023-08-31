@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Dialog from "@mui/material/Dialog";
@@ -10,7 +10,7 @@ import DialogContent from "@mui/material/DialogContent";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-const Actions = ({ id, name, editRoute, updateDeletedProduct }) => {
+const Actions = ({ id, name, updateDeletedProduct }) => {
     const [open, setOpen] = useState(false);
 
     const handleClose = () => {
@@ -42,7 +42,7 @@ const Actions = ({ id, name, editRoute, updateDeletedProduct }) => {
         <>
             <div className="flex justify-between items-center gap-3">
                 <Link
-                    to={`/admin/${editRoute}/${id}`}
+                    to={`/admin/dashboard/product/${id}`}
                     className="text-blue-600 hover:bg-blue-200 p-[1px] rounded-full bg-blue-100"
                 >
                     <EditIcon />

@@ -14,7 +14,7 @@ const PrivateRoute = () => {
 
     const authCheck = async () => {
         try {
-            console.log("authCheck called");
+            // console.log("authCheck called");
             const res = await axios.get("/api/v1/auth/user-auth", {
                 headers: {
                     Authorization: auth?.token,
@@ -29,8 +29,6 @@ const PrivateRoute = () => {
 
             if (error.response.status === 401 && !isContextLoading) {
                 //check for authentication when context gets updated from cookie
-
-                // console.log("error:" + ok);
                 setTimeout(() => {
                     toast.error("Please Log in to access Details!", {
                         toastId: "userNotLoggedIn",

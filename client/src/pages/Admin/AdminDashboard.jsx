@@ -9,6 +9,7 @@ import CreateProduct from "./CreateProduct";
 import AllProducts from "./AllProducts";
 import Users from "./Users";
 import Deactivate from "../Auth/Deactivate";
+import EditProduct from "./EditProduct";
 
 const AdminDashboard = () => {
     return (
@@ -39,6 +40,10 @@ const AdminDashboard = () => {
                             <Route path="orders" element={<Orders />} />
                             <Route path="users" element={<Users />} />
                             <Route path="deactivate" element={<Deactivate />} />
+                            <Route
+                                path="product/:productId"
+                                element={<EditProduct />}
+                            />
                         </Routes>
                     </div>
                 </div>

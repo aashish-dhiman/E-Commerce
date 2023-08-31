@@ -12,7 +12,6 @@ import Actions from "./Actions";
 const AllProducts = () => {
     const [auth] = useAuth();
     const [products, setProducts] = useState([]);
-    // Add loading state
     const [loading, setLoading] = useState(true);
     useEffect(() => {
         const fetchData = async () => {
@@ -159,7 +158,6 @@ const AllProducts = () => {
             renderCell: (params) => {
                 return (
                     <Actions
-                        editRoute={"product"}
                         name={params.row.name}
                         updateDeletedProduct={updateDeletedProduct}
                         id={params.row.id}
@@ -175,7 +173,7 @@ const AllProducts = () => {
         rows.unshift({
             id: item._id,
             name: item.name,
-            image: item.images[0].url,
+            image: item.images[0]?.url,
             category: item.category,
             stock: item.stock,
             price: item.price,

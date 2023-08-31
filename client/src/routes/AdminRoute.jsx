@@ -13,7 +13,7 @@ const AdminRoute = () => {
 
     const authCheck = async () => {
         try {
-            console.log("authCheck called");
+            // console.log("authCheck called");
             const res = await axios.get("/api/v1/auth/admin-auth", {
                 headers: {
                     Authorization: auth?.token,
@@ -27,12 +27,9 @@ const AdminRoute = () => {
             // console.log("func:" + ok);
         } catch (error) {
             console.log(error);
-            // console.log("token available");
-            // console.log("loading:" + isContextLoading);
-
-            // When isContextLoading becomes false, it means the context has been loaded
 
             if (error.response?.status === 401 && !isContextLoading) {
+                // When isContextLoading becomes false, it means the context has been loaded
                 setTimeout(() => {
                     toast.error("Admin Privileges Required!", {
                         toastId: "userNotAdmin",
