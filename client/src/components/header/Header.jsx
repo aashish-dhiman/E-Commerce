@@ -47,8 +47,11 @@ const Header = () => {
     });
     return (
         <header ref={headerRef}>
-            <div className="container" onMouseLeave={closeDropdown}>
-                <div className=" flex items-center justify-between gap-5 w-[100%] flex-col md:flex-row sm:flex-row lg:flex-row">
+            <div
+                className="container px-4 md:px-[100px]"
+                onMouseLeave={closeDropdown}
+            >
+                <div className=" flex items-center justify-between gap-8 md:gap-14 w-[100%] flex-col md:flex-row sm:flex-row lg:flex-row">
                     {/* primary div */}
                     <div className=" sm:h-[100px] md:h-[60px] lg:h-[60px] flex items-center justify-between w-[100%] max-w-[650px]">
                         <div className=" flex gap-[20px] items-center w-[100%] flex-col md:flex-row sm:flex-row lg:flex-row">
@@ -66,7 +69,7 @@ const Header = () => {
                                 <form
                                     action="/search"
                                     method=""
-                                    className="bg-[#f0f5ff] rounded-lg relative "
+                                    className="bg-[#f0f5ff] rounded-lg relative w-[100%]"
                                 >
                                     <div className="flex items-center">
                                         <div className=" flex items-center px-2">
@@ -76,7 +79,7 @@ const Header = () => {
                                                 </figure>
                                             </button>
                                         </div>
-                                        <div className="w-[300px]">
+                                        <div className="w-[100%]">
                                             <input
                                                 type="text"
                                                 title="Search for Products, Brands and More"
@@ -92,25 +95,13 @@ const Header = () => {
                     </div>
 
                     {/* secondary div */}
-                    <div className="flex items-center justify-between gap-[20px] w-[50%]">
+                    <div className="flex items-center justify-between gap-[50px] w-[50%] mb-4 md:mb-0">
                         {/* home */}
                         <div className="flex items-center group">
                             <NavLink to="/" className="flex items-center gap-1">
-                                <BiHomeSmile className="text-[20px]" />
-                                <span className="text-[16px] hidden md:block lg:block group-hover:text-slate-700">
+                                <BiHomeSmile className="text-[22px]" />
+                                <span className="text-[18px] hidden md:block lg:block group-hover:text-slate-700">
                                     Home
-                                </span>
-                            </NavLink>
-                        </div>
-                        {/* category */}
-                        <div className="flex items-center group">
-                            <NavLink
-                                to="/category"
-                                className="flex items-center gap-1"
-                            >
-                                <BiCategoryAlt className="text-[20px]" />
-                                <span className="text-[16px] hidden md:block lg:block group-hover:text-slate-700">
-                                    Category
                                 </span>
                             </NavLink>
                         </div>
@@ -126,9 +117,9 @@ const Header = () => {
                         >
                             {auth.user ? (
                                 <div className="flex items-center gap-1 ">
-                                    <AiOutlineUser className="text-[20px] " />
-                                    <span className="text-[16px] w-[50px] max-w-fit hidden md:block lg:block ">
-                                        <p className="text-[14px]">
+                                    <AiOutlineUser className="text-[22px] " />
+                                    <span className="text-[18px] w-[50px] max-w-fit hidden md:block lg:block ">
+                                        <p className="text-[16px]">
                                             {auth.user.name.split(" ")[0]}
                                         </p>
                                     </span>
@@ -137,30 +128,28 @@ const Header = () => {
                                     </span>
                                 </div>
                             ) : (
-                                <Link
-                                    to="/login"
-                                    className=" text-[14px] group-hover:text-white"
-                                >
-                                    <div className="flex items-center gap-1 ">
-                                        <AiOutlineUser className="text-[20px] group-hover:text-white" />
-                                        <span className="text-[14px] w-[50px] max-w-fit hidden md:block lg:block ">
-                                            <p className="text-[14px]">
-                                                Sign in
-                                            </p>
+                                <div className="flex items-center gap-1 w-fit">
+                                    <Link
+                                        to="/login"
+                                        className=" flex gap-1 group-hover:text-white"
+                                    >
+                                        <AiOutlineUser className="text-[22px] group-hover:text-white" />
+                                        <span className="text-[18px] w-[60px] max-w-fit hidden md:block lg:block ">
+                                            <p>Sign in</p>
                                         </span>
-                                        <span>
-                                            <RiArrowDropDownLine
-                                                className="group-hover:rotate-[180deg] transition-all 
+                                    </Link>
+                                    <span>
+                                        <RiArrowDropDownLine
+                                            className="group-hover:rotate-[180deg] transition-all 
                                                     group-hover:text-white"
-                                            />
-                                        </span>
-                                    </div>
-                                </Link>
+                                        />
+                                    </span>
+                                </div>
                             )}
 
                             {/* dropdown menu */}
                             {isDropdownOpen && (
-                                <div className="absolute top-[28px] -left-[2px] bg-white border border-gray-300 rounded-md p-2 z-10 w-[140px] transition-all flex flex-col">
+                                <div className="absolute top-[34px] -left-[2px] bg-white border border-gray-300 rounded-md p-2 z-10 w-[140px] transition-all flex flex-col">
                                     <ul>
                                         {!auth.user && (
                                             <li className="p-1 hover:bg-slate-100 rounded-md">
@@ -168,8 +157,8 @@ const Header = () => {
                                                     to="/register"
                                                     className="flex items-center gap-2"
                                                 >
-                                                    <MdLogin className="text-[12px]" />
-                                                    <span className="text-[14px]">
+                                                    <MdLogin className="text-[14px]" />
+                                                    <span className="text-[16px]">
                                                         Sign up
                                                     </span>
                                                 </Link>
@@ -184,8 +173,8 @@ const Header = () => {
                                                 }/dashboard`}
                                                 className="flex items-center gap-2"
                                             >
-                                                <AiOutlineUser className="text-[12px]" />
-                                                <span className="text-[14px]">
+                                                <AiOutlineUser className="text-[14px]" />
+                                                <span className="text-[16px]">
                                                     My Profile
                                                 </span>
                                             </Link>
@@ -197,8 +186,8 @@ const Header = () => {
                                                     to="/user/dashboard/wishlist"
                                                     className="flex items-center gap-2"
                                                 >
-                                                    <AiOutlineHeart className="text-[12px]" />
-                                                    <span className="text-[14px]">
+                                                    <AiOutlineHeart className="text-[14px]" />
+                                                    <span className="text-[16px]">
                                                         Wishlist
                                                     </span>
                                                 </Link>
@@ -213,8 +202,8 @@ const Header = () => {
                                                 }/dashboard/orders`}
                                                 className="flex items-center gap-2"
                                             >
-                                                <BsBox className="text-[12px]" />
-                                                <span className="text-[14px]">
+                                                <BsBox className="text-[14px]" />
+                                                <span className="text-[16px]">
                                                     Orders
                                                 </span>
                                             </Link>
@@ -227,8 +216,8 @@ const Header = () => {
                                                     to="/login"
                                                     className="flex items-center gap-2"
                                                 >
-                                                    <MdLogout className="text-[12px]" />
-                                                    <span className="text-[14px]">
+                                                    <MdLogout className="text-[14px]" />
+                                                    <span className="text-[16px]">
                                                         Logout
                                                     </span>
                                                 </Link>
@@ -248,9 +237,9 @@ const Header = () => {
                                 <span className="absolute w-4 h-4 text-[11px] text-center font-semibold left-2 bottom-3 text-white bg-red-500 rounded-[50%] ">
                                     0
                                 </span>
-                                <BsCart2 className="text-[20px]" />
-                                <span className="text-[16px] hidden md:block lg:block group-hover:text-slate-700">
-                                    <p className="text-[16px]">Cart</p>
+                                <BsCart2 className="text-[22px]" />
+                                <span className="hidden md:block lg:block group-hover:text-slate-700">
+                                    <p className="text-[18px]">Cart</p>
                                 </span>
                             </NavLink>
                         </div>

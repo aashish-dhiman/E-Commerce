@@ -1,7 +1,7 @@
-import React from "react";
+import ComingSoon from "./ComingSoon";
 
 const PanCardComponent = () => {
-    return <div>PanCardComponent</div>;
+    return <ComingSoon />;
 };
 
 export default PanCardComponent;

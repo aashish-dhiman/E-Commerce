@@ -7,6 +7,8 @@ import PanCardComponent from "../PanCardComponent";
 import Orders from "./Orders";
 import Wishlist from "./Wishlist";
 import Deactivate from "../Auth/Deactivate";
+import Reviews from "./Reviews";
+import PaymentCards from "./PaymentCards";
 
 const Dashboard = () => {
     return (
@@ -29,6 +31,11 @@ const Dashboard = () => {
 
                             <Route path="orders" element={<Orders />} />
                             <Route path="wishlist" element={<Wishlist />} />
+                            <Route
+                                path="payment-cards"
+                                element={<PaymentCards />}
+                            />
+                            <Route path="user-review" element={<Reviews />} />
                             <Route path="deactivate" element={<Deactivate />} />
                         </Routes>
                     </div>

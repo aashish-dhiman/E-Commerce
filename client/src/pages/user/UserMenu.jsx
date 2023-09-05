@@ -135,7 +135,7 @@ const UserMenu = () => {
                         </NavLink>
 
                         <NavLink
-                            to=""
+                            to="./user-review"
                             onClick={scrollToTop}
                             className={({ isActive }) =>
                                 isActive
@@ -143,7 +143,9 @@ const UserMenu = () => {
                                     : ""
                             }
                         >
-                            <div className=" h-[40px] px-[60px] flex items-center hover:text-primaryBlue hover:bg-[#f1f3f5]"></div>
+                            <div className=" h-[40px] px-[60px] flex items-center hover:text-primaryBlue hover:bg-[#f1f3f5]">
+                                My Reviews
+                            </div>
                         </NavLink>
                     </div>
                 </div>

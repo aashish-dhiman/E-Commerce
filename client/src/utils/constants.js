@@ -1,11 +1,13 @@
 // Categories Used In Entire App
 export const categories = [
     "Mobiles",
-    "Laptops",
+    "Electronics",
     "Fashion",
     "Appliances",
-    "Home & Decor",
+    "Home",
     "Furniture",
+    "Grocery",
+    "Beauty, Toys and More",
 ];
 
 // Product Sliders Offers
@@ -33,6 +35,12 @@ export const offerProducts = [
         name: "Office Study Chairs",
         offer: "Min 40% Off",
         tag: "Grab Now!",
+    },
+    {
+        image: "https://rukminim2.flixcart.com/image/400/400/xif0q/bra/1/7/e/lightly-padded-34e-regular-no-regular-br1804x01-clovia-original-imagg9ja3fadhyfh.jpeg?q=70",
+        name: "Bra, Denims & More",
+        offer: "Min 60% Off",
+        tag: "Zivame",
     },
     {
         image: "https://rukminim1.flixcart.com/image/150/150/ky0g58w0/smartwatch/v/w/p/33-android-ios-id116-plus-fitpro-yes-original-imagacdfj58fqtgf.jpeg",

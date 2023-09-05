@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import SeoMetadata from "./../../SEO/seoMetadata";
 import Spinner from "../../components/Spinner";
+import Checkbox from "@mui/material/Checkbox";
 
 const Register = () => {
     const [name, setName] = useState("");
@@ -16,11 +17,16 @@ const Register = () => {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [address, setAddress] = useState("");
+    const [isSeller, setIsSeller] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     const handlePasswordToggle = () => {
         setShowPassword(!showPassword);
+    };
+
+    const handleCheckbox = () => {
+        setIsSeller(!isSeller);
     };
 
     const navigate = useNavigate();
@@ -40,6 +46,7 @@ const Register = () => {
                 phone,
                 password,
                 address,
+                isSeller,
             });
             console.log(response);
 
@@ -80,7 +87,7 @@ const Register = () => {
                 <Spinner />
             ) : (
                 <div className="container bg-primaryBg mt-5 sm:mt-0 md:mt-0 lg:mt-0 py-[2px]">
-                    <div className="flex items-center flex-col sm:flex-row md:flow-row lg:flex-row my-10 mx-auto w-full sm:w-[70vw] md:w-[70vw] lg:w-[70vw] min-h-[450px] md:h-[80vh] lg:h-[80vh] bg-white shadow-[0px_0px_8px_2px_rgba(212,212,212,0.6)] ">
+                    <div className="flex items-center flex-col sm:flex-row md:flow-row lg:flex-row my-10 mx-auto w-full sm:w-[70vw] md:w-[70vw] lg:w-[70vw] min-h-[500px] md:h-[80vh] lg:h-[80vh] bg-white shadow-[0px_0px_8px_2px_rgba(212,212,212,0.6)] ">
                         {/* left view  */}
                         <div className=" w-full md:w-[40%] lg:w-[40%] h-full bg-primaryBlue">
                             <div className="flex gap-6 flex-col h-full mt-10 px-6 ">
@@ -93,14 +100,14 @@ const Register = () => {
                                         started
                                     </p>
                                 </div>
-                                <div className="mt-8">
+                                <div className="mt-14">
                                     <img src={auth} alt="auth image" />
                                 </div>
                             </div>
                         </div>
 
                         {/* sign up form */}
-                        <div className="p-10 w-full h-full sm:w-[60%] md:w-[60%] lg:w-[60%] ">
+                        <div className="p-10 w-full  sm:w-[60%] md:w-[60%] lg:w-[60%] ">
                             <div className="flex items-center flex-col h-full w-full">
                                 <form
                                     action="/register"
@@ -254,6 +261,18 @@ const Register = () => {
                                             >
                                                 Address
                                             </label>
+                                        </div>
+                                        <div className="relative">
+                                            <Checkbox
+                                                size="small"
+                                                onChange={handleCheckbox}
+                                                inputProps={{
+                                                    "aria-label": "controlled",
+                                                }}
+                                            />
+                                            <span className="text-[12px] text-gray-700 font-[500]">
+                                                Register as Seller
+                                            </span>
                                         </div>
                                         <div className="relative flex flex-col">
                                             <button className="bg-orange uppercase text-white text-[14px] font-[500] rounded-sm px-2 py-1">
