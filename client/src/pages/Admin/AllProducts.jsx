@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import { DataGrid } from "@mui/x-data-grid";
 import Rating from "@mui/material/Rating";
-import SeoMetadata from "../../SEO/seoMetadata";
+import SeoMetadata from "../../SEO/SeoMetadata";
 import Actions from "./Actions";
 
 const AllProducts = () => {

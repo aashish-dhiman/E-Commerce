@@ -48,7 +48,7 @@ const Header = () => {
     return (
         <header ref={headerRef}>
             <div
-                className="container px-4 md:px-[100px]"
+                className="container px-4 md:px-[50px] lg:px-[80px]"
                 onMouseLeave={closeDropdown}
             >
                 <div className=" flex items-center justify-between gap-8 md:gap-14 w-[100%] flex-col md:flex-row sm:flex-row lg:flex-row">
@@ -65,7 +65,7 @@ const Header = () => {
                             </Link>
 
                             {/* search bar*/}
-                            <div className="w-[100%]">
+                            <div className="w-[100%] sm:w-[70%]">
                                 <form
                                     action="/search"
                                     method=""
@@ -95,7 +95,7 @@ const Header = () => {
                     </div>
 
                     {/* secondary div */}
-                    <div className="flex items-center justify-between gap-[50px] w-[50%] mb-4 md:mb-0">
+                    <div className="flex items-center justify-between gap-[50px] w-[70%] mb-4 md:mb-0">
                         {/* home */}
                         <div className="flex items-center group">
                             <NavLink to="/" className="flex items-center gap-1">
@@ -118,10 +118,8 @@ const Header = () => {
                             {auth.user ? (
                                 <div className="flex items-center gap-1 ">
                                     <AiOutlineUser className="text-[22px] " />
-                                    <span className="text-[18px] w-[50px] max-w-fit hidden md:block lg:block ">
-                                        <p className="text-[16px]">
-                                            {auth.user.name.split(" ")[0]}
-                                        </p>
+                                    <span className="text-[18px] max-w-fit hidden md:block lg:block ">
+                                        <p>{auth.user.name.split(" ")[0]}</p>
                                     </span>
                                     <span>
                                         <RiArrowDropDownLine className="group-hover:rotate-[180deg] transition-all " />
@@ -134,7 +132,7 @@ const Header = () => {
                                         className=" flex gap-1 group-hover:text-white"
                                     >
                                         <AiOutlineUser className="text-[22px] group-hover:text-white" />
-                                        <span className="text-[18px] w-[60px] max-w-fit hidden md:block lg:block ">
+                                        <span className="text-[18px] max-w-fit hidden md:block lg:block ">
                                             <p>Sign in</p>
                                         </span>
                                     </Link>
@@ -149,13 +147,13 @@ const Header = () => {
 
                             {/* dropdown menu */}
                             {isDropdownOpen && (
-                                <div className="absolute top-[34px] -left-[2px] bg-white border border-gray-300 rounded-md p-2 z-10 w-[140px] transition-all flex flex-col">
+                                <div className="absolute top-[34px] -left-[2px] z-50 bg-white border border-gray-300 rounded-md p-2 z-10 w-[140px] transition-all flex flex-col">
                                     <ul>
                                         {!auth.user && (
                                             <li className="p-1 hover:bg-slate-100 rounded-md">
                                                 <Link
                                                     to="/register"
-                                                    className="flex items-center gap-2"
+                                                    className="flex items-center gap-3"
                                                 >
                                                     <MdLogin className="text-[14px]" />
                                                     <span className="text-[16px]">
@@ -171,7 +169,7 @@ const Header = () => {
                                                         ? "/admin"
                                                         : "/user"
                                                 }/dashboard`}
-                                                className="flex items-center gap-2"
+                                                className="flex items-center gap-3"
                                             >
                                                 <AiOutlineUser className="text-[14px]" />
                                                 <span className="text-[16px]">
@@ -183,8 +181,8 @@ const Header = () => {
                                         {auth.user?.role !== 1 && (
                                             <li className="p-1 hover:bg-slate-100 rounded-md">
                                                 <Link
-                                                    to="/user/dashboard/wishlist"
-                                                    className="flex items-center gap-2"
+                                                    to="/user/wishlist"
+                                                    className="flex items-center gap-3"
                                                 >
                                                     <AiOutlineHeart className="text-[14px]" />
                                                     <span className="text-[16px]">
@@ -197,10 +195,10 @@ const Header = () => {
                                             <Link
                                                 to={`${
                                                     auth?.user?.role === 1
-                                                        ? "/admin"
+                                                        ? "/admin/dashboard"
                                                         : "/user"
-                                                }/dashboard/orders`}
-                                                className="flex items-center gap-2"
+                                                }/orders`}
+                                                className="flex items-center gap-3"
                                             >
                                                 <BsBox className="text-[14px]" />
                                                 <span className="text-[16px]">
@@ -214,7 +212,7 @@ const Header = () => {
                                                 <Link
                                                     onClick={handleLogout}
                                                     to="/login"
-                                                    className="flex items-center gap-2"
+                                                    className="flex items-center gap-3"
                                                 >
                                                     <MdLogout className="text-[14px]" />
                                                     <span className="text-[16px]">

@@ -1,5 +1,5 @@
 export const getDiscount = (price, discountPrice) => {
-    return (((discountPrice - price) / discountPrice) * 100).toFixed();
+    return (((price - discountPrice) / price) * 100).toFixed();
 };
 
 export const getDeliveryDate = () => {

@@ -1,11 +1,9 @@
 import { Route, Routes } from "react-router-dom";
 import UserMenu from "./UserMenu";
-import SeoMetadata from "../../SEO/seoMetadata";
+import SeoMetadata from "../../SEO/SeoMetadata";
 import UserProfile from "../UserProfile";
 import AddressComponent from "../AddressComponent";
 import PanCardComponent from "../PanCardComponent";
-import Orders from "./Orders";
-import Wishlist from "./Wishlist";
 import Deactivate from "../Auth/Deactivate";
 import Reviews from "./Reviews";
 import PaymentCards from "./PaymentCards";
@@ -28,15 +26,15 @@ const Dashboard = () => {
                                 element={<AddressComponent />}
                             />
                             <Route path="pan" element={<PanCardComponent />} />
-
-                            <Route path="orders" element={<Orders />} />
-                            <Route path="wishlist" element={<Wishlist />} />
                             <Route
                                 path="payment-cards"
                                 element={<PaymentCards />}
                             />
                             <Route path="user-review" element={<Reviews />} />
-                            <Route path="deactivate" element={<Deactivate />} />
+                            <Route
+                                path="profile/deactivate"
+                                element={<Deactivate />}
+                            />
                         </Routes>
                     </div>
                 </div>

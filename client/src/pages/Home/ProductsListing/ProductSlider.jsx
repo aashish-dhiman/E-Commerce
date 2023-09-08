@@ -11,7 +11,7 @@ export const settings = {
     slidesToShow: 4,
     slidesToScroll: 1,
     initialSlide: 0,
-    swipe: false,
+    swipe: true,
     prevArrow: <PreviousBtn />,
     nextArrow: <NextBtn />,
     responsive: [
@@ -42,13 +42,13 @@ export const settings = {
 const ProductSlider = ({ title, products, logo }) => {
     return (
         <section className="bg-white w-full shadow p-0 overflow-hidden">
-            <div className="flex flex-col md:flex-row items-center">
+            <div className="flex flex-col md:flex-row w-full items-center">
                 {/* Left Side */}
-                <div className="flex flex-row md:flex-col gap-6 px-6 pt-8 w-[100%] md:w-[20%] justify-between items-center">
-                    <h1 className="text-[22px]  font-medium">{title}</h1>
+                <div className="flex flex-row md:flex-col h-full gap-6 w-[100%] md:w-[20%] items-center justify-around">
+                    <h1 className="text-[22px] pt-5 font-medium">{title}</h1>
                     <Link
                         to="/products"
-                        className="bg-primaryBlue text-[16px] font-medium text-white px-5 py-2.5 rounded-sm hover:shadow-md"
+                        className="bg-primaryBlue text-[12px] sm:text-[16px] font-medium text-white px-2 sm:px-5 py-1.5 sm:py-2.5 rounded-sm hover:shadow-md"
                     >
                         VIEW ALL
                     </Link>
@@ -56,7 +56,7 @@ const ProductSlider = ({ title, products, logo }) => {
                         <img
                             src={logo}
                             alt="card"
-                            className="hidden md:block"
+                            className="hidden md:block w-full mt-7"
                         />
                     )}
                 </div>

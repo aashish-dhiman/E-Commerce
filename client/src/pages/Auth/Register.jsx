@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import SeoMetadata from "./../../SEO/seoMetadata";
+import SeoMetadata from "../../SEO/SeoMetadata";
 import Spinner from "../../components/Spinner";
 import Checkbox from "@mui/material/Checkbox";
 

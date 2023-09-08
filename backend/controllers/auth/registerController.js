@@ -4,7 +4,7 @@ import userModel from "../../models/userModel.js";
 //POST REGISTER
 export const registerController = async (req, res) => {
     try {
-        const { name, email, phone, password, address } = req.body;
+        const { name, email, phone, password, address, isSeller } = req.body;
 
         //setup validations
         if (!name) res.send({ message: "Name is Required" });
@@ -32,6 +32,7 @@ export const registerController = async (req, res) => {
             phone,
             password: hashedPassword,
             address,
+            role: isSeller ? 1 : 0,
         });
         user.save();
 

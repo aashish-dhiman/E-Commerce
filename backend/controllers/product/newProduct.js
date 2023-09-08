@@ -23,7 +23,7 @@ const newProduct = async (req, res) => {
                 url: result.secure_url,
             });
         }
-
+        req.body.logo
         const result = await cloudinary.v2.uploader.upload(req.body.logo, {
             folder: "brands",
         });

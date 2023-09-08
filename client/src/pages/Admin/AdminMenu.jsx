@@ -1,5 +1,5 @@
 import { useAuth } from "../../context/auth";
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import PersonIcon from "@mui/icons-material/Person";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import PowerSettingsNewIcon from "@mui/icons-material/PowerSettingsNew";
@@ -26,8 +26,10 @@ const AdminMenu = () => {
                 />
 
                 <div className="flex flex-col justify-center p-1">
-                    <div className="text-[12px]">Hello,</div>
-                    <div className="font-[600] ">{auth?.user?.name}</div>
+                    <div className="text-[14px]">Hello,</div>
+                    <div className="font-[600] text-[16px] ">
+                        {auth?.user?.name}
+                    </div>
                 </div>
             </div>
 
@@ -35,11 +37,11 @@ const AdminMenu = () => {
                 <div className="flex flex-col justify-center border-b-[1px]">
                     <div className="flex flex-row items-center gap-6 pl-[10px] py-[8px]">
                         <PersonIcon className="text-primaryBlue text-[16px]" />
-                        <div className="font-[600] text-[12px] text-slate-500">
+                        <div className="font-[600] text-[14px] text-slate-500">
                             ACCOUNT SETTINGS
                         </div>
                     </div>
-                    <div className="flex flex-col  text-black font-[300] text-[12px] mb-2 mt-0 ">
+                    <div className="flex flex-col  text-black font-[300] text-[14px] mb-2 mt-0 ">
                         <NavLink
                             to="./profile"
                             onClick={scrollToTop}
@@ -87,11 +89,11 @@ const AdminMenu = () => {
                 <div className="flex flex-col justify-center border-b-[1px]">
                     <div className="flex flex-row items-center gap-6 pl-[10px] py-[8px]">
                         <BarChartIcon className="text-primaryBlue text-[16px]" />
-                        <div className="font-[600] text-[12px] text-slate-500">
+                        <div className="font-[600] text-[14px] text-slate-500">
                             DASHBOARD
                         </div>
                     </div>
-                    <div className="flex flex-col  text-black font-[300] text-[12px] mb-2 mt-0 ">
+                    <div className="flex flex-col  text-black font-[300] text-[14px] mb-2 mt-0 ">
                         <NavLink
                             to="./orders "
                             onClick={scrollToTop}
@@ -159,6 +161,16 @@ const AdminMenu = () => {
                         >
                             Logout
                         </button>
+                    </div>
+                </div>
+                <div className="flex flex-col items-start gap-2 p-4 bg-white rounded-sm shadow">
+                    <span className="text-xs font-medium">
+                        Frequently Visited:
+                    </span>
+                    <div className="flex gap-2.5 text-xs text-gray-500">
+                        <Link to="/forgot-password">Change Password</Link>
+                        <Link to="/admin/dashboard/orders">Track Order</Link>
+                        <Link to="/">Help Center</Link>
                     </div>
                 </div>
             </div>

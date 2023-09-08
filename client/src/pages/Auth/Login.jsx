@@ -5,7 +5,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import SeoMetadata from "../../SEO/seoMetadata";
+import SeoMetadata from "../../SEO/SeoMetadata";
 import { useAuth } from "../../context/auth";
 import Spinner from "../../components/Spinner";
 import Cookies from "js-cookie";
@@ -49,7 +49,6 @@ const Login = () => {
                     expires: 7,
                 });
                 navigate(location.state || "/");
-
             }
         } catch (error) {
             console.error("Error:", error);

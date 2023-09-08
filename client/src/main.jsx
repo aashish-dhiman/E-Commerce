@@ -8,12 +8,10 @@ import "react-toastify/dist/ReactToastify.css";
 import { AuthProvider } from "./context/auth.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-    <React.StrictMode>
         <AuthProvider>
             <ToastContainer />
             <BrowserRouter>
                 <App />
             </BrowserRouter>
         </AuthProvider>
-    </React.StrictMode>
 );

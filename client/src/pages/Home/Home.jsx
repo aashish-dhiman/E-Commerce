@@ -1,4 +1,4 @@
-import SeoMetadata from "../../SEO/seoMetadata";
+import SeoMetadata from "../../SEO/SeoMetadata";
 import { useAuth } from "../../context/auth";
 import ScrollToTopOnRouteChange from "../../utils/ScrollToTopOnRouteChange";
 import Categories from "../../components/header/Categories";
@@ -15,6 +15,7 @@ import accessoryCard from "../../assets/images/accessory-card.jpg";
 import fashionCard from "../../assets/images/fashion-card.jpg";
 import applianceCard from "../../assets/images/appliance-card.jpg";
 import furnitureCard from "../../assets/images/furniture-card.jpg";
+import Suggestion from "./Suggestions/Suggestion";
 
 const Home = () => {
     // const [auth, setAuth] = useAuth();
@@ -39,6 +40,11 @@ const Home = () => {
                     products={accessories}
                     logo={accessoryCard}
                 />
+                <Suggestion
+                    title={"Suggested for You"}
+                    tagline={"Based on Your Activity"}
+                />
+
                 <ProductSlider
                     title={"Fashion Top Deals"}
                     products={fashionProducts}

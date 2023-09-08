@@ -5,6 +5,7 @@ import getSellerProducts from "../controllers/product/getSellerProducts.js";
 import deleteProduct from "../controllers/product/deleteProduct.js";
 import findProduct from "../controllers/product/findProduct.js";
 import updateProduct from "../controllers/product/updateProduct.js";
+import getFilteredProducts from "../controllers/product/getFilteredProducts.js";
 
 //router object
 const router = express.Router();
@@ -17,6 +18,9 @@ router.get("/seller-product", isAdmin, getSellerProducts);
 
 //Delete Product
 router.post("/delete-product", deleteProduct);
+
+//find filtered product
+router.get("/filtered-products", getFilteredProducts);
 
 //find product details from product id
 router.get("/:id", findProduct);

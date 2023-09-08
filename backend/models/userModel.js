@@ -28,6 +28,15 @@ const userSchema = new mongoose.Schema(
             type: Number,
             default: 0,
         },
+        pan: {
+            number: {
+                type: String,
+            },
+            name: {
+                type: String,
+            },
+        },
+        wishlist: [{ type: mongoose.Schema.ObjectId, ref: "Product" }],
     },
     { timestamps: true }
 );

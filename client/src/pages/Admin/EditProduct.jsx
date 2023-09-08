@@ -7,7 +7,7 @@ import { useNavigate, useParams, Link } from "react-router-dom";
 import ImageIcon from "@mui/icons-material/Image";
 import { categories } from "../../utils/constants";
 import Spinner from "../../components/Spinner";
-import SeoMetadata from "./../../SEO/seoMetadata";
+import SeoMetadata from "../../SEO/SeoMetadata";
 import axios from "axios";
 import FormData from "form-data";
 import { useAuth } from "../../context/auth";

@@ -118,9 +118,11 @@ const UserProfile = () => {
             <div className="w-full flex flex-col items-start p-5 gap-10">
                 <div className="flex flex-col items-start gap-4">
                     <div className="flex gap-5">
-                        <div className="font-[600] ">Personal Information</div>
+                        <div className="font-[600] text-[16px] ">
+                            Personal Information
+                        </div>
                         <button
-                            className="text-[12px] text-primaryBlue font-[500]"
+                            className="text-[14px] text-primaryBlue font-[500]"
                             onClick={handleProfile}
                         >
                             {!profile ? "Edit" : "Cancel"}
@@ -181,9 +183,11 @@ const UserProfile = () => {
                 {/* email section */}
                 <div className="flex flex-col items-start gap-4">
                     <div className="flex gap-5">
-                        <div className="font-[600] ">Email Address</div>
+                        <div className="font-[600] text-[16px] ">
+                            Email Address
+                        </div>
                         <button
-                            className="text-[12px] text-primaryBlue font-[500]"
+                            className="text-[14px] text-primaryBlue font-[500]"
                             onClick={handleEmail}
                         >
                             {!emailSection ? "Edit" : "Cancel"}
@@ -217,9 +221,11 @@ const UserProfile = () => {
                 {/* Mobile section */}
                 <div className="flex flex-col items-start gap-4">
                     <div className="flex gap-5">
-                        <div className="font-[600] ">Mobile Number</div>
+                        <div className="font-[600] text-[16px] ">
+                            Mobile Number
+                        </div>
                         <button
-                            className="text-[12px] text-primaryBlue font-[500]"
+                            className="text-[14px] text-primaryBlue font-[500]"
                             onClick={handlePhone}
                         >
                             {!phoneSection ? "Edit" : "Cancel"}
@@ -257,11 +263,11 @@ const UserProfile = () => {
                 <div>
                     <h3 className="text-[16px] font-[600] mt-4">FAQs</h3>
                     <div className="mt-4">
-                        <h5 className="text-[12px] font-[500]">
+                        <h5 className="text-[14px] font-[500]">
                             What happens when I update my email address (or
                             mobile number)?
                         </h5>
-                        <p className="text-[11px] text-slate-500 mt-2">
+                        <p className="text-[12px] text-slate-500 mt-2">
                             Your login email id (or mobile number) changes,
                             likewise. You'll receive all your account related
                             communication on your updated email address (or
@@ -269,29 +275,29 @@ const UserProfile = () => {
                         </p>
                     </div>
                     <div className="mt-4">
-                        <h5 className="text-[12px] font-[500]">
+                        <h5 className="text-[14px] font-[500]">
                             When will my Flipkart account be updated with the
                             new email address (or mobile number)?
                         </h5>
-                        <p className="text-[11px] text-slate-500 mt-2">
+                        <p className="text-[12px] text-slate-500 mt-2">
                             It happens as soon as you confirm the verification
                             code sent to your email (or mobile) and save the
                             changes.
                         </p>
                     </div>
                     <div className="mt-4">
-                        <h5 className="text-[12px] font-[500]">
+                        <h5 className="text-[14px] font-[500]">
                             Does my Seller account get affected when I update my
                             email address?
                         </h5>
-                        <p className="text-[11px] text-slate-500 mt-2">
+                        <p className="text-[12px] text-slate-500 mt-2">
                             Flipkart has a single sign-on policy. Any changes
                             will reflect in your Seller account also.
                         </p>
                     </div>
                 </div>
                 {/* deactivate account */}
-                <div className="text-[12px] text-primaryBlue font-[500] mt-4 -mb-4">
+                <div className="text-[14px] text-primaryBlue font-[500] mt-4 -mb-4">
                     <Link to="./deactivate">Deactivate Account</Link>
                 </div>
             </div>

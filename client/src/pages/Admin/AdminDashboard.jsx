@@ -1,15 +1,15 @@
 import { Route, Routes } from "react-router-dom";
 import AdminMenu from "./AdminMenu";
-import SeoMetadata from "../../SEO/seoMetadata";
+import SeoMetadata from "../../SEO/SeoMetadata";
 import UserProfile from "../UserProfile";
 import AddressComponent from "../AddressComponent";
 import PanCardComponent from "../PanCardComponent";
-import Orders from "./Orders";
 import CreateProduct from "./CreateProduct";
 import AllProducts from "./AllProducts";
 import Users from "./Users";
 import Deactivate from "../Auth/Deactivate";
 import EditProduct from "./EditProduct";
+import Orders from "./Orders";
 
 const AdminDashboard = () => {
     return (
@@ -33,13 +33,16 @@ const AdminDashboard = () => {
                                 path="add-product"
                                 element={<CreateProduct />}
                             />
+                            <Route path="orders" element={<Orders />} />
                             <Route
                                 path="all-products"
                                 element={<AllProducts />}
                             />
-                            <Route path="orders" element={<Orders />} />
                             <Route path="users" element={<Users />} />
-                            <Route path="deactivate" element={<Deactivate />} />
+                            <Route
+                                path="profile/deactivate"
+                                element={<Deactivate />}
+                            />
                             <Route
                                 path="product/:productId"
                                 element={<EditProduct />}
