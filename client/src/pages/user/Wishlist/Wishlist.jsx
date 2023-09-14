@@ -59,7 +59,8 @@ const Wishlist = () => {
     }, [page]);
     // console.log(wishlistItems);
 
-    const handleLoadMore = () => {
+    const 
+    handleLoadMore = () => {
         // Increment the page number to fetch the next batch
         setIsLoadMore(true);
         setPage((prevPage) => {
@@ -145,7 +146,7 @@ const Wishlist = () => {
                                         key={index}
                                     />
                                 ))
-                                .reverse()}
+                                }
 
                             {count > pageSize && (
                                 <span className="font-medium text-md px-4 sm:px-8 py-4 flex items-center justify-center border-b">

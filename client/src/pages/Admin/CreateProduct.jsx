@@ -188,10 +188,10 @@ const CreateProduct = () => {
                 <form
                     onSubmit={newProductSubmitHandler}
                     encType="multipart/form-data"
-                    className="flex flex-col sm:flex-row bg-white rounded-lg shadow p-4"
+                    className="flex flex-col w-full sm:flex-row bg-white rounded-lg shadow p-4"
                     id="mainForm"
                 >
-                    <div className="flex flex-col gap-3 m-2 ">
+                    <div className="flex flex-col mx-auto py-2 gap-3 m-2 w-[90%] ">
                         <TextField
                             label="Name"
                             variant="outlined"

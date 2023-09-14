@@ -63,7 +63,7 @@ const ProductSlider = ({ title, products, logo }) => {
 
                 {/* Right Side (Slider) */}
                 <Slider className="w-[100%] md:w-[80%]" {...settings}>
-                    {products.map((item, i) => (
+                    {products?.map((item, i) => (
                         <Product {...item} key={i} />
                     ))}
                 </Slider>

@@ -6,6 +6,7 @@ import deleteProduct from "../controllers/product/deleteProduct.js";
 import findProduct from "../controllers/product/findProduct.js";
 import updateProduct from "../controllers/product/updateProduct.js";
 import getFilteredProducts from "../controllers/product/getFilteredProducts.js";
+import searchProductController from "../controllers/product/searchProductController.js";
 
 //router object
 const router = express.Router();
@@ -27,5 +28,8 @@ router.get("/:id", findProduct);
 
 //update product details from product id
 router.put("/update/:id", isAdmin, updateProduct);
+
+// search products using keyword
+router.get("/search/:keyword",searchProductController)
 
 export default router;

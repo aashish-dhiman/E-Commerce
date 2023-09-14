@@ -9,6 +9,7 @@ import AdminDashboard from "../pages/Admin/AdminDashboard";
 import PrivateRoute from "./PrivateRoute";
 import AdminRoute from "./AdminRoute";
 import Products from "../pages/Products/Products";
+import ProductPage from "../pages/Products/ProductPage";
 import Orders from "./../pages/user/Orders/Orders";
 import Wishlist from "../pages/user/Wishlist/Wishlist";
 
@@ -20,7 +21,7 @@ const Routers = () => {
             <Route path="/register" element={<Register />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/products" element={<Products />} />
-            <Route path="product/:productId" element={<Products />} />
+            <Route path="product/:productId" element={<ProductPage />} />
             <Route path="/user" element={<PrivateRoute />}>
                 <Route path="dashboard/*" element={<Dashboard />} />
                 <Route path="orders" element={<Orders />} />

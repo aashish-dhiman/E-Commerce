@@ -3,10 +3,11 @@ import { NavLink, Link } from "react-router-dom";
 import logo from "../../assets/images/logo.png";
 import { BiHomeSmile, BiCategoryAlt } from "react-icons/bi";
 import { AiOutlineUser, AiOutlineHeart } from "react-icons/ai";
-import { BsSearch, BsCart2, BsBox } from "react-icons/bs";
+import { BsCart2, BsBox } from "react-icons/bs";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { MdLogin, MdLogout } from "react-icons/md";
 import { useAuth } from "../../context/auth";
+import SearchBar from "./SearchBar";
 // import { toast } from "react-toastify";
 // import LogOut from "../../pages/Auth/LogOut";
 
@@ -16,11 +17,15 @@ const Header = () => {
 
     const [auth, setAuth, LogOut] = useAuth();
 
+    let closeTimeout;
     const toggleDropdown = () => {
-        setDropdownOpen(!isDropdownOpen);
+        clearTimeout(closeTimeout);
+        setDropdownOpen(true);
     };
     const closeDropdown = () => {
-        setDropdownOpen(false);
+        closeTimeout = setTimeout(() => {
+            setDropdownOpen(false);
+        }, 200);
     };
 
     const handleLogout = () => {
@@ -49,7 +54,7 @@ const Header = () => {
         <header ref={headerRef}>
             <div
                 className="container px-4 md:px-[50px] lg:px-[80px]"
-                onMouseLeave={closeDropdown}
+                // onMouseLeave={closeDropdown}
             >
                 <div className=" flex items-center justify-between gap-8 md:gap-14 w-[100%] flex-col md:flex-row sm:flex-row lg:flex-row">
                     {/* primary div */}
@@ -65,32 +70,8 @@ const Header = () => {
                             </Link>
 
                             {/* search bar*/}
-                            <div className="w-[100%] sm:w-[70%]">
-                                <form
-                                    action="/search"
-                                    method=""
-                                    className="bg-[#f0f5ff] rounded-lg relative w-[100%]"
-                                >
-                                    <div className="flex items-center">
-                                        <div className=" flex items-center px-2">
-                                            <button type="submit">
-                                                <figure className=" text-slate-500 bg-transparent">
-                                                    <BsSearch />
-                                                </figure>
-                                            </button>
-                                        </div>
-                                        <div className="w-[100%]">
-                                            <input
-                                                type="text"
-                                                title="Search for Products, Brands and More"
-                                                placeholder="Search for Products, Brands and More"
-                                                autoComplete="off"
-                                                className=" bg-transparent w-[100%] border-none outline-none text-[14px] md:text-[16px] p-1 placeholder-gray-600"
-                                            />
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
+                            <SearchBar />
+                            {/* search bar*/}
                         </div>
                     </div>
 
@@ -114,6 +95,7 @@ const Header = () => {
                                     : "hover:bg-primaryBlue"
                             } rounded-md p-1`}
                             onMouseEnter={toggleDropdown}
+                            onMouseLeave={closeDropdown}
                         >
                             {auth.user ? (
                                 <div className="flex items-center gap-1 ">
@@ -147,7 +129,11 @@ const Header = () => {
 
                             {/* dropdown menu */}
                             {isDropdownOpen && (
-                                <div className="absolute top-[34px] -left-[2px] z-50 bg-white border border-gray-300 rounded-md p-2 z-10 w-[140px] transition-all flex flex-col">
+                                <div
+                                    className="absolute top-[36px] -left-[2px] z-50 bg-white border border-gray-300 rounded-md p-2 w-[140px] transition-all flex flex-col "
+                                    onMouseEnter={toggleDropdown}
+                                    onMouseLeave={closeDropdown}
+                                >
                                     <ul>
                                         {!auth.user && (
                                             <li className="p-1 hover:bg-slate-100 rounded-md">
