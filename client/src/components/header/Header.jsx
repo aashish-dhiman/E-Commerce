@@ -8,6 +8,7 @@ import { RiArrowDropDownLine } from "react-icons/ri";
 import { MdLogin, MdLogout } from "react-icons/md";
 import { useAuth } from "../../context/auth";
 import SearchBar from "./SearchBar";
+import { useCart } from "../../context/cart";
 // import { toast } from "react-toastify";
 // import LogOut from "../../pages/Auth/LogOut";
 
@@ -16,6 +17,7 @@ const Header = () => {
     const headerRef = useRef(null);
 
     const [auth, setAuth, LogOut] = useAuth();
+    const [cartItems, setCartItems] = useCart();
 
     let closeTimeout;
     const toggleDropdown = () => {
@@ -219,7 +221,7 @@ const Header = () => {
                                 className="relative flex items-center gap-1"
                             >
                                 <span className="absolute w-4 h-4 text-[11px] text-center font-semibold left-2 bottom-3 text-white bg-red-500 rounded-[50%] ">
-                                    0
+                                    {cartItems?.length}
                                 </span>
                                 <BsCart2 className="text-[22px]" />
                                 <span className="hidden md:block lg:block group-hover:text-slate-700">

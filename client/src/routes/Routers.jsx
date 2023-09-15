@@ -12,6 +12,7 @@ import Products from "../pages/Products/Products";
 import ProductPage from "../pages/Products/ProductPage";
 import Orders from "./../pages/user/Orders/Orders";
 import Wishlist from "../pages/user/Wishlist/Wishlist";
+import Cart from "../pages/user/Cart/Cart";
 
 const Routers = () => {
     return (
@@ -21,6 +22,8 @@ const Routers = () => {
             <Route path="/register" element={<Register />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/products" element={<Products />} />
+            <Route path="/search" element={<Products />} />
+            <Route path="/cart" element={<Cart />} />
             <Route path="product/:productId" element={<ProductPage />} />
             <Route path="/user" element={<PrivateRoute />}>
                 <Route path="dashboard/*" element={<Dashboard />} />

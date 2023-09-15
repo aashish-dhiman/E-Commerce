@@ -69,7 +69,7 @@ const Product = ({
                         },
                     }
                 );
-                console.log(res);
+                // console.log(res);
                 setWishlistItems(res.data.wishlistItems);
                 fetchWishlistItems();
             } else {

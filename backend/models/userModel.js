@@ -39,13 +39,30 @@ const userSchema = new mongoose.Schema(
         wishlist: [{ type: mongoose.Schema.ObjectId, ref: "Product" }],
         cartItems: [
             {
-                product: {
-                    type: mongoose.Schema.ObjectId,
-                    ref: "Product",
+                name: {
+                    type: String,
+                },
+                stock: {
+                    type: Number,
+                },
+                image: {
+                    type: String,
+                },
+                brandName: {
+                    type: String,
+                },
+                price: {
+                    type: Number,
+                },
+                discountPrice: {
+                    type: Number,
                 },
                 quantity: {
                     type: Number,
                     default: 1,
+                },
+                productId: {
+                    type: String,
                     required: true,
                 },
             },

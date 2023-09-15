@@ -59,8 +59,7 @@ const Wishlist = () => {
     }, [page]);
     // console.log(wishlistItems);
 
-    const 
-    handleLoadMore = () => {
+    const handleLoadMore = () => {
         // Increment the page number to fetch the next batch
         setIsLoadMore(true);
         setPage((prevPage) => {
@@ -88,10 +87,11 @@ const Wishlist = () => {
                 }
             );
             // console.log(res);
-            toast.success("Product Removed From Wishlist");
-            setWishlistItems((prev) =>
-                prev.filter((item) => item._id !== _id)
-            );
+            res.status === 201 &&
+                toast.success("Product Removed From Wishlist") &&
+                setWishlistItems((prev) =>
+                    prev.filter((item) => item._id !== _id)
+                );
             setIsLoading(false);
             fetchCounts();
             fetchDetails();
@@ -138,15 +138,13 @@ const Wishlist = () => {
                                 </div>
                             )}
 
-                            {wishlistItems
-                                ?.map((item, index) => (
-                                    <Product
-                                        {...item}
-                                        func={deleteHandler}
-                                        key={index}
-                                    />
-                                ))
-                                }
+                            {wishlistItems?.map((item, index) => (
+                                <Product
+                                    {...item}
+                                    func={deleteHandler}
+                                    key={index}
+                                />
+                            ))}
 
                             {count > pageSize && (
                                 <span className="font-medium text-md px-4 sm:px-8 py-4 flex items-center justify-center border-b">

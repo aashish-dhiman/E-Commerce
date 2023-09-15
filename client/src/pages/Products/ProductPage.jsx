@@ -27,11 +27,13 @@ import { useAuth } from "../../context/auth";
 import { fashionProducts } from "../../utils/fashion";
 import { electronicProducts } from "../../utils/electronics";
 import ScrollToTopOnRouteChange from "../../utils/ScrollToTopOnRouteChange";
+import { useCart } from "../../context/cart";
 
 const ProductDetails = () => {
     const params = useParams();
     const navigate = useNavigate();
     const [auth, setAuth, LogOut, isContextLoading] = useAuth();
+    const [cartItems, setCartItems, addItems] = useCart();
     // reviews toggle
     const [open, setOpen] = useState(false);
     const [viewAll, setViewAll] = useState(false);
@@ -55,7 +57,106 @@ const ProductDetails = () => {
 
     const { productId } = useParams();
     // console.log(productId);
-    const itemInWishlist = wishlistItems?.some((id) => id === productId);
+
+    const reviewSubmitHandler = () => {
+        if (rating === 0 || !comment.trim()) {
+            toast.error("Empty Review", {
+                style: {
+                    top: "40px",
+                },
+            });
+            return;
+        }
+        const formData = new FormData();
+        formData.set("rating", rating);
+        formData.set("comment", comment);
+        formData.set("productId", productId);
+
+        setOpen(false);
+    };
+
+    const addToCartHandler = () => {
+        const item = {
+            productId: product._id,
+            name: product.name,
+            stock: product.stock,
+            image: product.images[0].url,
+            brandName: product.brand.name,
+            price: product.price,
+            discountPrice: product.discountPrice,
+        };
+        addItems(item, 1);
+    };
+
+    const handleDialogClose = () => {
+        setOpen(!open);
+    };
+
+    const itemInCart = cartItems.some((item) => item.productId === productId);
+
+    const goToCart = () => {
+        navigate("/cart");
+    };
+
+    const buyNow = () => {
+        addToCartHandler();
+        navigate("/shipping");
+    };
+
+    //fetch wishlist items
+    const fetchWishlistItems = async () => {
+        try {
+            // only id of wishlist products will get
+            const res = await axios.get("/api/v1/user/wishlist", {
+                headers: {
+                    Authorization: auth.token,
+                },
+            });
+            setWishlistItems(res.data.wishlistItems);
+        } catch (error) {
+            console.error("Error fetching wishlist items:", error);
+        }
+    };
+    //fetch cart items
+    useEffect(() => {
+        !isContextLoading && fetchWishlistItems();
+    }, [isContextLoading]);
+
+    //fetch product details
+    useEffect(() => {
+        const fetchProduct = async () => {
+            try {
+                const res = await axios.get(`/api/v1/product/${productId}`);
+                // console.log(res.data.product);
+                res.status === 201 && setProduct(res.data.product);
+                setLoading(false);
+            } catch (error) {
+                console.error("Error:", error);
+                setLoading(false);
+                // product not found
+                error.response?.status === 404 &&
+                    toast.error("Product Not Found!", {
+                        style: {
+                            top: "40px",
+                        },
+                    });
+
+                //server error
+                error.response?.status === 500 &&
+                    toast.error(
+                        "Something went wrong! Please try after sometime.",
+                        {
+                            style: {
+                                top: "40px",
+                            },
+                        }
+                    );
+            }
+        };
+        fetchProduct();
+    }, []);
+
+    let itemInWishlist = wishlistItems?.find((id) => id === productId);
 
     const addToWishlistHandler = async () => {
         if (itemInWishlist) {
@@ -97,7 +198,7 @@ const ProductDetails = () => {
                         },
                     }
                 );
-                console.log(res);
+                // console.log(res);
                 res.status === 201 &&
                     toast.success("Product Added To Wishlist", {
                         style: {
@@ -105,105 +206,12 @@ const ProductDetails = () => {
                         },
                     }) &&
                     setWishlistItems(res.data.wishlistItems);
+                itemInWishlist = true;
             } catch (error) {
                 console.log(error);
             }
         }
     };
-
-    const reviewSubmitHandler = () => {
-        if (rating === 0 || !comment.trim()) {
-            toast.error("Empty Review", {
-                style: {
-                    top: "40px",
-                },
-            });
-            return;
-        }
-        const formData = new FormData();
-        formData.set("rating", rating);
-        formData.set("comment", comment);
-        formData.set("productId", productId);
-
-        setOpen(false);
-    };
-
-    const addToCartHandler = () => {
-        toast.success("Product Added To Cart", {
-            style: {
-                top: "40px",
-            },
-        });
-    };
-
-    const handleDialogClose = () => {
-        setOpen(!open);
-    };
-
-    // const itemInCart = cartItems.some((id) => id === productId);
-    const itemInCart = false;
-
-    const goToCart = () => {
-        navigate("/cart");
-    };
-
-    const buyNow = () => {
-        addToCartHandler();
-        navigate("/shipping");
-    };
-
-    //fetch wishlist items
-    const fetchWishlistItems = async () => {
-        try {
-            // only id of wishlist products will get
-            const res = await axios.get("/api/v1/user/wishlist", {
-                headers: {
-                    Authorization: auth.token,
-                },
-            });
-            setWishlistItems(res.data.wishlistItems);
-        } catch (error) {
-            console.error("Error fetching wishlist items:", error);
-        }
-    };
-    //fetch cart items
-    useEffect(() => {
-        !isContextLoading && fetchWishlistItems();
-    }, [isContextLoading]);
-
-    //fetch product details
-    useEffect(() => {
-        const fetchProduct = async () => {
-            try {
-                const res = await axios.get(`/api/v1/product/${productId}`);
-                // console.log(res);
-                res.status === 201 && setProduct(res.data.product);
-                setLoading(false);
-            } catch (error) {
-                console.error("Error:", error);
-                setLoading(false);
-                // product not found
-                error.response?.status === 404 &&
-                    toast.error("Product Not Found!", {
-                        style: {
-                            top: "40px",
-                        },
-                    });
-
-                //server error
-                error.response?.status === 500 &&
-                    toast.error(
-                        "Something went wrong! Please try after sometime.",
-                        {
-                            style: {
-                                top: "40px",
-                            },
-                        }
-                    );
-            }
-        };
-        fetchProduct();
-    }, []);
 
     return (
         <>
@@ -220,18 +228,29 @@ const ProductDetails = () => {
                             {/* <!-- image wrapper --> */}
                             <div className="w-full sm:w-2/5 sm:sticky top-16 sm:h-screen">
                                 {/* <!-- imgBox --> */}
-                                <div className="flex flex-col gap-3 m-3">
-                                    <div className="w-full h-full pb-6 border relative">
+                                <div className="flex flex-col gap-3 m-3 ">
+                                    <div className="w-full sm:w-[450px] h-full pb-6 border relative">
                                         <Slider {...settings}>
-                                            {product?.images?.map((item, i) => (
+                                            {product?.images.length > 1 ? (
+                                                product?.images?.map(
+                                                    (item, i) => (
+                                                        <img
+                                                            draggable="false"
+                                                            className="w-full h-96 object-contain"
+                                                            src={item.url}
+                                                            alt={product.name}
+                                                            key={i}
+                                                        />
+                                                    )
+                                                )
+                                            ) : (
                                                 <img
                                                     draggable="false"
                                                     className="w-full h-96 object-contain"
-                                                    src={item.url}
-                                                    alt={product.name}
-                                                    key={i}
+                                                    src={product?.images[0].url}
+                                                    alt={product?.name}
                                                 />
-                                            ))}
+                                            )}
                                         </Slider>
                                         <div className="absolute top-4 right-4 shadow-lg bg-white w-9 h-9 border flex items-center justify-center rounded-full">
                                             <span
@@ -258,7 +277,7 @@ const ProductDetails = () => {
                                                         ? goToCart
                                                         : addToCartHandler
                                                 }
-                                                className="p-4 w-1/2 flex items-center justify-center gap-2 text-white bg-[#ff9f00] rounded-sm shadow hover:shadow-lg"
+                                                className="p-2 sm:p-4 w-1/2 flex items-center justify-center gap-2 text-white bg-[#ff9f00] rounded-sm shadow hover:shadow-lg"
                                             >
                                                 <ShoppingCartIcon />
                                                 {itemInCart
@@ -366,11 +385,13 @@ const ProductDetails = () => {
                                                 }}
                                                 style={{
                                                     color: "#16bd49",
-                                                    marginTop:"2px"
+                                                    marginTop: "2px",
                                                 }}
                                             />
                                             <span className="font-[500] text-[14px] flex items-baseline gap-4">
-                                                <span className="min-w-fit">Bank Offer</span>
+                                                <span className="min-w-fit">
+                                                    Bank Offer
+                                                </span>
                                                 <span className=" font-[400] ">
                                                     {el}
                                                     <Link
