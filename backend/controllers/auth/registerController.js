@@ -26,7 +26,7 @@ export const registerController = async (req, res) => {
         //Register User
         const hashedPassword = await hashPassword(password);
 
-        const user = await new userModel({
+        const user = new userModel({
             name,
             email,
             phone,
@@ -34,7 +34,7 @@ export const registerController = async (req, res) => {
             address,
             role: isSeller ? 1 : 0,
         });
-        user.save();
+        await user.save();
 
         res.status(201).send({
             success: true,

@@ -84,6 +84,7 @@ const ProductDetails = () => {
             brandName: product.brand.name,
             price: product.price,
             discountPrice: product.discountPrice,
+            seller:product.seller
         };
         addItems(item, 1);
     };

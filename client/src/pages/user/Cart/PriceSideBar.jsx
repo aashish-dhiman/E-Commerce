@@ -1,6 +1,8 @@
 /* eslint-disable react/prop-types */
+import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
+
 const PriceSidebar = ({ cartItems }) => {
-    console.log(cartItems);
+    // console.log(cartItems);
     return (
         <div className="flex sticky top-16 sm:h-screen flex-col sm:w-4/12 sm:px-1">
             {/* <!-- nav tiles --> */}
@@ -52,7 +54,8 @@ const PriceSidebar = ({ cartItems }) => {
                             {cartItems
                                 .reduce(
                                     (sum, item) =>
-                                        sum + item.discountPrice * item.quantity,
+                                        sum +
+                                        item.discountPrice * item.quantity,
                                     0
                                 )
                                 .toLocaleString()}
@@ -74,6 +77,13 @@ const PriceSidebar = ({ cartItems }) => {
                         on this order
                     </p>
                 </div>
+            </div>
+            <div className="flex gap-3 items-center my-4 p-2 ">
+                <VerifiedUserIcon className="text-gray-600"/>
+                <p className="text-gray-500 w-full text-[14px] font-[500]">
+                    Safe and Secure Payments.Easy returns.100% Authentic
+                    products.
+                </p>
             </div>
             {/* <!-- nav tiles --> */}
         </div>

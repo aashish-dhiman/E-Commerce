@@ -4,20 +4,22 @@ import EmptyCart from "./EmptyCart";
 import PriceSidebar from "./PriceSidebar";
 import SeoMetadata from "../../../SEO/SeoMetadata";
 import { useCart } from "../../../context/cart";
-// import SaveForLaterItem from "./SaveForLaterItem";
+import SaveForLater from "./SaveForLater";
+import ScrollToTopOnRouteChange from "./../../../utils/ScrollToTopOnRouteChange";
 
 const Cart = () => {
     const navigate = useNavigate();
-    const [cartItems, setCartItems] = useCart();
+    const [cartItems, setCartItems, , , saveLaterItems] = useCart();
 
     // console.log(cartItems);
 
     const placeOrderHandler = () => {
-        navigate("/login?redirect=shipping");
+        navigate("/shipping");
     };
 
     return (
         <>
+            <ScrollToTopOnRouteChange />
             <SeoMetadata title="Shopping Cart | Flipkart.com" />
             <main className="w-full pt-5">
                 {/* <!-- row --> */}
@@ -41,7 +43,7 @@ const Cart = () => {
                                 ))
                             )}
                             {/* <!-- place order btn --> */}
-                            <div className="flex justify-end">
+                            <div className="flex justify-end sticky bottom-0 left-0 bg-white">
                                 <button
                                     onClick={placeOrderHandler}
                                     disabled={
@@ -51,7 +53,7 @@ const Cart = () => {
                                         cartItems.length < 1
                                             ? "hidden"
                                             : "bg-orange"
-                                    } w-full sm:w-1/3 mx-2 sm:mx-6 my-4 py-3 font-medium text-white shadow hover:shadow-lg rounded-sm`}
+                                    } w-full sm:w-1/3 mx-2 sm:mx-6 my-4 py-4 font-medium text-white shadow hover:shadow-lg rounded-sm `}
                                 >
                                     PLACE ORDER
                                 </button>
@@ -61,15 +63,14 @@ const Cart = () => {
                         {/* <!-- cart items container --> */}
 
                         {/* <!-- saved for later items container --> */}
-                        {/* <div className="flex flex-col mt-5 shadow bg-white">
+                        <div className="flex flex-col mt-5 shadow bg-white mb-8">
                             <span className="font-medium text-lg px-2 sm:px-8 py-4 border-b">
-                                Saved For Later 
+                                Saved For Later ({saveLaterItems?.length})
                             </span>
-                            {saveForLaterItems &&
-                                saveForLaterItems.map((item) => (
-                                    <SaveForLaterItem {...item} />
-                                ))}
-                        </div> */}
+                            {saveLaterItems?.map((item, i) => (
+                                <SaveForLater product={item} key={i} />
+                            ))}
+                        </div>
                         {/* <!-- saved for later container --> */}
                     </div>
                     {/* <!-- cart column --> */}

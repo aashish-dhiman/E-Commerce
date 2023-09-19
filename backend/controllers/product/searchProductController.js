@@ -4,7 +4,7 @@ const searchProductController = async (req, res) => {
     try {
         const { keyword } = req.params;
         // console.log(keyword);
-        
+
         // Use MongoDB's $regex operator for a case-insensitive search
         const products = await productModel.find({
             $or: [

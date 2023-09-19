@@ -7,7 +7,7 @@ import { useCart } from "../../../context/cart";
 import { useState } from "react";
 
 const CartItem = ({ product, inCart }) => {
-    const [cartItems, setCartItems, addItems, removeItems] = useCart();
+    const [, , addItems, removeItems, , addLater] = useCart();
     // console.log(product);
     const [quantity, setQuantity] = useState(product?.quantity);
 
@@ -36,9 +36,10 @@ const CartItem = ({ product, inCart }) => {
         removeItems(product);
     };
 
-    const saveForLaterHandler = (id) => {
+    const saveForLaterHandler = (product) => {
         // dispatch(saveForLater(id));
-        removeCartItem(id);
+        addLater(product);
+        // console.log("Save for later clicked");
         // enqueueSnackbar("Saved For Later", { variant: "success" });
     };
 
@@ -74,7 +75,7 @@ const CartItem = ({ product, inCart }) => {
                             </span>
                         </div>
 
-                        <div className="flex flex-col sm:gap-2">
+                        <div className="flex flex-col sm:gap-2 w-[50%]">
                             <p className="text-sm">
                                 Delivery by {getDeliveryDate()} |{" "}
                                 <span className="line-through">₹{40}</span>{" "}
@@ -118,18 +119,18 @@ const CartItem = ({ product, inCart }) => {
                 <div className="flex gap-2 items-center justify-between w-[130px]">
                     <span
                         onClick={() => decreaseQuantity(product)}
-                        className="w-7 h-7 text-3xl font-light bg-gray-50 rounded-full border flex items-center justify-center cursor-pointer hover:bg-gray-200"
+                        className="w-7 h-7 text-3xl font-light select-none bg-gray-50 rounded-full border flex items-center justify-center cursor-pointer hover:bg-gray-200"
                     >
                         <p>-</p>
                     </span>
                     <input
-                        className="w-11 border outline-none text-center rounded-sm py-0.5 text-gray-700 font-medium text-sm qtyInput"
+                        className="w-11 border outline-none text-center select-none rounded-sm py-0.5 text-gray-700 font-medium text-sm qtyInput"
                         value={quantity}
                         disabled
                     />
                     <span
                         onClick={() => increaseQuantity(product)}
-                        className="w-7 h-7 text-xl font-light bg-gray-50 rounded-full border flex items-center justify-center cursor-pointer hover:bg-gray-200"
+                        className="w-7 h-7 text-xl font-light select-none bg-gray-50 rounded-full border flex items-center justify-center cursor-pointer hover:bg-gray-200"
                     >
                         +
                     </span>

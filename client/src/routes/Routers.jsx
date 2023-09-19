@@ -13,6 +13,10 @@ import ProductPage from "../pages/Products/ProductPage";
 import Orders from "./../pages/user/Orders/Orders";
 import Wishlist from "../pages/user/Wishlist/Wishlist";
 import Cart from "../pages/user/Cart/Cart";
+import Shipping from "../pages/user/Cart/Shipping";
+import OrderSuccess from "../pages/user/Cart/OrderSuccess";
+import OrderFailed from "../pages/user/Cart/OrderFailed";
+import OrderDetails from "../pages/user/Orders/OrderDetails";
 
 const Routers = () => {
     return (
@@ -24,10 +28,19 @@ const Routers = () => {
             <Route path="/products" element={<Products />} />
             <Route path="/search" element={<Products />} />
             <Route path="/cart" element={<Cart />} />
+            <Route path="/shipping" element={<PrivateRoute />}>
+                <Route path="" element={<Shipping />} />
+                <Route path="confirm" element={<OrderSuccess />} />
+                <Route path="failed" element={<OrderFailed />} />
+            </Route>
             <Route path="product/:productId" element={<ProductPage />} />
             <Route path="/user" element={<PrivateRoute />}>
                 <Route path="dashboard/*" element={<Dashboard />} />
                 <Route path="orders" element={<Orders />} />
+                <Route
+                    path="orders/order_details/:id"
+                    element={<OrderDetails />}
+                />
                 <Route path="wishlist" element={<Wishlist />} />
             </Route>
             <Route path="/admin" element={<AdminRoute />}>

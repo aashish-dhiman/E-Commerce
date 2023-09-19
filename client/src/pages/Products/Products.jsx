@@ -301,7 +301,7 @@ const Products = () => {
                     {/* <!-- search column --> */}
                     <div className="flex-1 relative ">
                         {!loading && products?.length === 0 && (
-                            <div className="flex flex-col items-center justify-center gap-3 bg-white shadow-sm rounded-sm p-6 sm:p-16 min-h-[750px] ">
+                            <div className="flex flex-col items-center justify-start gap-3 bg-white shadow-sm rounded-sm p-6 sm:p-16 sm:min-h-[750px] ">
                                 <img
                                     draggable="true"
                                     className="w-1/2 h-44 object-contain"

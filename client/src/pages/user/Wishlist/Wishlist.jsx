@@ -138,13 +138,15 @@ const Wishlist = () => {
                                 </div>
                             )}
 
-                            {wishlistItems?.map((item, index) => (
-                                <Product
-                                    {...item}
-                                    func={deleteHandler}
-                                    key={index}
-                                />
-                            ))}
+                            {wishlistItems
+                                ?.map((item, index) => (
+                                    <Product
+                                        {...item}
+                                        func={deleteHandler}
+                                        key={index}
+                                    />
+                                ))
+                                .reverse()}
 
                             {count > pageSize && (
                                 <span className="font-medium text-md px-4 sm:px-8 py-4 flex items-center justify-center border-b">

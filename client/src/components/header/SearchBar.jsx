@@ -49,15 +49,15 @@ const SearchBar = () => {
                 onBlur={() =>
                     setTimeout(() => {
                         setOpen(false);
-                    },500)
+                    }, 500)
                 }
             >
                 <form
                     action="/search"
                     method=""
-                    className="bg-[#f0f5ff]  relative w-[100%]"
+                    className="bg-[#f0f5ff] relative w-[100%] rounded-md"
                 >
-                    <div className="flex items-center">
+                    <div className="flex items-center h-[40px] ">
                         <div className=" flex items-center px-2">
                             <button type="submit">
                                 <figure className=" text-slate-500 bg-transparent">
@@ -79,12 +79,12 @@ const SearchBar = () => {
                     </div>
                 </form>
                 {results.length > 0 && open && (
-                    <ul className="absolute top-[30px] left-0 right-0 z-50 w-full bg-[#f0f5ff] shadow-lg">
+                    <ul className="absolute top-[40px] left-0 right-0 pb-2 z-50 w-full bg-white shadow-lg rounded-b-md">
                         {results.map((product) => (
                             <li key={product?._id}>
                                 <a
                                     href={`/product/${product._id}`}
-                                    className="p-3 hover:bg-gray-200 flex gap-4"
+                                    className="px-5 py-4 h-[50px] hover:bg-[#f0f5ff] flex gap-5"
                                 >
                                     <img
                                         src={product?.images[0].url}
