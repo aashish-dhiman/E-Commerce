@@ -23,7 +23,7 @@ This is a Flipkart clone eCommerce project developed using the MERN (MongoDB, Ex
 
 - **User Order History and Order Management:** Store user order history and provide a user-friendly interface for order management, including order status and tracking.
 
-- **Admin Panel for Product Management:** Admin users can manage product listings, categories, and view orders. Accessible via `/admin` route (login required).
+- **Admin Panel for Product Management:** Admin users can manage product listings, categories, and view orders. Accessible via `/dashboard/admin` route (login required).
 
 - **Responsive Design with Tailwind CSS and Material UI:** Utilize Tailwind CSS and Material UI for responsive and visually appealing user interfaces on both mobile and desktop devices.
 
