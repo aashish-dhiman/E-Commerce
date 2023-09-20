@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import CircleIcon from "@mui/icons-material/Circle";
 import { Link } from "react-router-dom";
-import { formatDate } from "../../../utils/functions";
+import { formatDate } from "../../utils/functions";
 
 const OrderItem = ({
     item,
@@ -63,31 +63,36 @@ const OrderItem = ({
                                     </span>
                                     Delivered
                                 </>
+                            ) : orderStatus === "Out For Delivery" ? (
+                                <>
+                                    <span className="text-primaryGreen pb-0.5">
+                                        <CircleIcon sx={{ fontSize: "14px" }} />
+                                    </span>
+                                    Out For Delivery
+                                </>
                             ) : (
                                 <>
                                     <span className="text-primaryBlue pb-0.5">
                                         <CircleIcon sx={{ fontSize: "14px" }} />
                                     </span>
-                                    Ordered on {formatDate(createdAt)}
+                                    Order received on {formatDate(createdAt)}
                                 </>
                             )}
                         </p>
                         {orderStatus === "Delivered" ? (
                             <p className="text-xs ml-1">
-                                Your item has been Delivered
+                                Item successfully delivered
+                            </p>
+                        ) : orderStatus === "Out For Delivery" ? (
+                            <p className="text-xs ml-1">
+                                Product is out for delivery
                             </p>
                         ) : orderStatus === "Shipped" ? (
                             <p className="text-xs ml-1">
-                                Your item has been Shipped
-                            </p>
-                        ) : orderStatus === "Processed" ? (
-                            <p className="text-xs ml-1">
-                                Seller has processed your order
+                                You have processed this order
                             </p>
                         ) : (
-                            <p className="text-xs ml-1">
-                                Your order has been placed
-                            </p>
+                            <p className="text-xs ml-1">Order received</p>
                         )}
                     </div>
                 </div>

@@ -183,7 +183,7 @@ const Header = () => {
                                             <Link
                                                 to={`${
                                                     auth?.user?.role === 1
-                                                        ? "/admin/dashboard"
+                                                        ? "/admin"
                                                         : "/user"
                                                 }/orders`}
                                                 className="flex items-center gap-3"

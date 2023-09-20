@@ -95,7 +95,7 @@ const AdminMenu = () => {
                     </div>
                     <div className="flex flex-col  text-black font-[300] text-[14px] mb-2 mt-0 ">
                         <NavLink
-                            to="./orders "
+                            to="/admin/orders "
                             onClick={scrollToTop}
                             className={({ isActive }) =>
                                 isActive
@@ -169,7 +169,7 @@ const AdminMenu = () => {
                     </span>
                     <div className="flex gap-2.5 text-xs text-gray-500">
                         <Link to="/forgot-password">Change Password</Link>
-                        <Link to="/admin/dashboard/orders">Track Order</Link>
+                        <Link to="/admin/orders">Track Order</Link>
                         <Link to="/">Help Center</Link>
                     </div>
                 </div>

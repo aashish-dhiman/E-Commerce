@@ -10,13 +10,13 @@ const handleSuccess = async (req, res) => {
         // Retrieve the session ID from the query parameters
         const { sessionId, orderItems, shippingInfo } = req.body;
 
-        // console.log(sessionId, orderItems, shippingInfo);
+        console.log(sessionId, orderItems, shippingInfo);
 
         // Fetch the payment intent associated with the session
         const session = await stripeInstance.checkout.sessions.retrieve(
             sessionId
         );
-        // console.log(session);
+        console.log(session);
         // Extract the payment intent ID from the retrieved session
         const paymentIntentId = session.payment_intent;
         const amount = session.amount_total;

@@ -7,6 +7,8 @@ import createSession from "../controllers/user/createSession.js";
 import handleSuccess from "../controllers/user/handleSuccess.js";
 import getOrders from "../controllers/user/getOrders.js";
 import getOrderDetail from "../controllers/user/getOrderDetail.js";
+import getAdminOrders from "../controllers/user/getAdminOrders.js";
+import updateOrder from "../controllers/user/updateOrder.js";
 
 //router object
 const router = express.Router();
@@ -28,5 +30,12 @@ router.post("/payment-success", requireSignIn, handleSuccess);
 // get user orders
 router.get("/orders", requireSignIn, getOrders);
 router.get("/order-detail", requireSignIn, getOrderDetail);
+
+//get admin orders
+router.get("/admin-orders", isAdmin, getAdminOrders);
+router.get("/admin-order-detail", isAdmin, getOrderDetail);
+
+//update order status
+router.patch("/update/order-status", isAdmin, updateOrder);
 
 export default router;

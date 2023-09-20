@@ -17,6 +17,8 @@ import Shipping from "../pages/user/Cart/Shipping";
 import OrderSuccess from "../pages/user/Cart/OrderSuccess";
 import OrderFailed from "../pages/user/Cart/OrderFailed";
 import OrderDetails from "../pages/user/Orders/OrderDetails";
+import AdminOrders from "../pages/Admin/AdminOrders";
+import UpdateOrders from "../pages/Admin/UpdateOrders";
 
 const Routers = () => {
     return (
@@ -45,6 +47,11 @@ const Routers = () => {
             </Route>
             <Route path="/admin" element={<AdminRoute />}>
                 <Route path="dashboard/*" element={<AdminDashboard />} />
+                <Route path="orders" element={<AdminOrders />} />
+                <Route
+                    path="orders/order_details/:id"
+                    element={<UpdateOrders />}
+                />
             </Route>
             <Route path="*" element={<PageNotFound />} />
         </Routes>
