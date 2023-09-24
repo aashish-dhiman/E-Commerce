@@ -6,6 +6,12 @@ import cors from "cors";
 import { v2 as cloudinary } from "cloudinary";
 import bodyParser from "body-parser";
 import fileUpload from "express-fileupload";
+import { fileURLToPath } from "url";
+import { dirname } from "path";
+import path from "path";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 //local imports
 import connectDB from "./config/database.js";
@@ -39,7 +45,7 @@ app.use(
 // use body-parser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
+app.use(express.static(path.join(__dirname, "../client/dist")));
 //connect DB
 connectDB();
 
@@ -51,8 +57,8 @@ app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/product", productRoute);
 app.use("/api/v1/user", userRoute);
 
-app.get("/", (req, res) => {
-    res.send("<h1>Welcome to E-Commerce App</h1>");
+app.use("*", function (req, res) {
+    res.sendFile(path.join(__dirname, "../client/dist/index.html"));
 });
 
 app.listen(PORT, () => {
