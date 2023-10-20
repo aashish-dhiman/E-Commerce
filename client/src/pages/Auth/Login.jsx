@@ -94,8 +94,15 @@ const Login = () => {
                                         Get access to your Orders, Wishlist and
                                         Recommendations
                                     </p>
+                                    <h5 className="text-md font-medium leading-normal text-white mt-2">
+                                        Test User
+                                    </h5>
+                                    <p className="text-sm">
+                                        username - test@test.com <br />
+                                        password - test123
+                                    </p>
                                 </div>
-                                <div className="mt-8">
+                                <div className="mt-5">
                                     <img src={authImg} alt="auth image" />
                                 </div>
                             </div>
@@ -186,7 +193,7 @@ const Login = () => {
                                 </form>
                             </div>
 
-                            <div className="relative -mt-6 w-full text-center">
+                            <div className="relative -mt-7 w-full text-center">
                                 <Link
                                     to="/forgot-password"
                                     className=" text-primaryBlue font-[500] text-[12px] "
