@@ -11,6 +11,16 @@ This is a Flipkart clone eCommerce project developed using the MERN (MongoDB, Ex
 - [Usage](#usage)
 - [Contributing](#contributing)
 
+## Test Users
+
+-> USER
+   - test@test.com
+   - test123
+
+-> ADMIN
+   - store@flipkart.com
+   - admin123
+
 ## Features
 
 - **User Authentication and Authorization:** Implement user registration, login, and JWT-based authorization for secure access to user-specific data.
