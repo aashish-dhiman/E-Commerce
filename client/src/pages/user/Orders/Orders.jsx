@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 import OrderItem from "./OrderItem";
 import SearchIcon from "@mui/icons-material/Search";
 import MinCategory from "../../../components/MinCategory";
-import SeoMetadata from "../../../SEO/SeoMetadata";
 import Spinner from "../../../components/Spinner";
 import axios from "axios";
 import { useAuth } from "../../../context/auth";
+import SeoData from "../../../SEO/SeoData";
 
 const Orders = () => {
     const [auth] = useAuth();
@@ -39,7 +39,7 @@ const Orders = () => {
 
     return (
         <>
-            <SeoMetadata title="My Orders | Flipkart" />
+            <SeoData title="My Orders | Flipkart" />
 
             <MinCategory />
             <main className="w-full px-4 sm:px-10 py-4 ">

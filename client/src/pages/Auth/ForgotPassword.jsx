@@ -5,9 +5,9 @@ import axios from "axios";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import SeoMetadata from "../../SEO/SeoMetadata";
 import { useNavigate } from "react-router-dom";
 import Spinner from "./../../components/Spinner";
+import SeoData from "../../SEO/SeoData";
 
 const ForgotPassword = () => {
     //hooks->
@@ -79,7 +79,7 @@ const ForgotPassword = () => {
     // display content
     return (
         <>
-            <SeoMetadata
+            <SeoData
                 title="Forgot Password - Existing User"
                 description="Forgot Password"
             />

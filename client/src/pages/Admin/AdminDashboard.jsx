@@ -1,6 +1,5 @@
 import { Route, Routes } from "react-router-dom";
 import AdminMenu from "./AdminMenu";
-import SeoMetadata from "../../SEO/SeoMetadata";
 import UserProfile from "../UserProfile";
 import AddressComponent from "../AddressComponent";
 import PanCardComponent from "../PanCardComponent";
@@ -9,11 +8,12 @@ import AllProducts from "./AllProducts";
 import Users from "./Users";
 import Deactivate from "../Auth/Deactivate";
 import EditProduct from "./EditProduct";
+import SeoData from "../../SEO/SeoData";
 
 const AdminDashboard = () => {
     return (
         <>
-            <SeoMetadata title="Admin Dashboard" />
+            <SeoData title="Admin Dashboard" />
             <div className="px-[50px] py-[5px]">
                 <div className="flex text-[14px] mx-[50px] my-[40px] gap-6">
                     <div className="min-w-[30%]">

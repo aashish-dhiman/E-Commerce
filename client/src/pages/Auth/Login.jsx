@@ -5,10 +5,10 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import SeoMetadata from "../../SEO/SeoMetadata";
 import { useAuth } from "../../context/auth";
 import Spinner from "../../components/Spinner";
 import Cookies from "js-cookie";
+import SeoData from "../../SEO/SeoData";
 
 const Login = () => {
     //hooks->
@@ -74,7 +74,7 @@ const Login = () => {
     // display content
     return (
         <>
-            <SeoMetadata
+            <SeoData
                 title="Log in - Existing User"
                 description="Log in with user details"
             />

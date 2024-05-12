@@ -7,11 +7,11 @@ import { useNavigate } from "react-router-dom";
 import ImageIcon from "@mui/icons-material/Image";
 import { categories } from "../../utils/constants";
 import Spinner from "../../components/Spinner";
-import SeoMetadata from "../../SEO/SeoMetadata";
 import axios from "axios";
 import FormData from "form-data";
 import { useAuth } from "../../context/auth";
 import ScrollToTopOnRouteChange from "./../../utils/ScrollToTopOnRouteChange";
+import SeoData from "../../SEO/SeoData";
 
 const CreateProduct = () => {
     const [auth] = useAuth();
@@ -177,7 +177,7 @@ const CreateProduct = () => {
 
     return (
         <>
-            <SeoMetadata title="New Product | Flipkart" />
+            <SeoData title="New Product | Flipkart" />
             <ScrollToTopOnRouteChange />
 
             {isSubmit ? (

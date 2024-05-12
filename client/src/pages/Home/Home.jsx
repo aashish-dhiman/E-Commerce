@@ -15,13 +15,13 @@ import fashionCard from "../../assets/images/fashion-card.jpg";
 import applianceCard from "../../assets/images/appliance-card.jpg";
 import furnitureCard from "../../assets/images/furniture-card.jpg";
 import Suggestion from "./Suggestions/Suggestion";
-import SeoMetadata from "./../../SEO/SeoMetadata.jsx";
+import SeoData from "../../SEO/SeoData";
 
 const Home = () => {
     // const [auth, setAuth] = useAuth();
     return (
         <>
-            <SeoMetadata title="Online Shopping Site for Mobiles, Electronics, Furniture, Grocery, Lifestyle, Books & More. Best Offers!" />
+            <SeoData title="Online Shopping Site for Mobiles, Electronics, Furniture, Grocery, Lifestyle, Books & More. Best Offers!" />
             <ScrollToTopOnRouteChange />
             <Categories />
             <main className="flex flex-col items-center gap-3 px-2 pb-5 sm:mt-2">

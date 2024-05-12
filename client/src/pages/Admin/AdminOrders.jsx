@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import OrderItem from "./OrderItem";
 import SearchIcon from "@mui/icons-material/Search";
-import SeoMetadata from "../../SEO/SeoMetadata";
 import Spinner from "../../components/Spinner";
 import axios from "axios";
 import { useAuth } from "../../context/auth";
+import SeoData from "../../SEO/SeoData";
 
 const AdminOrders = () => {
     const [auth] = useAuth();
@@ -37,7 +37,7 @@ const AdminOrders = () => {
 
     return (
         <>
-            <SeoMetadata title="Admin Orders | Flipkart" />
+            <SeoData title="Admin Orders | Flipkart" />
 
             <main className="w-full px-4 sm:px-10 py-4 ">
                 {/* <!-- row --> */}

@@ -5,7 +5,7 @@ import MinCategory from "../../../components/MinCategory";
 import axios from "axios";
 import { useAuth } from "../../../context/auth";
 import Spinner from "../../../components/Spinner";
-import SeoMetadata from "./../../../SEO/SeoMetadata";
+import SeoData from "../../../SEO/SeoData";
 
 const OrderDetails = () => {
     const params = useParams();
@@ -52,7 +52,7 @@ const OrderDetails = () => {
 
     return (
         <>
-            <SeoMetadata title="Order Details | Flipkart" />
+            <SeoData title="Order Details | Flipkart" />
 
             <MinCategory />
             <main className="w-full py-2 sm:py-8">

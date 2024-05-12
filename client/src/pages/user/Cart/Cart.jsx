@@ -2,10 +2,10 @@ import { useNavigate } from "react-router-dom";
 import CartItem from "./CartItem";
 import EmptyCart from "./EmptyCart";
 import PriceSidebar from "./PriceSidebar";
-import SeoMetadata from "../../../SEO/SeoMetadata";
 import { useCart } from "../../../context/cart";
 import SaveForLater from "./SaveForLater";
 import ScrollToTopOnRouteChange from "./../../../utils/ScrollToTopOnRouteChange";
+import SeoData from "../../../SEO/SeoData";
 
 const Cart = () => {
     const navigate = useNavigate();
@@ -20,7 +20,7 @@ const Cart = () => {
     return (
         <>
             <ScrollToTopOnRouteChange />
-            <SeoMetadata title="Shopping Cart | Flipkart.com" />
+            <SeoData title="Shopping Cart | Flipkart.com" />
             <main className="w-full pt-5">
                 {/* <!-- row --> */}
                 <div className="flex flex-col sm:flex-row gap-3.5 w-full sm:w-11/12 mt-0 sm:mt-4 m-auto ">

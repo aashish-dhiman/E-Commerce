@@ -1,17 +1,17 @@
 import { Route, Routes } from "react-router-dom";
 import UserMenu from "./UserMenu";
-import SeoMetadata from "../../SEO/SeoMetadata";
 import UserProfile from "../UserProfile";
 import AddressComponent from "../AddressComponent";
 import PanCardComponent from "../PanCardComponent";
 import Deactivate from "../Auth/Deactivate";
 import Reviews from "./Reviews";
 import PaymentCards from "./PaymentCards";
+import SeoData from "../../SEO/SeoData";
 
 const Dashboard = () => {
     return (
         <>
-            <SeoMetadata title="User Dashboard" />
+            <SeoData title="User Dashboard" />
             <div className="px-[50px] py-[5px]">
                 <div className="flex text-[14px] mx-[50px] my-[40px] gap-6">
                     <div className="min-w-[30%]">

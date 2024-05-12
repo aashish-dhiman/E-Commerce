@@ -6,8 +6,8 @@ import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import { DataGrid } from "@mui/x-data-grid";
 import Rating from "@mui/material/Rating";
-import SeoMetadata from "../../SEO/SeoMetadata";
 import Actions from "./Actions";
+import SeoData from "../../SEO/SeoData";
 
 const AllProducts = () => {
     const [auth] = useAuth();
@@ -38,7 +38,7 @@ const AllProducts = () => {
         };
         //initial call to fetch data from server
         fetchData();
-    }, []);
+    }, [auth.token]);
     //update products details on client side after deletion
     const updateDeletedProduct = (id) => {
         setProducts((prevProducts) => {
@@ -183,7 +183,7 @@ const AllProducts = () => {
     });
     return (
         <div className="relative p-2 w-full h-full">
-            <SeoMetadata title="All Products -  Seller Flipkart" />
+            <SeoData title="All Products -  Seller Flipkart" />
 
             {loading ? (
                 <Spinner />

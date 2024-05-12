@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 import Product from "./Product";
 import MinCategory from "./../../../components/MinCategory";
-import SeoMetadata from "../../../SEO/SeoMetadata";
 import axios from "axios";
 import { useAuth } from "../../../context/auth";
 import Spinner from "../../../components/Spinner";
 import { toast } from "react-toastify";
+import SeoData from "../../../SEO/SeoData";
 
 const Wishlist = () => {
-    const [auth, setAuth] = useAuth();
+    const [auth] = useAuth();
     const [wishlistItems, setWishlistItems] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [isLoadMore, setIsLoadMore] = useState(false);
@@ -106,7 +106,7 @@ const Wishlist = () => {
     };
     return (
         <>
-            <SeoMetadata title="My Wishlist" />
+            <SeoData title="My Wishlist" />
             <MinCategory />
 
             {isLoading ? (

@@ -2,13 +2,11 @@ import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
-import DoneIcon from "@mui/icons-material/Done";
 import MenuItem from "@mui/material/MenuItem";
 import { useState } from "react";
 import PriceSidebar from "./PriceSidebar";
 import { useNavigate } from "react-router-dom";
 import states from "../../../utils/states";
-import SeoMetadata from "./../../../SEO/SeoMetadata";
 import { toast } from "react-toastify";
 import { useCart } from "../../../context/cart";
 import { useAuth } from "../../../context/auth";
@@ -17,9 +15,9 @@ import axios from "axios";
 
 //payment using stripe
 import { loadStripe } from "@stripe/stripe-js";
+import SeoData from "../../../SEO/SeoData";
 
 const Shipping = () => {
-    const navigate = useNavigate();
     const Info = localStorage.getItem("shippingInfo");
     const shippingInfo = JSON.parse(Info);
 
@@ -94,7 +92,7 @@ const Shipping = () => {
 
     return (
         <>
-            <SeoMetadata title="Flipkart: Shipping Details" />
+            <SeoData title="Flipkart: Shipping Details" />
             <main className="w-full pt-8">
                 {/* <!-- row --> */}
 

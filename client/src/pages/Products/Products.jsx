@@ -6,7 +6,6 @@ import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import Slider from "@mui/material/Slider";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
 import MinCategory from "../../components/MinCategory";
 import Product from "./Product";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
@@ -14,13 +13,12 @@ import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import StarIcon from "@mui/icons-material/Star";
 import { categories } from "../../utils/constants";
 import { useLocation } from "react-router-dom";
-import SeoMetadata from "../../SEO/SeoMetadata";
 import { toast } from "react-toastify";
 import Spinner from "./../../components/Spinner";
 import axios from "axios";
+import SeoData from "../../SEO/SeoData";
 
 const Products = () => {
-    const params = useParams();
     const location = useLocation();
     const [loading, setLoading] = useState(true);
 
@@ -70,52 +68,54 @@ const Products = () => {
         setCategory("");
         setRatings(0);
     };
-
-    //fetching filtered products from sever
-    const fetchFilteredData = async () => {
-        try {
-            setLoading(true);
-            const res = await axios.get("/api/v1/product/filtered-products", {
-                params: {
-                    category: category,
-                    priceRange: [
-                        parseInt(price[0].toFixed()),
-                        parseInt(price[1].toFixed()),
-                    ],
-                    ratings: ratings,
-                },
-            });
-            // console.log(res.data);
-
-            res.status === 404 &&
-                toast.error("No Products Found!", {
-                    toastId: "productNotFound",
-                });
-
-            res.status === 201 && setProducts(res.data.products);
-            setLoading(false);
-            setProductsCount(res.data.products.length);
-        } catch (error) {
-            console.error("Error fetching data:", error);
-            setLoading(false);
-
-            //server error
-            error.response?.status === 500 &&
-                toast.error(
-                    "Something went wrong! Please try after sometime.",
+    useEffect(() => {
+        //fetching filtered products from sever
+        const fetchFilteredData = async () => {
+            try {
+                setLoading(true);
+                const res = await axios.get(
+                    "/api/v1/product/filtered-products",
                     {
-                        toastId: "error",
+                        params: {
+                            category: category,
+                            priceRange: [
+                                parseInt(price[0].toFixed()),
+                                parseInt(price[1].toFixed()),
+                            ],
+                            ratings: ratings,
+                        },
                     }
                 );
-        }
-    };
-    useEffect(() => {
+                // console.log(res.data);
+
+                res.status === 404 &&
+                    toast.error("No Products Found!", {
+                        toastId: "productNotFound",
+                    });
+
+                res.status === 201 && setProducts(res.data.products);
+                setLoading(false);
+                setProductsCount(res.data.products.length);
+            } catch (error) {
+                console.error("Error fetching data:", error);
+                setLoading(false);
+
+                //server error
+                error.response?.status === 500 &&
+                    toast.error(
+                        "Something went wrong! Please try after sometime.",
+                        {
+                            toastId: "error",
+                        }
+                    );
+            }
+        };
         fetchFilteredData();
     }, [price, category, ratings]);
 
     return (
         <>
-            <SeoMetadata title="All Products | Flipkart" />
+            <SeoData title="All Products | Flipkart" />
 
             <MinCategory />
             <main className="w-full pt-2 pb-5 sm:mt-0">

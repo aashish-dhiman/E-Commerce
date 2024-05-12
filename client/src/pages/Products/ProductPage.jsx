@@ -21,16 +21,15 @@ import Rating from "@mui/material/Rating";
 import TextField from "@mui/material/TextField";
 import { getDeliveryDate, getDiscount } from "../../utils/functions";
 import MinCategory from "../../components/MinCategory";
-import SeoMetadata from "../../SEO/SeoMetadata";
 import axios from "axios";
 import { useAuth } from "../../context/auth";
 import { fashionProducts } from "../../utils/fashion";
 import { electronicProducts } from "../../utils/electronics";
 import ScrollToTopOnRouteChange from "../../utils/ScrollToTopOnRouteChange";
 import { useCart } from "../../context/cart";
+import SeoData from "../../SEO/SeoData";
 
 const ProductDetails = () => {
-    const params = useParams();
     const navigate = useNavigate();
     const [auth, setAuth, LogOut, isContextLoading] = useAuth();
     const [cartItems, setCartItems, addItems] = useCart();
@@ -84,7 +83,7 @@ const ProductDetails = () => {
             brandName: product.brand.name,
             price: product.price,
             discountPrice: product.discountPrice,
-            seller:product.seller
+            seller: product.seller,
         };
         addItems(item, 1);
     };
@@ -155,7 +154,7 @@ const ProductDetails = () => {
             }
         };
         fetchProduct();
-    }, []);
+    }, [productId]);
 
     let itemInWishlist = wishlistItems?.find((id) => id === productId);
 
@@ -220,7 +219,7 @@ const ProductDetails = () => {
                 <Spinner />
             ) : (
                 <>
-                    <SeoMetadata title={product?.name} />
+                    <SeoData title={product?.name} />
                     <ScrollToTopOnRouteChange />
                     <MinCategory />
                     <main className="mt-12 sm:mt-0">

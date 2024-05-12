@@ -8,7 +8,7 @@ export default defineConfig({
         proxy: {
             // Proxy /api requests to your backend server
             "/api": {
-                target: "https://e-commerce-mgtd.onrender.com/", // Replace with your backend server URL
+                target: "https://e-commerce-mgtd.onrender.com/",
                 changeOrigin: true,
                 secure: true,
                 ws: true,

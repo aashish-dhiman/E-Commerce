@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
-import SeoMetadata from "./../../../SEO/SeoMetadata";
 import { useCart } from "../../../context/cart";
 import { useAuth } from "../../../context/auth";
 import axios from "axios";
 import Spinner from "./../../../components/Spinner";
+import SeoData from "../../../SEO/SeoData";
 
 const OrderSuccess = () => {
     const navigate = useNavigate();
@@ -64,7 +64,7 @@ const OrderSuccess = () => {
 
     return (
         <>
-            <SeoMetadata title={`Transaction Successful`} />
+            <SeoData title={`Transaction Successful`} />
             <main className="w-full p-8 relative min-h-[60vh]">
                 {loading ? (
                     <Spinner />
