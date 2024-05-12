@@ -4,18 +4,16 @@ import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import { useState } from "react";
-import PriceSidebar from "./PriceSidebar";
-import { useNavigate } from "react-router-dom";
 import states from "../../../utils/states";
 import { toast } from "react-toastify";
 import { useCart } from "../../../context/cart";
 import { useAuth } from "../../../context/auth";
 import axios from "axios";
-// import Stepper from "./Stepper";
 
 //payment using stripe
 import { loadStripe } from "@stripe/stripe-js";
 import SeoData from "../../../SEO/SeoData";
+import PriceCard from "./PriceCard";
 
 const Shipping = () => {
     const Info = localStorage.getItem("shippingInfo");
@@ -222,7 +220,7 @@ const Shipping = () => {
                         {/* </Stepper> */}
                     </div>
 
-                    <PriceSidebar cartItems={cartItems} />
+                    <PriceCard cartItems={cartItems} />
                 </div>
             </main>
         </>
