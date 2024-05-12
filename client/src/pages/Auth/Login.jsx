@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import authImg from "../../assets/images/auth.png";
 import axios from "axios";
 import { Link, useNavigate, useLocation } from "react-router-dom";
@@ -85,24 +85,30 @@ const Login = () => {
                     <div className="flex items-center flex-col sm:flex-row md:flow-row lg:flex-row my-10 mx-auto w-full sm:w-[70vw] md:w-[70vw] lg:w-[70vw] min-h-[400px] md:h-[80vh] lg:h-[80vh] bg-white shadow-[0px_0px_8px_2px_rgba(212,212,212,0.6)] ">
                         {/* left view  */}
                         <div className=" w-full md:w-[40%] lg:w-[40%] h-full bg-primaryBlue">
-                            <div className="flex gap-6 flex-col h-full mt-10 px-6 ">
+                            <div className="flex gap-2 md:gap-6 flex-col h-full mt-5 md:mt-10 px-6 ">
                                 <div className="text-white leading-8 text-[22px] font-[600]">
                                     <h2>Log in</h2>
                                 </div>
-                                <div className="text-slate-300 text-[15px] leading-7 font-[400]">
+                                <div className="text-slate-300 text-base leading-7 font-[400]">
                                     <p>
                                         Get access to your Orders, Wishlist and
                                         Recommendations
                                     </p>
-                                    <h5 className="text-md font-medium leading-normal text-white mt-2">
-                                        Test User
-                                    </h5>
-                                    <p className="text-sm">
+
+                                    <p className="text-xs">
+                                        <span>
+                                            User <br />
+                                        </span>
                                         username - test@test.com <br />
-                                        password - test123
+                                        password - test123 <br />
+                                        <span>
+                                            Admin <br />
+                                        </span>
+                                        username - store@flipkart.com <br />
+                                        password - admin123
                                     </p>
                                 </div>
-                                <div className="mt-5">
+                                <div className="">
                                     <img src={authImg} alt="auth image" />
                                 </div>
                             </div>
