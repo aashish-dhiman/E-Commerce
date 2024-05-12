@@ -1,4 +1,3 @@
-import SeoMetadata from "../../SEO/SeoMetadata";
 import { useAuth } from "../../context/auth";
 import ScrollToTopOnRouteChange from "../../utils/ScrollToTopOnRouteChange";
 import Categories from "../../components/header/Categories";
@@ -16,6 +15,7 @@ import fashionCard from "../../assets/images/fashion-card.jpg";
 import applianceCard from "../../assets/images/appliance-card.jpg";
 import furnitureCard from "../../assets/images/furniture-card.jpg";
 import Suggestion from "./Suggestions/Suggestion";
+import SeoMetadata from "../../SEO/SeoMetadata";
 
 const Home = () => {
     // const [auth, setAuth] = useAuth();
