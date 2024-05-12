@@ -5,10 +5,11 @@ import { useCart } from "../../../context/cart";
 import SaveForLater from "./SaveForLater";
 import ScrollToTopOnRouteChange from "./../../../utils/ScrollToTopOnRouteChange";
 import SeoData from "../../../SEO/SeoData";
-import PriceSideBar from "./PriceSidebar";
+import PriceCard from "./PriceCard";
 
 const Cart = () => {
     const navigate = useNavigate();
+    // eslint-disable-next-line no-unused-vars
     const [cartItems, setCartItems, , , saveLaterItems] = useCart();
 
     // console.log(cartItems);
@@ -75,7 +76,7 @@ const Cart = () => {
                     </div>
                     {/* <!-- cart column --> */}
 
-                    <PriceSideBar cartItems={cartItems} />
+                    <PriceCard cartItems={cartItems} />
                 </div>
                 {/* <!-- row --> */}
             </main>

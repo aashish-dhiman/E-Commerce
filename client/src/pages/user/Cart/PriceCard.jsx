@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
 
-const PriceSideBar = ({ cartItems }) => {
+const PriceCard = ({ cartItems }) => {
     // console.log(cartItems);
     return (
         <div className="flex sticky top-16 sm:h-screen flex-col sm:w-4/12 sm:px-1">
@@ -90,4 +90,4 @@ const PriceSideBar = ({ cartItems }) => {
     );
 };
 
-export default PriceSideBar;
+export default PriceCard;
