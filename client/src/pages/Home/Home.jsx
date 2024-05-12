@@ -15,7 +15,7 @@ import fashionCard from "../../assets/images/fashion-card.jpg";
 import applianceCard from "../../assets/images/appliance-card.jpg";
 import furnitureCard from "../../assets/images/furniture-card.jpg";
 import Suggestion from "./Suggestions/Suggestion";
-import SeoMetadata from "../../SEO/SeoMetadata";
+import SeoMetadata from "./../../SEO/SeoMetadata/";
 
 const Home = () => {
     // const [auth, setAuth] = useAuth();
