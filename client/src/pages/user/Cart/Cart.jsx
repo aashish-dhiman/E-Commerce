@@ -1,11 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import CartItem from "./CartItem";
 import EmptyCart from "./EmptyCart";
-import PriceSidebar from "./PriceSidebar";
 import { useCart } from "../../../context/cart";
 import SaveForLater from "./SaveForLater";
 import ScrollToTopOnRouteChange from "./../../../utils/ScrollToTopOnRouteChange";
 import SeoData from "../../../SEO/SeoData";
+import PriceSideBar from "./PriceSidebar";
 
 const Cart = () => {
     const navigate = useNavigate();
@@ -75,7 +75,7 @@ const Cart = () => {
                     </div>
                     {/* <!-- cart column --> */}
 
-                    <PriceSidebar cartItems={cartItems} />
+                    <PriceSideBar cartItems={cartItems} />
                 </div>
                 {/* <!-- row --> */}
             </main>

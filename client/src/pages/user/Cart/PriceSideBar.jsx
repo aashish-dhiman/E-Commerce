@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
 
-const PriceSidebar = ({ cartItems }) => {
+const PriceSideBar = ({ cartItems }) => {
     // console.log(cartItems);
     return (
         <div className="flex sticky top-16 sm:h-screen flex-col sm:w-4/12 sm:px-1">
@@ -79,7 +79,7 @@ const PriceSidebar = ({ cartItems }) => {
                 </div>
             </div>
             <div className="flex gap-3 items-center my-4 p-2 ">
-                <VerifiedUserIcon className="text-gray-600"/>
+                <VerifiedUserIcon className="text-gray-600" />
                 <p className="text-gray-500 w-full text-[14px] font-[500]">
                     Safe and Secure Payments.Easy returns.100% Authentic
                     products.
@@ -90,4 +90,4 @@ const PriceSidebar = ({ cartItems }) => {
     );
 };
 
-export default PriceSidebar;
+export default PriceSideBar;
