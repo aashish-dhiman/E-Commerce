@@ -45,7 +45,7 @@ app.use(
 // use body-parser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, "../client/dist")));
+// app.use(express.static(path.join(__dirname, "../client/dist")));
 //connect DB
 connectDB();
 
@@ -57,9 +57,9 @@ app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/product", productRoute);
 app.use("/api/v1/user", userRoute);
 
-app.use("*", function (req, res) {
-    res.sendFile(path.join(__dirname, "../client/dist/index.html"));
-});
+// app.use("*", function (req, res) {
+//     res.sendFile(path.join(__dirname, "../client/dist/index.html"));
+// });
 
 app.listen(PORT, () => {
     console.log(`SERVER RUNNING ON PORT ${PORT}`);
