@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { Helmet } from "react-helmet";
 
-export const SeoMetadata = ({ title, description, keywords }) => (
+const SeoMetadata = ({ title, description, keywords }) => (
     <Helmet>
         <title>{title}</title>
         <meta name="description" content={description} />
@@ -14,3 +14,5 @@ SeoMetadata.defaultProps = {
     description: "Flipkart online shopping platform clone by Aashish Dhiman",
     keywords: ["shopping", "react project", "mern project", "nodejs", "online"],
 };
+
+export default SeoMetadata;
