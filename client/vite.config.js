@@ -10,7 +10,7 @@ export default defineConfig({
             "/api": {
                 target: "https://e-commerce-mgtd.onrender.com/", // Replace with your backend server URL
                 changeOrigin: true,
-                secure: false,
+                secure: true,
                 ws: true,
             },
         },
