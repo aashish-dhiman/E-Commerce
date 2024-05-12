@@ -26,11 +26,14 @@ const Product = ({
     const fetchWishlistItems = async () => {
         try {
             // console.log("Fetching wishlist items...");
-            const res = await axios.get("/api/v1/user/wishlist", {
-                headers: {
-                    Authorization: auth.token,
-                },
-            });
+            const res = await axios.get(
+                "https://e-commerce-mgtd.onrender.com/api/v1/user/wishlist",
+                {
+                    headers: {
+                        Authorization: auth.token,
+                    },
+                }
+            );
             // console.log(res.data.wishlistItems);
             setWishlistItems(res.data.wishlistItems);
         } catch (error) {
@@ -58,7 +61,7 @@ const Product = ({
         try {
             if (itemInWishlist) {
                 const res = await axios.post(
-                    "/api/v1/user/update-wishlist",
+                    "https://e-commerce-mgtd.onrender.com/api/v1/user/update-wishlist",
                     {
                         productId: _id,
                         type: "remove",
@@ -74,7 +77,7 @@ const Product = ({
                 fetchWishlistItems();
             } else {
                 const res = await axios.post(
-                    "/api/v1/user/update-wishlist",
+                    "https://e-commerce-mgtd.onrender.com/api/v1/user/update-wishlist",
                     {
                         productId: _id,
                         type: "add",

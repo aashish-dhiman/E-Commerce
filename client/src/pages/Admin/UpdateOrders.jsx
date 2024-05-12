@@ -25,7 +25,7 @@ const UpdateOrders = () => {
             try {
                 setLoading(true);
                 const response = await axios.get(
-                    `/api/v1/user/admin-order-detail?orderId=${orderId}`,
+                    `https://e-commerce-mgtd.onrender.com/api/v1/user/admin-order-detail?orderId=${orderId}`,
                     {
                         headers: {
                             Authorization: auth?.token,

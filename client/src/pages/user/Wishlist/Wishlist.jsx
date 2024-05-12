@@ -20,11 +20,14 @@ const Wishlist = () => {
     const fetchCounts = async () => {
         try {
             // only id of wishlist products will get
-            const res = await axios.get("/api/v1/user/wishlist", {
-                headers: {
-                    Authorization: auth.token,
-                },
-            });
+            const res = await axios.get(
+                "https://e-commerce-mgtd.onrender.com/api/v1/user/wishlist",
+                {
+                    headers: {
+                        Authorization: auth.token,
+                    },
+                }
+            );
             setCount(res.data.wishlistItems?.length);
         } catch (error) {
             console.error("Error fetching wishlist items:", error);
@@ -39,7 +42,7 @@ const Wishlist = () => {
     const fetchDetails = async () => {
         try {
             const response = await axios.get(
-                `/api/v1/user/wishlist-products?page=${page}&pageSize=${pageSize}`,
+                `https://e-commerce-mgtd.onrender.com/api/v1/user/wishlist-products?page=${page}&pageSize=${pageSize}`,
                 {
                     headers: {
                         Authorization: auth.token,
@@ -75,7 +78,7 @@ const Wishlist = () => {
         try {
             setIsLoading(true);
             const res = await axios.post(
-                "/api/v1/user/update-wishlist",
+                "https://e-commerce-mgtd.onrender.com/api/v1/user/update-wishlist",
                 {
                     productId: productId,
                     type: "remove",

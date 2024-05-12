@@ -32,10 +32,13 @@ const UserProfile = () => {
         try {
             setProfile(false);
 
-            const response = await axios.post("/api/v1/auth/update-details", {
-                newName: name,
-                email: auth?.user?.email,
-            });
+            const response = await axios.post(
+                "https://e-commerce-mgtd.onrender.com/api/v1/auth/update-details",
+                {
+                    newName: name,
+                    email: auth?.user?.email,
+                }
+            );
             setAuth({
                 ...auth,
                 user: {
@@ -57,10 +60,13 @@ const UserProfile = () => {
         try {
             setEmailSection(false);
 
-            const response = await axios.post("/api/v1/auth/update-details", {
-                newEmail: email,
-                email: auth?.user?.email,
-            });
+            const response = await axios.post(
+                "https://e-commerce-mgtd.onrender.com/api/v1/auth/update-details",
+                {
+                    newEmail: email,
+                    email: auth?.user?.email,
+                }
+            );
             setAuth({
                 ...auth,
                 user: {
@@ -85,10 +91,13 @@ const UserProfile = () => {
         try {
             setProfile(false);
 
-            const response = await axios.post("/api/v1/auth/update-details", {
-                newPhone: phone,
-                email: auth?.user?.email,
-            });
+            const response = await axios.post(
+                "https://e-commerce-mgtd.onrender.com/api/v1/auth/update-details",
+                {
+                    newPhone: phone,
+                    email: auth?.user?.email,
+                }
+            );
             setAuth({
                 ...auth,
                 user: {

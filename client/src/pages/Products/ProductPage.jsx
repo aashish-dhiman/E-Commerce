@@ -107,11 +107,14 @@ const ProductDetails = () => {
     const fetchWishlistItems = async () => {
         try {
             // only id of wishlist products will get
-            const res = await axios.get("/api/v1/user/wishlist", {
-                headers: {
-                    Authorization: auth.token,
-                },
-            });
+            const res = await axios.get(
+                "https://e-commerce-mgtd.onrender.com/api/v1/user/wishlist",
+                {
+                    headers: {
+                        Authorization: auth.token,
+                    },
+                }
+            );
             setWishlistItems(res.data.wishlistItems);
         } catch (error) {
             console.error("Error fetching wishlist items:", error);
@@ -126,7 +129,9 @@ const ProductDetails = () => {
     useEffect(() => {
         const fetchProduct = async () => {
             try {
-                const res = await axios.get(`/api/v1/product/${productId}`);
+                const res = await axios.get(
+                    `https://e-commerce-mgtd.onrender.com/api/v1/product/${productId}`
+                );
                 // console.log(res.data.product);
                 res.status === 201 && setProduct(res.data.product);
                 setLoading(false);
@@ -162,7 +167,7 @@ const ProductDetails = () => {
         if (itemInWishlist) {
             try {
                 const res = await axios.post(
-                    "/api/v1/user/update-wishlist",
+                    "https://e-commerce-mgtd.onrender.com/api/v1/user/update-wishlist",
                     {
                         productId: productId,
                         type: "remove",
@@ -187,7 +192,7 @@ const ProductDetails = () => {
         } else {
             try {
                 const res = await axios.post(
-                    "/api/v1/user/update-wishlist",
+                    "https://e-commerce-mgtd.onrender.com/api/v1/user/update-wishlist",
                     {
                         productId: productId,
                         type: "add",

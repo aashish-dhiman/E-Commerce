@@ -177,7 +177,9 @@ const EditProduct = () => {
     // Request for prefilled values from the server
     const fetchData = async () => {
         try {
-            const res = await axios.get(`/api/v1/product/${productId}`);
+            const res = await axios.get(
+                `https://e-commerce-mgtd.onrender.com/api/v1/product/${productId}`
+            );
 
             // Update state with fetched product data
             setName(res.data.product.name);

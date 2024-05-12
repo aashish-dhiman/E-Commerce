@@ -62,7 +62,7 @@ const Shipping = () => {
         const stripe = await loadStripe(publishKey);
 
         const response = await axios.post(
-            "/api/v1/user/create-checkout-session",
+            "https://e-commerce-mgtd.onrender.com/api/v1/user/create-checkout-session",
             {
                 products: cartItems,
                 frontendURL: frontendURL,

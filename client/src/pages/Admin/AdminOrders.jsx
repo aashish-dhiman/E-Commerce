@@ -16,11 +16,14 @@ const AdminOrders = () => {
     const fetchOrders = async () => {
         try {
             setLoading(true);
-            const response = await axios.get("/api/v1/user/admin-orders", {
-                headers: {
-                    Authorization: auth?.token,
-                },
-            });
+            const response = await axios.get(
+                "https://e-commerce-mgtd.onrender.com/api/v1/user/admin-orders",
+                {
+                    headers: {
+                        Authorization: auth?.token,
+                    },
+                }
+            );
             console.log(response.data.orders);
             if (response?.data?.orders) {
                 setOrders(response.data.orders);

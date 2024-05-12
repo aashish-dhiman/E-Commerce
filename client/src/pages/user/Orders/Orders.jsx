@@ -18,12 +18,14 @@ const Orders = () => {
     const fetchOrders = async () => {
         try {
             setLoading(true);
-            const response = await axios.get("/api/v1/user/orders", {
-                headers: {
-                    Authorization: auth?.token,
-                },
-            });
-            console.log(response.data);
+            const response = await axios.get(
+                "https://e-commerce-mgtd.onrender.com/api/v1/user/orders",
+                {
+                    headers: {
+                        Authorization: auth?.token,
+                    },
+                }
+            );
             if (response?.data?.orders) {
                 setOrders(response.data.orders);
                 setLoading(false);

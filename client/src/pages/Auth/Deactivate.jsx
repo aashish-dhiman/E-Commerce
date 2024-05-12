@@ -14,10 +14,13 @@ const Deactivate = () => {
     const handleDeactivate = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post("/api/v1/auth/deactivate", {
-                email,
-                phone,
-            });
+            const response = await axios.post(
+                "https://e-commerce-mgtd.onrender.com/api/v1/auth/deactivate",
+                {
+                    email,
+                    phone,
+                }
+            );
             // console.log(response);
 
             if (response.status === 200) {

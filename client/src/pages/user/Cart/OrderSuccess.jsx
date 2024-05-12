@@ -23,7 +23,7 @@ const OrderSuccess = () => {
             try {
                 setLoading(true);
                 const payment = await axios.post(
-                    "/api/v1/user/payment-success",
+                    "https://e-commerce-mgtd.onrender.com/api/v1/user/payment-success",
                     {
                         sessionId: sessionId,
                         orderItems: cartItems,

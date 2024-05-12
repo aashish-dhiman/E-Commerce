@@ -10,7 +10,9 @@ const SearchBar = () => {
 
     const handleSearch = async (query) => {
         try {
-            const products = await axios.get(`/api/v1/product/search/${query}`);
+            const products = await axios.get(
+                `https://e-commerce-mgtd.onrender.com/api/v1/product/search/${query}`
+            );
             // console.log(products);
             setResults(products.data.slice(0, 6));
             setOpen(true);

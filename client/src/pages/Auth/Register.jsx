@@ -40,14 +40,17 @@ const Register = () => {
                 toast.error("Password does not match!");
                 return;
             }
-            const response = await axios.post("/api/v1/auth/register", {
-                name,
-                email,
-                phone,
-                password,
-                address,
-                isSeller,
-            });
+            const response = await axios.post(
+                "https://e-commerce-mgtd.onrender.com/api/v1/auth/register",
+                {
+                    name,
+                    email,
+                    phone,
+                    password,
+                    address,
+                    isSeller,
+                }
+            );
             console.log(response);
 
             // Registration successful

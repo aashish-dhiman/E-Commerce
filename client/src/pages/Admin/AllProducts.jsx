@@ -16,11 +16,14 @@ const AllProducts = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await axios.get("/api/v1/product/seller-product", {
-                    headers: {
-                        Authorization: auth.token,
-                    },
-                });
+                const res = await axios.get(
+                    "https://e-commerce-mgtd.onrender.com/api/v1/product/seller-product",
+                    {
+                        headers: {
+                            Authorization: auth.token,
+                        },
+                    }
+                );
                 // console.log(res.data.products);
 
                 res.status === 201 && setProducts(res.data.products);

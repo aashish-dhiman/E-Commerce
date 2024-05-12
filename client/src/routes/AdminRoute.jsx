@@ -14,11 +14,14 @@ const AdminRoute = () => {
     const authCheck = async () => {
         try {
             // console.log("authCheck called");
-            const res = await axios.get("/api/v1/auth/admin-auth", {
-                headers: {
-                    Authorization: auth?.token,
-                },
-            });
+            const res = await axios.get(
+                "https://e-commerce-mgtd.onrender.com/api/v1/auth/admin-auth",
+                {
+                    headers: {
+                        Authorization: auth?.token,
+                    },
+                }
+            );
             // console.log("isContextLoading:" + isContextLoading);
             // console.log(res.data);
 

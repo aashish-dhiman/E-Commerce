@@ -20,9 +20,12 @@ const Actions = ({ id, name, updateDeletedProduct }) => {
     const deleteHandler = async (id) => {
         handleClose();
         try {
-            const res = await axios.post("/api/v1/product/delete-product", {
-                productId: id,
-            });
+            const res = await axios.post(
+                "https://e-commerce-mgtd.onrender.com/api/v1/product/delete-product",
+                {
+                    productId: id,
+                }
+            );
             if (res.status === 201) {
                 toast.success("Product Deleted Successfully!");
                 // After a successful deletion, update the products state

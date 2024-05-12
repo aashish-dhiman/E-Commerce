@@ -35,7 +35,7 @@ const ForgotPassword = () => {
                     return;
                 }
                 const response = await axios.post(
-                    "/api/v1/auth/forgot-password",
+                    "https://e-commerce-mgtd.onrender.com/api/v1/auth/forgot-password",
                     {
                         email,
                         password,
@@ -51,9 +51,12 @@ const ForgotPassword = () => {
                     navigate("/login");
                 }
             } else {
-                const response = await axios.post("/api/v1/auth/user-exist", {
-                    email,
-                });
+                const response = await axios.post(
+                    "https://e-commerce-mgtd.onrender.com/api/v1/auth/user-exist",
+                    {
+                        email,
+                    }
+                );
 
                 if (response.status === 200) {
                     setUserFound(true);
