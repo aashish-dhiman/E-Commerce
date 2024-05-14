@@ -1,7 +1,8 @@
+/* eslint-disable no-unused-vars */
 import { useState, useRef, useEffect } from "react";
 import { NavLink, Link } from "react-router-dom";
 import logo from "../../assets/images/logo.png";
-import { BiHomeSmile, BiCategoryAlt } from "react-icons/bi";
+import { BiHomeSmile } from "react-icons/bi";
 import { AiOutlineUser, AiOutlineHeart } from "react-icons/ai";
 import { BsCart2, BsBox } from "react-icons/bs";
 import { RiArrowDropDownLine } from "react-icons/ri";
@@ -215,20 +216,22 @@ const Header = () => {
                         </div>
 
                         {/* cart */}
-                        <div className="flex items-center gap-1 group">
-                            <NavLink
-                                to="/cart"
-                                className="relative flex items-center gap-1"
-                            >
-                                <span className="absolute w-4 h-4 text-[11px] text-center font-semibold left-2 bottom-3 text-white bg-red-500 rounded-[50%] ">
-                                    {cartItems?.length}
-                                </span>
-                                <BsCart2 className="text-[22px]" />
-                                <span className="hidden md:block lg:block group-hover:text-slate-700">
-                                    <p className="text-[18px]">Cart</p>
-                                </span>
-                            </NavLink>
-                        </div>
+                        {auth?.user?.role !== 1 && (
+                            <div className="flex items-center gap-1 group">
+                                <NavLink
+                                    to="/cart"
+                                    className="relative flex items-center gap-1"
+                                >
+                                    <span className="absolute w-4 h-4 text-[11px] text-center font-semibold left-2 bottom-3 text-white bg-red-500 rounded-[50%] ">
+                                        {cartItems?.length}
+                                    </span>
+                                    <BsCart2 className="text-[22px]" />
+                                    <span className="hidden md:block lg:block group-hover:text-slate-700">
+                                        <p className="text-[18px]">Cart</p>
+                                    </span>
+                                </NavLink>
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>

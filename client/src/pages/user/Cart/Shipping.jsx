@@ -54,7 +54,6 @@ const Shipping = () => {
             phoneNo: phoneNo,
         };
         localStorage.setItem("shippingInfo", JSON.stringify(data));
-
     };
 
     //PAYMENT USING STRIPE
@@ -62,7 +61,7 @@ const Shipping = () => {
         const stripe = await loadStripe(publishKey);
 
         const response = await axios.post(
-            "https://e-commerce-mgtd.onrender.com/api/v1/user/create-checkout-session",
+            `${import.meta.env.VITE_SERVER_URL}/api/v1/user/create-checkout-session`,
             {
                 products: cartItems,
                 frontendURL: frontendURL,

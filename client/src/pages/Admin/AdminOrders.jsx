@@ -12,31 +12,33 @@ const AdminOrders = () => {
     const [loading, setLoading] = useState(false);
     const [orders, setOrders] = useState([]);
 
-    // fetch orders from server
-    const fetchOrders = async () => {
-        try {
-            setLoading(true);
-            const response = await axios.get(
-                "https://e-commerce-mgtd.onrender.com/api/v1/user/admin-orders",
-                {
-                    headers: {
-                        Authorization: auth?.token,
-                    },
+    useEffect(() => {
+        // fetch orders from server
+        const fetchOrders = async () => {
+            try {
+                setLoading(true);
+                const response = await axios.get(
+                    `${
+                        import.meta.env.VITE_SERVER_URL
+                    }/api/v1/user/admin-orders`,
+                    {
+                        headers: {
+                            Authorization: auth?.token,
+                        },
+                    }
+                );
+                console.log(response.data.orders);
+                if (response?.data?.orders) {
+                    setOrders(response.data.orders);
+                    setLoading(false);
                 }
-            );
-            console.log(response.data.orders);
-            if (response?.data?.orders) {
-                setOrders(response.data.orders);
+            } catch (error) {
+                console.log(error);
                 setLoading(false);
             }
-        } catch (error) {
-            console.log(error);
-            setLoading(false);
-        }
-    };
-    useEffect(() => {
+        };
         fetchOrders();
-    }, []);
+    }, [auth?.token]);
 
     return (
         <>

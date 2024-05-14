@@ -41,7 +41,7 @@ const Register = () => {
                 return;
             }
             const response = await axios.post(
-                "https://e-commerce-mgtd.onrender.com/api/v1/auth/register",
+                `${import.meta.env.VITE_SERVER_URL}/api/v1/auth/register`,
                 {
                     name,
                     email,
@@ -95,7 +95,7 @@ const Register = () => {
                         <div className=" w-full md:w-[40%] lg:w-[40%] h-full bg-primaryBlue">
                             <div className="flex gap-6 flex-col h-full mt-10 px-6 ">
                                 <div className="text-white leading-8 text-[22px] font-[600]">
-                                    <h2>Looks like you're new here!</h2>
+                                    <h2>Looks like you&apos;re new here!</h2>
                                 </div>
                                 <div className="text-slate-300 text-[15px] leading-7 font-[400]">
                                     <p>

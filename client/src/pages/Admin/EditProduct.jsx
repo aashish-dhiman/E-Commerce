@@ -178,7 +178,7 @@ const EditProduct = () => {
     const fetchData = async () => {
         try {
             const res = await axios.get(
-                `https://e-commerce-mgtd.onrender.com/api/v1/product/${productId}`
+                `${import.meta.env.VITE_SERVER_URL}/api/v1/product/${productId}`
             );
 
             // Update state with fetched product data

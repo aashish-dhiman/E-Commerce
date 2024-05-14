@@ -21,10 +21,10 @@ const Wishlist = () => {
         try {
             // only id of wishlist products will get
             const res = await axios.get(
-                "https://e-commerce-mgtd.onrender.com/api/v1/user/wishlist",
+                `${import.meta.env.VITE_SERVER_URL}/api/v1/user/wishlist`,
                 {
                     headers: {
-                        Authorization: auth.token,
+                        Authorization: auth?.token,
                     },
                 }
             );
@@ -42,7 +42,7 @@ const Wishlist = () => {
     const fetchDetails = async () => {
         try {
             const response = await axios.get(
-                `https://e-commerce-mgtd.onrender.com/api/v1/user/wishlist-products?page=${page}&pageSize=${pageSize}`,
+                `${import.meta.env.VITE_SERVER_URL}/api/v1/user/wishlist-products?page=${page}&pageSize=${pageSize}`,
                 {
                     headers: {
                         Authorization: auth.token,
@@ -78,7 +78,7 @@ const Wishlist = () => {
         try {
             setIsLoading(true);
             const res = await axios.post(
-                "https://e-commerce-mgtd.onrender.com/api/v1/user/update-wishlist",
+                `${import.meta.env.VITE_SERVER_URL}/api/v1/user/update-wishlist`,
                 {
                     productId: productId,
                     type: "remove",

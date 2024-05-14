@@ -15,7 +15,7 @@ const Deactivate = () => {
         e.preventDefault();
         try {
             const response = await axios.post(
-                "https://e-commerce-mgtd.onrender.com/api/v1/auth/deactivate",
+                `${import.meta.env.VITE_SERVER_URL}/api/v1/auth/deactivate`,
                 {
                     email,
                     phone,

@@ -35,7 +35,7 @@ const ForgotPassword = () => {
                     return;
                 }
                 const response = await axios.post(
-                    "https://e-commerce-mgtd.onrender.com/api/v1/auth/forgot-password",
+                `${import.meta.env.VITE_SERVER_URL}/api/v1/auth/forgot-password`,
                     {
                         email,
                         password,
@@ -52,7 +52,7 @@ const ForgotPassword = () => {
                 }
             } else {
                 const response = await axios.post(
-                    "https://e-commerce-mgtd.onrender.com/api/v1/auth/user-exist",
+                    `${import.meta.env.VITE_SERVER_URL}/api/v1/auth/user-exist`,
                     {
                         email,
                     }

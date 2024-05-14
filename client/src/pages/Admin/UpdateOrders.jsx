@@ -25,7 +25,7 @@ const UpdateOrders = () => {
             try {
                 setLoading(true);
                 const response = await axios.get(
-                    `https://e-commerce-mgtd.onrender.com/api/v1/user/admin-order-detail?orderId=${orderId}`,
+                    `${import.meta.env.VITE_SERVER_URL}/api/v1/user/admin-order-detail?orderId=${orderId}`,
                     {
                         headers: {
                             Authorization: auth?.token,
@@ -58,7 +58,7 @@ const UpdateOrders = () => {
             e.preventDefault();
             console.log(status);
             const res = await axios.patch(
-                "/api/v1/user/update/order-status",
+               `${import.meta.env.VITE_SERVER_URL}/api/v1/user/update/order-status`,
                 { status, orderId },
                 {
                     headers: { Authorization: auth?.token },

@@ -108,7 +108,7 @@ const ProductDetails = () => {
         try {
             // only id of wishlist products will get
             const res = await axios.get(
-                "https://e-commerce-mgtd.onrender.com/api/v1/user/wishlist",
+                `${import.meta.env.VITE_SERVER_URL}/api/v1/user/wishlist`,
                 {
                     headers: {
                         Authorization: auth.token,
@@ -130,7 +130,7 @@ const ProductDetails = () => {
         const fetchProduct = async () => {
             try {
                 const res = await axios.get(
-                    `https://e-commerce-mgtd.onrender.com/api/v1/product/${productId}`
+                    `${import.meta.env.VITE_SERVER_URL}/api/v1/product/${productId}`
                 );
                 // console.log(res.data.product);
                 res.status === 201 && setProduct(res.data.product);
@@ -167,7 +167,7 @@ const ProductDetails = () => {
         if (itemInWishlist) {
             try {
                 const res = await axios.post(
-                    "https://e-commerce-mgtd.onrender.com/api/v1/user/update-wishlist",
+                    `${import.meta.env.VITE_SERVER_URL}/api/v1/user/update-wishlist`,
                     {
                         productId: productId,
                         type: "remove",
@@ -192,7 +192,7 @@ const ProductDetails = () => {
         } else {
             try {
                 const res = await axios.post(
-                    "https://e-commerce-mgtd.onrender.com/api/v1/user/update-wishlist",
+                    `${import.meta.env.VITE_SERVER_URL}/api/v1/user/update-wishlist`,
                     {
                         productId: productId,
                         type: "add",

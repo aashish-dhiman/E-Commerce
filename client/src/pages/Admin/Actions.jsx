@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Dialog from "@mui/material/Dialog";
@@ -21,7 +21,7 @@ const Actions = ({ id, name, updateDeletedProduct }) => {
         handleClose();
         try {
             const res = await axios.post(
-                "https://e-commerce-mgtd.onrender.com/api/v1/product/delete-product",
+                `${import.meta.env.VITE_SERVER_URL}/api/v1/product/delete-product`,
                 {
                     productId: id,
                 }

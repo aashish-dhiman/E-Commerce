@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import CircleIcon from "@mui/icons-material/Circle";
 import { Link } from "react-router-dom";
@@ -63,6 +64,13 @@ const OrderItem = ({
                                     </span>
                                     Delivered
                                 </>
+                            ) : orderStatus === "Out For Delivery" ? (
+                                <>
+                                    <span className="text-yellow-500 pb-0.5">
+                                        <CircleIcon sx={{ fontSize: "14px" }} />
+                                    </span>
+                                    Out For Delivery
+                                </>
                             ) : (
                                 <>
                                     <span className="text-primaryBlue pb-0.5">
@@ -83,6 +91,10 @@ const OrderItem = ({
                         ) : orderStatus === "Processed" ? (
                             <p className="text-xs ml-1">
                                 Seller has processed your order
+                            </p>
+                        ) : orderStatus === "Out For Delivery" ? (
+                            <p className="text-xs ml-1">
+                                Your order is Out for Delivery
                             </p>
                         ) : (
                             <p className="text-xs ml-1">

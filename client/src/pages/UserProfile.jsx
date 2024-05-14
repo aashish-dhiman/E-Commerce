@@ -33,7 +33,7 @@ const UserProfile = () => {
             setProfile(false);
 
             const response = await axios.post(
-                "https://e-commerce-mgtd.onrender.com/api/v1/auth/update-details",
+                `${import.meta.env.VITE_SERVER_URL}/api/v1/auth/update-details`,
                 {
                     newName: name,
                     email: auth?.user?.email,
@@ -61,7 +61,7 @@ const UserProfile = () => {
             setEmailSection(false);
 
             const response = await axios.post(
-                "https://e-commerce-mgtd.onrender.com/api/v1/auth/update-details",
+                `${import.meta.env.VITE_SERVER_URL}/api/v1/auth/update-details`,
                 {
                     newEmail: email,
                     email: auth?.user?.email,
@@ -92,7 +92,7 @@ const UserProfile = () => {
             setProfile(false);
 
             const response = await axios.post(
-                "https://e-commerce-mgtd.onrender.com/api/v1/auth/update-details",
+                `${import.meta.env.VITE_SERVER_URL}api/v1/auth/update-details`,
                 {
                     newPhone: phone,
                     email: auth?.user?.email,
@@ -278,7 +278,7 @@ const UserProfile = () => {
                         </h5>
                         <p className="text-[12px] text-slate-500 mt-2">
                             Your login email id (or mobile number) changes,
-                            likewise. You'll receive all your account related
+                            likewise. You&apos;ll receive all your account related
                             communication on your updated email address (or
                             mobile number).
                         </p>

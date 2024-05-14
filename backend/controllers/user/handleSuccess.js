@@ -50,6 +50,17 @@ const handleSuccess = async (req, res) => {
         const order = new orderModel(combinedOrder);
         await order.save();
 
+        // Reduce stock for each product
+        for (const item of orderItems) {
+            const product = await productModel.findById(item?.productId);
+            if (product) {
+                product?.stock -= item?.quantity;
+                await product.save();
+            } else {
+                throw new Error(`Product with ID ${item.productId} not found`);
+            }
+        }
+
         res.status(200).send({ success: true });
     } catch (error) {
         console.error("Error in handling payment success:", error);

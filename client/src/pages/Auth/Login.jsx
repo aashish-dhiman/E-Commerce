@@ -32,7 +32,7 @@ const Login = () => {
         setIsSubmitting(true);
         try {
             const response = await axios.post(
-                "https://e-commerce-mgtd.onrender.com/api/v1/auth/login",
+                `${import.meta.env.VITE_SERVER_URL}/api/v1/auth/login`,
                 {
                     email,
                     password,
@@ -188,7 +188,7 @@ const Login = () => {
                                         <div className="text-[9px] text-slate-500 ">
                                             <p>
                                                 By continuing, you agree to
-                                                Flipkart's Terms of Use and
+                                                Flipkart&apos;s Terms of Use and
                                                 Privacy Policy.
                                             </p>
                                         </div>

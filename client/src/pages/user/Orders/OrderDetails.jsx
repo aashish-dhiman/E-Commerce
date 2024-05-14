@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Tracker from "./Tracker";
@@ -15,32 +16,33 @@ const OrderDetails = () => {
     const [orderDetails, setOrderDetails] = useState([]);
     const [auth] = useAuth();
 
-    // fetch order detail from server
-    const fetchOrders = async () => {
-        try {
-            setLoading(true);
-            const response = await axios.get(
-                `https://e-commerce-mgtd.onrender.com/api/v1/user/order-detail?orderId=${orderId}`,
-                {
-                    headers: {
-                        Authorization: auth?.token,
-                    },
+    useEffect(() => {
+        // fetch order detail from server
+        const fetchOrders = async () => {
+            try {
+                setLoading(true);
+                const response = await axios.get(
+                    `${
+                        import.meta.env.VITE_SERVER_URL
+                    }/api/v1/user/order-detail?orderId=${orderId}`,
+                    {
+                        headers: {
+                            Authorization: auth?.token,
+                        },
+                    }
+                );
+                console.log(...response.data.orderDetails);
+                if (response?.data?.orderDetails) {
+                    setOrderDetails(...response.data.orderDetails);
+                    setLoading(false);
                 }
-            );
-            console.log(...response.data.orderDetails);
-            if (response?.data?.orderDetails) {
-                setOrderDetails(...response.data.orderDetails);
+            } catch (error) {
+                console.log(error);
                 setLoading(false);
             }
-        } catch (error) {
-            console.log(error);
-            setLoading(false);
-        }
-    };
-
-    useEffect(() => {
+        };
         fetchOrders();
-    }, []);
+    }, [auth?.token, orderId]);
 
     const amount = orderDetails?.amount;
     const orderItems = orderDetails?.products;
@@ -150,6 +152,12 @@ const OrderDetails = () => {
                                                 </span>
                                                 <span className="text-xs text-gray-600">
                                                     Payment Id: {paymentId}
+                                                </span>
+                                                <span className="text-xs text-gray-600">
+                                                    Order Date:{" "}
+                                                    {new Date(
+                                                        createdAt
+                                                    ).toDateString()}
                                                 </span>
                                             </div>
                                         </div>

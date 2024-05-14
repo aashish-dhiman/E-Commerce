@@ -151,7 +151,7 @@ const CreateProduct = () => {
             });
             console.log([...formData]);
             const response = await axios.post(
-                "https://e-commerce-mgtd.onrender.com/api/v1/product/new-product",
+                `${import.meta.env.VITE_SERVER_URL}/api/v1/product/new-product`,
                 formData,
                 {
                     headers: {
