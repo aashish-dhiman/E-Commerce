@@ -74,7 +74,7 @@ const Products = () => {
       try {
         setLoading(true);
         const res = await axios.get(
-          `https://e-commerce-mgtd.onrender.com/api/v1/product/filtered-products`,
+          `${import.meta.env.VITE_SERVER_URL}/api/v1/product/filtered-products`,
           {
             params: {
               category: category,
