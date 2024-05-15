@@ -232,42 +232,6 @@ const ProductDetails = () => {
                         <div className="w-full flex flex-col sm:flex-row bg-white sm:p-2 relative">
                             {/* <!-- image wrapper --> */}
                             <div className="w-full sm:w-2/5 sm:sticky top-16 sm:h-screen">
-                            <div className="w-full px-0 -p-2 flex md:gap-3 z-50 fixed md:static bottom-0">
-                                        {/* <!-- add to cart btn --> */}
-                                        {product.stock > 0 && (
-                                            <button
-                                                onClick={
-                                                    itemInCart
-                                                        ? goToCart
-                                                        : addToCartHandler
-                                                }
-                                                className="p-2 sm:p-4 w-1/2 flex items-center justify-center gap-2 text-white bg-[#ff9f00] rounded-sm shadow hover:shadow-lg"
-                                            >
-                                                <ShoppingCartIcon />
-                                                {itemInCart
-                                                    ? "GO TO CART"
-                                                    : "ADD TO CART"}
-                                            </button>
-                                        )}
-                                        <button
-                                            onClick={buyNow}
-                                            disabled={
-                                                product.stock < 1 ? true : false
-                                            }
-                                            className={
-                                                product.stock < 1
-                                                    ? "p-4 w-full flex items-center justify-center gap-2 text-white bg-red-600 cursor-not-allowed rounded-sm shadow hover:shadow-lg"
-                                                    : "p-4 w-1/2 flex items-center justify-center gap-2 text-white bg-[#fb641b] rounded-sm shadow hover:shadow-lg"
-                                            }
-                                        >
-                                            <FlashOnIcon />
-                                            {product?.stock < 1
-                                                ? "OUT OF STOCK"
-                                                : "BUY NOW"}
-                                        </button>
-                                        {/* <!-- add to cart btn --> */}
-                                    </div>
-                                </div>
                                 {/* <!-- imgBox --> */}
                                 <div className="flex flex-col gap-3 m-3 ">
                                     <div className="w-full sm:w-[450px] h-full pb-6 border relative">
@@ -309,13 +273,48 @@ const ProductDetails = () => {
                                         </div>
                                     </div>
 
-                                  
+                                    <div className="w-full bg-white md:bg-transparent md:static fixed bottom-0 flex gap-1 md:gap-3 px-0">
+                                        {/* <!-- add to cart btn --> */}
+                                        {product.stock > 0 && (
+                                            <button
+                                                onClick={
+                                                    itemInCart
+                                                        ? goToCart
+                                                        : addToCartHandler
+                                                }
+                                                className="p-2 sm:p-4 w-1/2 flex items-center justify-center gap-2 text-white bg-[#ff9f00] rounded-sm shadow hover:shadow-lg"
+                                            >
+                                                <ShoppingCartIcon />
+                                                {itemInCart
+                                                    ? "GO TO CART"
+                                                    : "ADD TO CART"}
+                                            </button>
+                                        )}
+                                        <button
+                                            onClick={buyNow}
+                                            disabled={
+                                                product.stock < 1 ? true : false
+                                            }
+                                            className={
+                                                product.stock < 1
+                                                    ? "p-4 w-full flex items-center justify-center gap-2 text-white bg-red-600 cursor-not-allowed rounded-sm shadow hover:shadow-lg"
+                                                    : "p-4 w-1/2 flex items-center justify-center gap-2 text-white bg-[#fb641b] rounded-sm shadow hover:shadow-lg"
+                                            }
+                                        >
+                                            <FlashOnIcon />
+                                            {product?.stock < 1
+                                                ? "OUT OF STOCK"
+                                                : "BUY NOW"}
+                                        </button>
+                                        {/* <!-- add to cart btn --> */}
+                                    </div>
+                                </div>
                                 {/* <!-- img box --> */}
                             </div>
                             {/* <!-- image wrapper --> */}
 
                             {/* <!-- product desc wrapper --> */}
-                            <div className="flex py-2 md:px-3">
+                            <div className="flex py-2 px-3">
                                 {/* <!-- whole product description --> */}
                                 <div className="flex flex-col gap-3 mb-4">
                                     <h2 className="text-xl">{product?.name}</h2>
