@@ -273,7 +273,7 @@ const ProductDetails = () => {
                                         </div>
                                     </div>
 
-                                    <div className="w-full bg-white md:bg-transparent md:static fixed bottom-0 flex gap-1 md:gap-3 px-0">
+                                    <div className="w-full bg-white md:static fixed bottom-0 flex gap-1 z-10 md:gap-3 left-0 px-0 max-w-md">
                                         {/* <!-- add to cart btn --> */}
                                         {product.stock > 0 && (
                                             <button
