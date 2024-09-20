@@ -15,10 +15,8 @@ const SearchBar = () => {
                     import.meta.env.VITE_SERVER_URL
                 }api/v1/product/search/${query}`
             );
-            // console.log(products);
             setResults(products.data.slice(0, 6));
             setOpen(true);
-            console.log(results);
         } catch (error) {
             console.error("Error searching for products:", error);
         }

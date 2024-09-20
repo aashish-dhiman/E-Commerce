@@ -77,7 +77,6 @@ const UserProfile = () => {
             localStorage.removeItem("auth");
             localStorage.setItem("auth", JSON.stringify(response.data));
 
-            // console.log(response);
             toast.success(response.data.message);
         } catch (error) {
             console.log(error);
@@ -86,7 +85,6 @@ const UserProfile = () => {
     const handlePhoneSubmit = async (e) => {
         setPhoneSection(false);
         e.preventDefault();
-        console.log(auth);
 
         try {
             setProfile(false);
@@ -108,7 +106,6 @@ const UserProfile = () => {
             localStorage.removeItem("auth");
             localStorage.setItem("auth", JSON.stringify(response.data));
 
-            // console.log(response);
             toast.success(response.data.message);
         } catch (error) {
             console.error("Error:", error);
@@ -278,9 +275,9 @@ const UserProfile = () => {
                         </h5>
                         <p className="text-[12px] text-slate-500 mt-2">
                             Your login email id (or mobile number) changes,
-                            likewise. You&apos;ll receive all your account related
-                            communication on your updated email address (or
-                            mobile number).
+                            likewise. You&apos;ll receive all your account
+                            related communication on your updated email address
+                            (or mobile number).
                         </p>
                     </div>
                     <div className="mt-4">

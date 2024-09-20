@@ -44,7 +44,7 @@ const isAdmin = asyncHandler(async (req, res, next) => {
         // console.log(req.user);
         if (!req.user || req.user.role !== 1) {
             return res
-                .status(401)
+                .status(403)
                 .json({ message: "Access denied. Admin privileges required." });
         }
 

@@ -11,10 +11,13 @@ import { CartProvider } from "./context/cart.jsx";
 ReactDOM.createRoot(document.getElementById("root")).render(
     <AuthProvider>
         <CartProvider>
-            <ToastContainer />
             <BrowserRouter>
                 <App />
             </BrowserRouter>
+            <ToastContainer
+                style={{ fontSize: "14px", zIndex: 900 }}
+                autoClose={2000}
+            />
         </CartProvider>
     </AuthProvider>
 );

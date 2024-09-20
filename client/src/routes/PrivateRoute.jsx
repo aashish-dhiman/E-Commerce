@@ -16,7 +16,6 @@ const PrivateRoute = () => {
     useEffect(() => {
         const authCheck = async () => {
             try {
-                // console.log("authCheck called");
                 const res = await axios.get(
                     `${import.meta.env.VITE_SERVER_URL}/api/v1/auth/user-auth`,
                     {
@@ -25,10 +24,8 @@ const PrivateRoute = () => {
                         },
                     }
                 );
-                // console.log("isContextLoading:" + isContextLoading);
 
                 res.data.ok ? setOk(true) : setOk(false);
-                // console.log("func:" + ok);
             } catch (error) {
                 console.log(error);
 

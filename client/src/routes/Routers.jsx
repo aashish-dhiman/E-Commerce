@@ -9,7 +9,7 @@ import AdminDashboard from "../pages/Admin/AdminDashboard";
 import PrivateRoute from "./PrivateRoute";
 import AdminRoute from "./AdminRoute";
 import Products from "../pages/Products/Products";
-import ProductPage from "../pages/Products/ProductPage";
+import ProductPage from "../components/ProductListing/ProductPage.jsx";
 import Orders from "./../pages/user/Orders/Orders";
 import Wishlist from "../pages/user/Wishlist/Wishlist";
 import Cart from "../pages/user/Cart/Cart";

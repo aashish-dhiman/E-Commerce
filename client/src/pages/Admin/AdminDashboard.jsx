@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import AdminMenu from "./AdminMenu";
 import UserProfile from "../UserProfile";
 import AddressComponent from "../AddressComponent";
@@ -9,8 +9,14 @@ import Users from "./Users";
 import Deactivate from "../Auth/Deactivate";
 import EditProduct from "./EditProduct";
 import SeoData from "../../SEO/SeoData";
+import { useEffect } from "react";
 
 const AdminDashboard = () => {
+    const navigate = useNavigate();
+    useEffect(() => {
+        if (window.location.pathname === "/admin/dashboard")
+            navigate("./profile");
+    }, [navigate]);
     return (
         <>
             <SeoData title="Admin Dashboard" />

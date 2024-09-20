@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Product from "./Product";
-import MinCategory from "./../../../components/MinCategory";
+import MinCategory from "../../../components/MinCategory";
 import axios from "axios";
 import { useAuth } from "../../../context/auth";
 import Spinner from "../../../components/Spinner";
@@ -14,116 +14,87 @@ const Wishlist = () => {
     const [isLoadMore, setIsLoadMore] = useState(false);
     const [count, setCount] = useState(0);
     const [page, setPage] = useState(1);
-    const [pageSize] = useState(5); // Number of items per page
-    let _id;
+    const pageSize = 5; // Number of items per page
 
-    const fetchCounts = async () => {
-        try {
-            // only id of wishlist products will get
-            const res = await axios.get(
-                `${import.meta.env.VITE_SERVER_URL}/api/v1/user/wishlist`,
-                {
-                    headers: {
-                        Authorization: auth?.token,
-                    },
-                }
-            );
-            setCount(res.data.wishlistItems?.length);
-        } catch (error) {
-            console.error("Error fetching wishlist items:", error);
-        }
-    };
     useEffect(() => {
-        fetchCounts();
-    }, []);
+        // Fetch wishlist count and product details
+        const fetchWishlist = async (page) => {
+            try {
+                setIsLoading(true);
+                const res = await axios.get(
+                    `${
+                        import.meta.env.VITE_SERVER_URL
+                    }/api/v1/user/wishlist-products?page=${page}&pageSize=${pageSize}`,
+                    {
+                        headers: {
+                            Authorization: auth.token,
+                        },
+                    }
+                );
+                const newItems = res.data.wishlistItems;
+                // append new items in state
+                setWishlistItems((prev) => [...prev, ...newItems]);
+                setCount(res?.data?.totalItems);
+                setIsLoading(false);
+                setIsLoadMore(false);
+            } catch (error) {
+                console.error("Error fetching wishlist items:", error);
+            }
+        };
+        fetchWishlist(page); // Fetch initial page
+    }, [page, auth.token]);
 
-    // to fetch details of wishlist products
-
-    const fetchDetails = async () => {
-        try {
-            const response = await axios.get(
-                `${import.meta.env.VITE_SERVER_URL}/api/v1/user/wishlist-products?page=${page}&pageSize=${pageSize}`,
-                {
-                    headers: {
-                        Authorization: auth.token,
-                    },
-                }
-            );
-            const newItems = response.data.wishlistItems;
-            setWishlistItems((prev) => [...new Set([...prev, ...newItems])]);
-            setIsLoading(false);
-            setIsLoadMore(false);
-        } catch (error) {
-            console.error("Error fetching wishlist items:", error);
-        }
-    };
-    useEffect(() => {
-        fetchDetails();
-    }, [page]);
-    // console.log(wishlistItems);
-
+    // Fetch more wishlist items when "Load more" is clicked
     const handleLoadMore = () => {
-        // Increment the page number to fetch the next batch
         setIsLoadMore(true);
         setPage((prevPage) => {
-            if (Math.ceil(count / pageSize) > prevPage) {
-                return (prevPage = prevPage + 1);
-            } else {
-                return prevPage;
+            const nextPage = prevPage + 1;
+            if (nextPage <= Math.ceil(count / pageSize)) {
+                return nextPage;
             }
+            return prevPage;
         });
     };
 
+    // Remove item from wishlist
     const updateWishlist = async (productId) => {
         try {
             setIsLoading(true);
-            const res = await axios.post(
-                `${import.meta.env.VITE_SERVER_URL}/api/v1/user/update-wishlist`,
-                {
-                    productId: productId,
-                    type: "remove",
-                },
-                {
-                    headers: {
-                        Authorization: auth.token,
-                    },
-                }
+            await axios.post(
+                `${
+                    import.meta.env.VITE_SERVER_URL
+                }/api/v1/user/update-wishlist`,
+                { productId, type: "remove" },
+                { headers: { Authorization: auth.token } }
             );
-            // console.log(res);
-            res.status === 201 &&
-                toast.success("Product Removed From Wishlist") &&
-                setWishlistItems((prev) =>
-                    prev.filter((item) => item._id !== _id)
-                );
+            toast.success("Product Removed From Wishlist");
+            setWishlistItems((prev) =>
+                prev.filter((item) => item._id !== productId)
+            );
+            setCount((prev) => prev - 1);
             setIsLoading(false);
-            fetchCounts();
-            fetchDetails();
         } catch (error) {
-            console.log(error);
+            console.error("Error updating wishlist:", error);
         }
     };
 
-    const deleteHandler = (productId) => {
-        updateWishlist(productId);
-        _id = productId;
-    };
     return (
         <>
             <SeoData title="My Wishlist" />
             <MinCategory />
 
-            {isLoading ? (
+            {isLoading && page === 1 ? (
                 <Spinner />
             ) : (
                 <div className="flex gap-3.5 w-full sm:w-11/12 sm:mt-4 m-auto pb-7">
                     <div className="flex-1 shadow bg-white">
-                        {/* <!-- wishlist container --> */}
+                        {/* Wishlist container */}
                         <div className="flex flex-col">
                             <span className="font-medium text-lg px-4 sm:px-8 py-4 border-b">
                                 My Wishlist ({count})
                             </span>
 
-                            {wishlistItems.length === 0 && (
+                            {wishlistItems.length === 0 ? (
                                 <div className="flex items-center flex-col gap-2 m-6">
                                     <img
                                         draggable="false"
@@ -139,23 +110,22 @@ const Wishlist = () => {
                                         Start adding!
                                     </p>
                                 </div>
-                            )}
-
-                            {wishlistItems
-                                ?.map((item, index) => (
+                            ) : (
+                                wishlistItems.map((item, index) => (
                                     <Product
                                         {...item}
-                                        func={deleteHandler}
+                                        func={updateWishlist}
                                         key={index}
                                     />
                                 ))
-                                .reverse()}
+                            )}
 
-                            {count > pageSize && (
+                            {count > wishlistItems.length && (
                                 <span className="font-medium text-md px-4 sm:px-8 py-4 flex items-center justify-center border-b">
                                     <button
                                         onClick={handleLoadMore}
-                                        className="text-primaryBlue "
+                                        className="text-primaryBlue"
+                                        disabled={isLoadMore}
                                     >
                                         {isLoadMore
                                             ? "Loading..."
@@ -164,7 +134,6 @@ const Wishlist = () => {
                                 </span>
                             )}
                         </div>
-                        {/* <!-- wishlist container --> */}
                     </div>
                 </div>
             )}

@@ -32,7 +32,6 @@ const UpdateOrders = () => {
                         },
                     }
                 );
-                console.log(response.data.orderDetails);
                 if (response?.data?.orderDetails) {
                     setUpdateOrders(...response.data.orderDetails);
                     setLoading(false);
@@ -56,7 +55,6 @@ const UpdateOrders = () => {
     const updateOrderSubmitHandler = async (e) => {
         try {
             e.preventDefault();
-            console.log(status);
             const res = await axios.patch(
                `${import.meta.env.VITE_SERVER_URL}/api/v1/user/update/order-status`,
                 { status, orderId },

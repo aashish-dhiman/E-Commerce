@@ -102,14 +102,14 @@ const Deactivate = () => {
                             />
 
                             <div className="relative flex items-center">
-                                <button className="bg-primaryBlue w-full uppercase text-white text-[14px] font-[500] rounded-sm px-2 py-1">
+                                <button className="bg-red-600 w-full uppercase text-white text-[14px] font-[500] rounded-sm px-2 py-1">
                                     Deactivate
                                 </button>
                             </div>
                         </form>
                     </div>
                     <Link
-                        to="/"
+                        to="/user/dashboard"
                         className="uppercase text-primaryBlue font-[600] text-[14px] flex items-center justify-center w-full"
                     >
                         No, Let me Stay

@@ -119,12 +119,6 @@ const CreateProduct = () => {
                 toast.warning("Please Add Product Images");
                 return;
             }
-            console.log("Name:", name);
-            console.log("Description:", description);
-            console.log("Price:", price);
-            console.log("Images Array:", images);
-            console.log("logo:", logo);
-            console.log("Specs Array:", specs);
 
             const formData = new FormData();
 
@@ -149,7 +143,6 @@ const CreateProduct = () => {
             specs.forEach((s) => {
                 formData.append("specifications", JSON.stringify(s));
             });
-            console.log([...formData]);
             const response = await axios.post(
                 `${import.meta.env.VITE_SERVER_URL}/api/v1/product/new-product`,
                 formData,
@@ -158,10 +151,8 @@ const CreateProduct = () => {
                         "Content-Type": "multipart/form-data",
                         Authorization: auth?.token,
                     },
-                    // header: { "Content-Type": "application/json" },
                 }
             );
-            // console.log(response);
             // on success->
             response.status === 201 &&
                 toast.success("Product Added Successfully!");

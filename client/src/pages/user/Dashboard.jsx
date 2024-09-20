@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import UserMenu from "./UserMenu";
 import UserProfile from "../UserProfile";
 import AddressComponent from "../AddressComponent";
@@ -7,8 +7,15 @@ import Deactivate from "../Auth/Deactivate";
 import Reviews from "./Reviews";
 import PaymentCards from "./PaymentCards";
 import SeoData from "../../SEO/SeoData";
+import { useEffect } from "react";
 
 const Dashboard = () => {
+    const navigate = useNavigate();
+    useEffect(() => {
+        if (window.location.pathname === "/user/dashboard")
+            navigate("./profile");
+    }, [navigate]);
+
     return (
         <>
             <SeoData title="User Dashboard" />
@@ -19,7 +26,7 @@ const Dashboard = () => {
                     </div>
                     <div className="w-[70%] bg-white shadow-md rounded-sm">
                         <Routes>
-                            <Route path="" element={<UserProfile />} />
+                            {/* <Route path="" element={<UserProfile />} /> */}
                             <Route path="profile" element={<UserProfile />} />
                             <Route
                                 path="address"

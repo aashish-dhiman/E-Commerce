@@ -23,7 +23,9 @@ const OrderSuccess = () => {
             try {
                 setLoading(true);
                 const payment = await axios.post(
-                    `${import.meta.env.VITE_SERVER_URL}/api/v1/user/payment-success`,
+                    `${
+                        import.meta.env.VITE_SERVER_URL
+                    }/api/v1/user/payment-success`,
                     {
                         sessionId: sessionId,
                         orderItems: cartItems,
@@ -48,7 +50,7 @@ const OrderSuccess = () => {
             }
         };
         savePayment();
-    }, []);
+    }, [auth?.token, cartItems, sessionId, setCartItems, shippingInfo]);
 
     useEffect(() => {
         if (!loading && time === 0) {
@@ -59,8 +61,7 @@ const OrderSuccess = () => {
             !loading && setTime(time - 1);
         }, 1000);
         return () => clearInterval(intervalId);
-        // eslint-disable-next-line
-    }, [time, loading]);
+    }, [time, loading, navigate]);
 
     return (
         <>

@@ -33,9 +33,7 @@ const Shipping = () => {
     //stripe details
     const publishKey = import.meta.env.VITE_STRIPE_PUBLISH_KEY;
     const secretKey = import.meta.env.VITE_STRIPE_SECRET_KEY;
-    // console.log(publishKey, secretKey);
     let frontendURL = window.location.origin; // Get the frontend URL
-    // console.log(frontendURL);
 
     const shippingSubmit = (e) => {
         e.preventDefault();
@@ -72,15 +70,12 @@ const Shipping = () => {
                 },
             }
         );
-        // console.log(response);
         const session = response.data.session;
-        // console.log(session);
         //storing session id to retrieve payment details after successful
         localStorage.setItem("sessionId", session.id);
         const result = stripe.redirectToCheckout({
             sessionId: session.id,
         });
-        // console.log(result);
 
         if (result.error) {
             console.log(result.error);

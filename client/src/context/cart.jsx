@@ -1,7 +1,5 @@
-import axios from "axios";
 import { useContext, createContext, useState, useEffect } from "react";
 import { toast } from "react-toastify";
-import Product from "./../pages/Home/Suggestions/Product";
 
 const CartContext = createContext();
 
@@ -24,11 +22,9 @@ const CartProvider = ({ children }) => {
     }, [reload]);
 
     const addItems = async (product, quantity = 1) => {
-        // console.log("Adding item:", product, "Quantity:", quantity);
         const existingItemIndex = cartItems.findIndex(
             (item) => item.productId === product?.productId
         );
-        // console.log(existingItemIndex);
 
         if (existingItemIndex !== -1) {
             // Create a copy of cartItems to avoid mutating state directly
@@ -40,7 +36,6 @@ const CartProvider = ({ children }) => {
             // Update the state with the new cart items
             localStorage.setItem("cart", JSON.stringify(updatedCartItems));
             setReload(!reload);
-            // console.log("Updated cartItems:", updatedCartItems);
         } else {
             // Update the state and local storage with the new cart items
             setCartItems([{ ...product, quantity }, ...cartItems]);
@@ -67,7 +62,6 @@ const CartProvider = ({ children }) => {
     };
     const addLater = (product) => {
         removeItems(product);
-        // console.log(product);
         setSaveLaterItems([product, ...saveLaterItems]);
         localStorage.setItem(
             "saveLater",
@@ -85,7 +79,6 @@ const CartProvider = ({ children }) => {
         removeLater(product);
     };
     const removeLater = (product) => {
-        // console.log(product);
         const updatedLaterItems = saveLaterItems?.filter(
             (item) => item.productId !== product.productId
         );

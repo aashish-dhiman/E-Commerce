@@ -15,7 +15,6 @@ const AdminRoute = () => {
     useEffect(() => {
         const authCheck = async () => {
             try {
-                // console.log("authCheck called");
                 const res = await axios.get(
                     `${import.meta.env.VITE_SERVER_URL}/api/v1/auth/admin-auth`,
                     {
@@ -24,12 +23,8 @@ const AdminRoute = () => {
                         },
                     }
                 );
-                // console.log("isContextLoading:" + isContextLoading);
-                // console.log(res.data);
 
                 setOk(res.data.ok === true); // Update ok based on the response
-                // console.log("func:" + (res.data.ok === true)); // Log the updated value
-                // console.log("func:" + ok);
             } catch (error) {
                 console.log(error);
 
