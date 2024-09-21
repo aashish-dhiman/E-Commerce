@@ -6,7 +6,13 @@ const stripeInstance = stripe(process.env.STRIPE_SECRET_KEY);
 
 const createSession = async (req, res) => {
     try {
-        const { products, frontendURL } = req.body;
+        const {
+            products,
+            frontendURL,
+            customerEmail,
+            customerPhone,
+            customerName,
+        } = req.body;
         // console.log(frontendURL);
         const successPath = "/shipping/confirm";
         const cancelPath = "/shipping/failed";
@@ -27,10 +33,26 @@ const createSession = async (req, res) => {
         }));
         const session = await stripeInstance.checkout.sessions.create({
             payment_method_types: ["card"],
+            currency: "inr",
             line_items: lineItems,
             mode: "payment",
             success_url: successURL,
             cancel_url: cancelURL,
+            customer_email: customerEmail,
+            // shipping_details: {
+            //     name: customerName,
+            //     address: {
+            //         line1: "1",
+            //         line2: "2",
+            //         city: "3",
+            //         state: "UP",
+            //         postal_code: "256656",
+            //         country: "IN",
+            //     },
+            // },
+            shipping_address_collection: {
+                allowed_countries: ["IN"], // Limit address collection to specific countries if needed
+            },
         });
 
         res.send({ session: session });

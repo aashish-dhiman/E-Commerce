@@ -6,7 +6,6 @@ const getAdminOrders = async (req, res) => {
         const order = await orderModel.find({
             "products.seller": req.user._id,
         });
-        console.log(order);
 
         res.status(200).send({
             success: true,

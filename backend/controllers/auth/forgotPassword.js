@@ -28,7 +28,6 @@ export const forgotPasswordController = async (req, res) => {
         const newPassword = await hashPassword(password);
 
         //IF USER EXISTS-
-        console.log(email, newPassword);
         const response = await userModel.findOneAndUpdate(
             { email: email },
             {

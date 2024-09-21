@@ -11,11 +11,9 @@ const requireSignIn = asyncHandler(async (req, res, next) => {
         }
 
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        // console.log(decoded);
 
         // Attach user information to the request
         req.user = await UserModel.findById(decoded._id);
-        // console.log(req.user);
 
         if (!req.user || req.user.role !== 0) {
             return res.status(401).json({ message: "Unauthorised User" });

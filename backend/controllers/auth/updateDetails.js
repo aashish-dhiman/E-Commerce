@@ -4,7 +4,6 @@ import userModel from "../../models/userModel.js";
 export const updateDetailsController = async (req, res) => {
     try {
         const { newName, newEmail, newPhone, email } = req.body;
-        console.log(req.body);
         const user = await userModel.findOne({ email });
         if (!user) {
             return res.status(401).send({

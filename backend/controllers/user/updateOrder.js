@@ -4,13 +4,11 @@ import userModel from "../../models/userModel.js";
 const updateOrder = async (req, res) => {
     try {
         const { status, orderId } = req.body;
-        console.log(orderId, status);
         const updatedOrder = await orderModel.findByIdAndUpdate(
             orderId,
             { orderStatus: status },
             { new: true }
         );
-        console.log(updatedOrder);
 
         if (updateOrder) {
             res.status(200).send({

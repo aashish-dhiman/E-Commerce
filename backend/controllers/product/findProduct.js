@@ -5,7 +5,6 @@ const findProduct = async (req, res) => {
         const productId = req.params.id;
 
         const response = await productModel.findById(productId);
-        // console.log(response);
         // if no response -? product don't exist
         !response &&
             res.status(401).send({

@@ -6,7 +6,6 @@ const getFilteredProducts = async (req, res) => {
         const { category, priceRange, ratings } = req.query;
 
         let products = await productModel.find({});
-        // console.log(products);
         if (category) {
             products = products.filter(
                 (product) => product.category === category
