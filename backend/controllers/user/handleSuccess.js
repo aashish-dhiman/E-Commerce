@@ -19,7 +19,7 @@ const handleSuccess = async (req, res) => {
         console.log("session: ", session);
 
         // Extract the payment intent ID from the retrieved session
-        const paymentIntentId = session.payment_intent;
+        const paymentIntentId = session?.payment_intent;
         const amount = session.amount_total;
         const orderObject = orderItems?.map((product) => ({
             name: product.name,
