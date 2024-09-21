@@ -39,19 +39,11 @@ const createSession = async (req, res) => {
             success_url: successURL,
             cancel_url: cancelURL,
             customer_email: customerEmail,
-            // shipping_details: {
-            //     name: customerName,
-            //     address: {
-            //         line1: "1",
-            //         line2: "2",
-            //         city: "3",
-            //         state: "UP",
-            //         postal_code: "256656",
-            //         country: "IN",
-            //     },
-            // },
             shipping_address_collection: {
                 allowed_countries: ["IN"], // Limit address collection to specific countries if needed
+            },
+            phone_number_collection: {
+                enabled: true,
             },
         });
 

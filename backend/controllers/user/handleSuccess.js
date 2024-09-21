@@ -9,20 +9,15 @@ import productModel from "../../models/productModel.js";
 const handleSuccess = async (req, res) => {
     try {
         // Retrieve the session ID from the query parameters
-        const { sessionId, orderItems, shippingInfo } = req.body;
-        console.log(
-            "sessionId, orderItems, shippingInfo: ",
-            sessionId,
-            orderItems,
-            shippingInfo
-        );
+        const { sessionId, orderItems } = req.body;
+        console.log("sessionId, orderItems: ", sessionId, orderItems);
 
         // Fetch the payment intent associated with the session
         const session = await stripeInstance.checkout.sessions.retrieve(
             sessionId
         );
-        console.log('session: ', session);
-        
+        console.log("session: ", session);
+
         // Extract the payment intent ID from the retrieved session
         const paymentIntentId = session.payment_intent;
         const amount = session.amount_total;
@@ -37,14 +32,16 @@ const handleSuccess = async (req, res) => {
             seller: new mongoose.Types.ObjectId(product.seller),
         }));
         const shippingObject = {
-            address: shippingInfo.address,
-            city: shippingInfo.city,
-            state: shippingInfo.state,
-            country: shippingInfo.country,
-            pincode: shippingInfo.pincode,
-            phoneNo: shippingInfo.phoneNo,
-            landmark: shippingInfo.landmark,
+            address: session?.customer_details?.address?.line1,
+            city: session?.customer_details?.address?.city,
+            state: session?.customer_details?.address?.state,
+            country: session?.customer_details?.address?.country,
+            pincode: session?.customer_details?.address?.postal_code,
+            phoneNo: session?.customer_details?.phone || "Not Provided", // Provide a fallback if phone is null
+            landmark:
+                session?.customer_details?.address?.line2 || "No Landmark", // Provide a fallback if line2 is null
         };
+        
         // Payment successful, save payment details to your database
         const combinedOrder = {
             paymentId: paymentIntentId,
@@ -55,7 +52,7 @@ const handleSuccess = async (req, res) => {
         };
         const order = new orderModel(combinedOrder);
         await order.save();
-
+        
         // Reduce stock for each product
         for (const item of orderItems) {
             const product = await productModel.findById(item?.productId);
