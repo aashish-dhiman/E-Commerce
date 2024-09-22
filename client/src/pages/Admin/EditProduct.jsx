@@ -37,7 +37,9 @@ const EditProduct = () => {
     const [images, setImages] = useState([]);
     const [imagesPreview, setImagesPreview] = useState([]);
     const [oldImages, setOldImages] = useState([]);
-    const [logo, setLogo] = useState("");
+    const [oldLogo, setOldLogo] = useState();
+    const [removedImages, setRemovedImages] = useState([]);
+    const [logo, setLogo] = useState(null);
     const [logoPreview, setLogoPreview] = useState("");
 
     //for submit state
@@ -68,6 +70,11 @@ const EditProduct = () => {
     };
 
     const handleLogoChange = (e) => {
+        if (oldLogo)
+            setRemovedImages((prev) => {
+                return [...prev, oldLogo.public_id];
+            });
+        setOldLogo(null);
         const reader = new FileReader();
 
         reader.onload = () => {
@@ -88,11 +95,8 @@ const EditProduct = () => {
 
             reader.onload = () => {
                 if (reader.readyState === 2) {
-                    setImagesPreview((oldImages) => [
-                        ...oldImages,
-                        reader.result,
-                    ]);
-                    setImages((oldImages) => [...oldImages, reader.result]);
+                    setImagesPreview((old) => [...old, reader.result]);
+                    setImages((old) => [...old, reader.result]);
                 }
             };
             reader.readAsDataURL(file);
@@ -101,28 +105,27 @@ const EditProduct = () => {
 
     const newProductUpdateHandler = async (e) => {
         e.preventDefault();
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth",
-        });
-        setIsSubmit(true);
-        try {
-            // required field checks
-            if (!logo) {
-                toast.warning("Please Add Brand Logo");
-                return;
-            }
-            if (specs.length <= 1) {
-                toast.warning("Please Add Minimum 2 Specifications");
-                return;
-            }
-            if (images.length <= 0) {
-                toast.warning("Please Add Product Images");
-                return;
-            }
 
+        setIsSubmit(true);
+
+        const validationErrors = [];
+
+        if (specs.length <= 1) {
+            validationErrors.push("Please Add Minimum 2 Specifications");
+        }
+
+        if (oldImages.length <= 0 && images.length <= 0) {
+            validationErrors.push("Please Add Atleast 1 Product Image");
+        }
+
+        if (validationErrors.length > 0) {
+            validationErrors.forEach((error) => toast.warning(error));
+            setIsSubmit(false); // Disable submission due to validation errors
+            return;
+        }
+        try {
             const formData = new FormData();
-            console.log(oldImages);
+
             formData.append("name", name);
             formData.append("description", description);
             formData.append("price", price);
@@ -132,6 +135,7 @@ const EditProduct = () => {
             formData.append("warranty", warranty);
             formData.append("brandName", brand);
             formData.append("logo", logo);
+            formData.append("oldLogo", JSON.stringify(oldLogo));
 
             images.forEach((image) => {
                 formData.append("images", image);
@@ -144,14 +148,20 @@ const EditProduct = () => {
             specs.forEach((s) => {
                 formData.append("specifications", JSON.stringify(s));
             });
-            oldImages.forEach((image) => {
-                formData.append("oldImages", image);
-            });
-            console.log([...formData]);
 
-            //send a put request to replace data on server
-            const response = await axios.put(
-                `/api/v1/product/update/${productId}`,
+            formData.append("oldImages", JSON.stringify(oldImages));
+            // oldImages.forEach((image) => {
+            // });
+
+            removedImages.forEach((image) => {
+                formData.append("removedImages", image);
+            });
+
+            // send a put request to replace data on server
+            const response = await axios.patch(
+                `${
+                    import.meta.env.VITE_SERVER_URL
+                }/api/v1/product/update/${productId}`,
                 formData,
                 {
                     headers: {
@@ -195,19 +205,20 @@ const EditProduct = () => {
                 setBrand(res.data.product.brand.name);
                 setHighlights(res.data.product.highlights || []);
                 setSpecs(res.data.product.specifications || []);
-                setOldImages((prevImages) => [
-                    ...prevImages,
-                    res.data.product.brand.logo.url,
-                ]);
+                setOldLogo(() => {
+                    return {
+                        url: res.data.product.brand.logo.url,
+                        public_id: res.data.product.brand.logo.public_id,
+                    };
+                });
                 {
                     res.data.product.images.map((image) => {
                         setOldImages((prevImages) => [
                             ...prevImages,
-                            image.url,
+                            { url: image.url, public_id: image.public_id },
                         ]);
                     });
                 }
-                console.log("res.data: ", res.data);
 
                 setLoading(false);
             } catch (error) {
@@ -237,7 +248,7 @@ const EditProduct = () => {
                 <form
                     onSubmit={newProductUpdateHandler}
                     encType="multipart/form-data"
-                    className="flex flex-col sm:flex-row bg-white rounded-lg shadow p-4"
+                    className="flex flex-col sm:flex-row bg-white rounded-lg shadow p-2 sm:p-4"
                     id="mainForm"
                 >
                     <div className="flex flex-col gap-3 m-2 ">
@@ -388,8 +399,15 @@ const EditProduct = () => {
                                 value={brand}
                                 onChange={(e) => setBrand(e.target.value)}
                             />
-                            <div className="w-24 h-10 flex items-center justify-center border rounded-lg">
-                                {!logoPreview ? (
+                            <div className="w-24 h-10 flex items-center justify-center border rounded-lg relative">
+                                {oldLogo ? (
+                                    <img
+                                        draggable="false"
+                                        src={oldLogo.url}
+                                        alt="Brand Logo"
+                                        className="w-full h-full object-contain"
+                                    />
+                                ) : !logoPreview ? (
                                     <ImageIcon />
                                 ) : (
                                     <img
@@ -399,6 +417,9 @@ const EditProduct = () => {
                                         className="w-full h-full object-contain"
                                     />
                                 )}
+                                <span className="text-red-500 absolute -top-1 -right-2">
+                                    *
+                                </span>
                             </div>
                             <label className="rounded bg-primaryBlue text-center cursor-pointer text-white py-2 px-2.5 shadow hover:shadow-lg">
                                 <input
@@ -412,7 +433,12 @@ const EditProduct = () => {
                             </label>
                         </div>
 
-                        <h2 className="font-medium">Specifications</h2>
+                        <h2 className="font-medium">
+                            Specifications{" "}
+                            <span className="text-xs text-gray-600">
+                                (at least 2 required)
+                            </span>
+                        </h2>
 
                         <div className="flex justify-between gap-2 items-center">
                             <TextField
@@ -461,25 +487,48 @@ const EditProduct = () => {
                             ))}
                         </div>
 
-                        <h2 className="font-medium">Product Images</h2>
-                        <div className="flex gap-2 overflow-x-auto h-32 border rounded">
-                            {oldImages?.map((image, i) => (
-                                <img
-                                    draggable="false"
-                                    src={image}
-                                    alt="Product"
-                                    key={i}
-                                    className="w-full h-full object-contain"
-                                />
-                            ))}
+                        <h2 className="font-medium">
+                            Product Images{" "}
+                            <span className="text-xs text-gray-600">
+                                (min 1 , max 4)
+                            </span>
+                        </h2>
+                        <div className="flex gap-2 overflow-x-auto h-36 border rounded bg-gray-200 p-2">
                             {imagesPreview?.map((image, i) => (
                                 <img
                                     draggable="false"
                                     src={image}
-                                    alt="Product"
+                                    alt="Product Image"
                                     key={i}
-                                    className="w-full h-full object-contain"
+                                    className="w-24 h-24 object-contain"
                                 />
+                            ))}
+                            {oldImages?.map((image, i) => (
+                                <div key={i} className="relative group">
+                                    <img
+                                        draggable="false"
+                                        src={image.url}
+                                        alt="Product"
+                                        className="w-24 h-24 object-contain transition-opacity duration-300 group-hover:opacity-20"
+                                    />
+                                    <div
+                                        onClick={() => {
+                                            setOldImages((prev) =>
+                                                prev.filter(
+                                                    (item) =>
+                                                        item?.url !== image?.url
+                                                )
+                                            );
+                                            setRemovedImages((prev) => [
+                                                ...prev,
+                                                image?.public_id,
+                                            ]);
+                                        }}
+                                        className="absolute text-red-500 text-center top-0 right-0 w-full h-full cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                                    >
+                                        <span>Remove</span>
+                                    </div>
+                                </div>
                             ))}
                         </div>
                         <label className="rounded font-medium bg-primaryBlue text-center cursor-pointer text-white p-2 shadow hover:shadow-lg my-2">

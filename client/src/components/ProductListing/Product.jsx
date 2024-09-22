@@ -94,7 +94,7 @@ const Product = ({
                             <img
                                 draggable="false"
                                 className="w-full h-full object-contain"
-                                src={images && images[0].url}
+                                src={images && images[0]?.url}
                                 alt={name}
                             />
                         </div>

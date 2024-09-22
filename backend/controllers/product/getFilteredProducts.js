@@ -5,7 +5,7 @@ const getFilteredProducts = async (req, res) => {
         // Extract parameters from the request query
         const { category, priceRange, ratings } = req.query;
 
-        let products = await productModel.find({});
+        let products = await productModel.find({}).sort({ createdAt: -1 });
         if (category) {
             products = products.filter(
                 (product) => product.category === category

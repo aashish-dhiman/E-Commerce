@@ -251,7 +251,7 @@ const ProductDetails = () => {
                                                 <img
                                                     draggable="false"
                                                     className="w-full h-96 object-contain"
-                                                    src={product?.images[0].url}
+                                                    src={product?.images[0]?.url}
                                                     alt={product?.name}
                                                 />
                                             )}

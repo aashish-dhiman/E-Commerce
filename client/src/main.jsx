@@ -16,8 +16,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             </BrowserRouter>
             <ToastContainer
                 style={{
-                    position: "fixed",
-                    bottom: "20px",
                     fontSize: "14px",
                     zIndex: 900,
                 }}

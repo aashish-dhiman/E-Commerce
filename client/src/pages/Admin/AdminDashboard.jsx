@@ -40,7 +40,7 @@ const AdminDashboard = () => {
                     >
                         <AdminMenu toggleMenu={toggleMenu} />
                     </div>
-                    <div className="flex-1 w-full bg-white shadow-md rounded-sm">
+                    <div className="w-full sm:w-[70%] bg-white shadow-md rounded-sm">
                         <button
                             onClick={toggleMenu}
                             className="sm:hidden text-blue-400 underline rounded px-2 text-lg py-2"
