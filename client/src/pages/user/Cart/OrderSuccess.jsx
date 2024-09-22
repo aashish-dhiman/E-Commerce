@@ -11,7 +11,7 @@ const OrderSuccess = () => {
     const navigate = useNavigate();
     const [time, setTime] = useState(3);
     const [cartItems, setCartItems] = useCart();
-    const [auth] = useAuth();
+    const { auth } = useAuth();
     const [sessionId, setSessionId] = useState(null);
     const [loading, setLoading] = useState(true);
     const [hasSavedPayment, setHasSavedPayment] = useState(false); // Add a flag to prevent multiple API calls

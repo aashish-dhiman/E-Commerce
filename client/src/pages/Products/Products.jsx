@@ -13,7 +13,7 @@ import { useAuth } from "../../context/auth";
 
 const Products = () => {
     const location = useLocation();
-    const [auth] = useAuth();
+    const { auth, isAdmin } = useAuth();
     const [loading, setLoading] = useState(true);
 
     const [price, setPrice] = useState([0, 200000]);
@@ -118,8 +118,8 @@ const Products = () => {
                     });
             }
         };
-        auth?.token && fetchWishlistItems();
-    }, [auth?.token]);
+        auth?.token && !isAdmin && fetchWishlistItems();
+    }, [auth?.token, isAdmin]);
 
     return (
         <>

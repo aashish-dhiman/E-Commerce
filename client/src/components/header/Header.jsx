@@ -17,7 +17,7 @@ const Header = () => {
     const [isDropdownOpen, setDropdownOpen] = useState(false);
     const headerRef = useRef(null);
 
-    const [auth, setAuth, LogOut] = useAuth();
+    const {auth, setAuth, LogOut} = useAuth();
     const [cartItems, setCartItems] = useCart();
 
     let closeTimeout;

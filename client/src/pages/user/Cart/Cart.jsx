@@ -11,7 +11,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
 
 const Cart = () => {
-    const [auth] = useAuth();
+    const { auth } = useAuth();
     //stripe details
     const publishKey = import.meta.env.VITE_STRIPE_PUBLISH_KEY;
     const secretKey = import.meta.env.VITE_STRIPE_SECRET_KEY;

@@ -5,7 +5,7 @@ import BarChartIcon from "@mui/icons-material/BarChart";
 import PowerSettingsNewIcon from "@mui/icons-material/PowerSettingsNew";
 
 const UserMenu = () => {
-    const [auth, setAuth, LogOut] = useAuth();
+    const { auth, setAuth, LogOut } = useAuth();
     const navigate = useNavigate();
     const handleLogout = () => {
         navigate("/");

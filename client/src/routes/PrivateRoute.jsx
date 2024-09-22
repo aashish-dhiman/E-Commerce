@@ -9,7 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 const PrivateRoute = () => {
     const [ok, setOk] = useState(false);
-    const [auth, setAuth, LogOut, isContextLoading] = useAuth();
+    const { auth, setAuth, LogOut, isContextLoading } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
 

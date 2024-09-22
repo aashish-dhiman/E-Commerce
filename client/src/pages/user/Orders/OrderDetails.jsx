@@ -14,7 +14,7 @@ const OrderDetails = () => {
 
     const [loading, setLoading] = useState(false);
     const [orderDetails, setOrderDetails] = useState([]);
-    const [auth] = useAuth();
+    const { auth } = useAuth();
 
     useEffect(() => {
         // fetch order detail from server

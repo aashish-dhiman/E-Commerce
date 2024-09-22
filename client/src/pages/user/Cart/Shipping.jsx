@@ -20,7 +20,7 @@ const Shipping = () => {
     const shippingInfo = JSON.parse(Info);
 
     const [cartItems] = useCart();
-    const [auth] = useAuth();
+    const { auth } = useAuth();
 
     const [address, setAddress] = useState(shippingInfo?.address);
     const [city, setCity] = useState(shippingInfo?.city);

@@ -10,6 +10,7 @@ const AuthProvider = ({ children }) => {
         user: null,
         token: "",
     });
+    const [isAdmin, setIsAdmin] = useState(0);
     const [isContextLoading, setIsContextLoading] = useState(true);
     useEffect(() => {
         const data = Cookies.get("auth");
@@ -19,6 +20,7 @@ const AuthProvider = ({ children }) => {
                 user: parsedData.user,
                 token: parsedData.token,
             });
+            setIsAdmin(parsedData?.user?.role === 1);
         }
         setIsContextLoading(false);
     }, []);
@@ -35,7 +37,9 @@ const AuthProvider = ({ children }) => {
         });
     };
     return (
-        <AuthContext.Provider value={[auth, setAuth, LogOut,isContextLoading]}>
+        <AuthContext.Provider
+            value={{ auth, setAuth, LogOut, isAdmin, isContextLoading }}
+        >
             {children}
         </AuthContext.Provider>
     );

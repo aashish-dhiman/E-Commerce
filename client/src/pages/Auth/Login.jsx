@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import authImg from "../../assets/images/auth.png";
 import axios from "axios";
 import { Link, useNavigate, useLocation } from "react-router-dom";
@@ -15,7 +15,7 @@ const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
-    const [auth, setAuth] = useAuth();
+    const { auth, setAuth, LogOut, isAdmin, isContextLoading } = useAuth();
     const [isSubmitting, setIsSubmitting] = useState(false);
     const location = useLocation();
 
@@ -24,6 +24,13 @@ const Login = () => {
     };
 
     const navigate = useNavigate();
+    useEffect(() => {
+        if (auth.token) {
+            isAdmin
+                ? navigate("/admin/dashboard")
+                : navigate("/user/dashboard");
+        }
+    }, [navigate, auth, isAdmin]);
     // axios.defaults.headers.common["Authorization"] = auth.token;
 
     //form submission handler

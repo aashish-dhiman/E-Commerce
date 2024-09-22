@@ -14,7 +14,7 @@ import ScrollToTopOnRouteChange from "./../../utils/ScrollToTopOnRouteChange";
 import SeoData from "../../SEO/SeoData";
 
 const EditProduct = () => {
-    const [auth] = useAuth();
+    const { auth } = useAuth();
     const navigate = useNavigate();
     const { productId } = useParams();
     const [loading, setLoading] = useState(true);

@@ -31,7 +31,10 @@ const updateProduct = async (req, res) => {
         let imagesLink = [];
         const images = Array.isArray(req.body.images)
             ? req.body.images
-            : [req.body.images];
+            : req.body.images
+            ? [req.body.images]
+            : []; // Default to an empty array if no images are provided
+
         if (images && images.length > 0) {
             for (const image of images) {
                 const result = await cloudinary.v2.uploader.upload(image, {

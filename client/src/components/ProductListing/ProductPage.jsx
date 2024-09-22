@@ -32,7 +32,7 @@ import SeoData from "../../SEO/SeoData";
 
 const ProductDetails = () => {
     const navigate = useNavigate();
-    const [auth, setAuth, LogOut, isContextLoading] = useAuth();
+    const {auth, setAuth, LogOut, isAdmin, isContextLoading} = useAuth();
     const [cartItems, setCartItems, addItems] = useCart();
     // reviews toggle
     const [open, setOpen] = useState(false);
@@ -251,7 +251,9 @@ const ProductDetails = () => {
                                                 <img
                                                     draggable="false"
                                                     className="w-full h-96 object-contain"
-                                                    src={product?.images[0]?.url}
+                                                    src={
+                                                        product?.images[0]?.url
+                                                    }
                                                     alt={product?.name}
                                                 />
                                             )}
@@ -281,7 +283,8 @@ const ProductDetails = () => {
                                                         ? goToCart
                                                         : addToCartHandler
                                                 }
-                                                className="p-2 sm:p-4 w-1/2 flex items-center justify-center gap-2 text-white bg-[#ff9f00] rounded-sm shadow hover:shadow-lg"
+                                                disabled={isAdmin}
+                                                className="disabled:cursor-not-allowed p-2 sm:p-4 w-1/2 flex items-center justify-center gap-2 text-white bg-[#ff9f00] rounded-sm shadow hover:shadow-lg"
                                             >
                                                 <ShoppingCartIcon />
                                                 {itemInCart
@@ -292,13 +295,13 @@ const ProductDetails = () => {
                                         <button
                                             onClick={buyNow}
                                             disabled={
-                                                product.stock < 1 ? true : false
+                                                isAdmin || product.stock < 1
                                             }
-                                            className={
+                                            className={`disabled:cursor-not-allowed flex items-center justify-center gap-2 text-white rounded-sm shadow hover:shadow-lg p-4 ${
                                                 product.stock < 1
-                                                    ? "p-4 w-full flex items-center justify-center gap-2 text-white bg-red-600 cursor-not-allowed rounded-sm shadow hover:shadow-lg"
-                                                    : "p-4 w-1/2 flex items-center justify-center gap-2 text-white bg-[#fb641b] rounded-sm shadow hover:shadow-lg"
-                                            }
+                                                    ? " w-full bg-red-600 cursor-not-allowed"
+                                                    : "w-1/2 bg-[#fb641b]"
+                                            }`}
                                         >
                                             <FlashOnIcon />
                                             {product?.stock < 1

@@ -21,7 +21,7 @@ const Product = ({
     wishlistItems,
     setWishlistItems,
 }) => {
-    const [auth] = useAuth();
+    const { auth, isAdmin } = useAuth();
 
     //check if item is present in user wishlist or not
     const itemInWishlist = wishlistItems?.some((itemId) => {
@@ -79,7 +79,9 @@ const Product = ({
                         itemInWishlist
                             ? "text-red-500"
                             : "hover:text-red-500 text-gray-300"
-                    } absolute z-10  top-2 right-3 cursor-pointer`}
+                    }
+                    ${isAdmin ? "hidden" : "block"}
+                    absolute z-10  top-2 right-3 cursor-pointer`}
                 >
                     <FavoriteIcon sx={{ fontSize: "20px" }} />
                 </span>

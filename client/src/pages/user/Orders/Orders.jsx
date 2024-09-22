@@ -9,7 +9,7 @@ import { useAuth } from "../../../context/auth";
 import SeoData from "../../../SEO/SeoData";
 
 const Orders = () => {
-    const [auth] = useAuth();
+    const { auth } = useAuth();
     const [search, setSearch] = useState("");
     const [loading, setLoading] = useState(false);
     const [orders, setOrders] = useState([]);

@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import SeoData from "../../../SEO/SeoData";
 
 const Wishlist = () => {
-    const [auth] = useAuth();
+    const { auth, setAuth, LogOut, isAdmin, isContextLoading } = useAuth();
     const [wishlistItems, setWishlistItems] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [isLoadMore, setIsLoadMore] = useState(false);
@@ -41,8 +41,8 @@ const Wishlist = () => {
                 console.error("Error fetching wishlist items:", error);
             }
         };
-        fetchWishlist(page); // Fetch initial page
-    }, [page, auth.token]);
+        auth.token && !isAdmin && fetchWishlist(page); // Fetch initial page
+    }, [page, auth.token, isAdmin]);
 
     // Fetch more wishlist items when "Load more" is clicked
     const handleLoadMore = () => {

@@ -18,7 +18,6 @@ import Suggestion from "./Suggestions/Suggestion";
 import SeoData from "../../SEO/SeoData";
 
 const Home = () => {
-    // const [auth, setAuth] = useAuth();
     return (
         <>
             <SeoData title="Online Shopping Site for Mobiles, Electronics, Furniture, Grocery, Lifestyle, Books & More. Best Offers!" />

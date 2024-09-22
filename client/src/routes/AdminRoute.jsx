@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 
 const AdminRoute = () => {
     const [ok, setOk] = useState(false);
-    const [auth, setAuth, LogOut, isContextLoading] = useAuth();
+    const { auth, setAuth, LogOut, isAdmin, isContextLoading } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
 

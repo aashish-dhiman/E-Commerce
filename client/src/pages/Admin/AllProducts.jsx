@@ -10,14 +10,16 @@ import Actions from "./Actions";
 import SeoData from "../../SEO/SeoData";
 
 const AllProducts = () => {
-    const [auth] = useAuth();
+    const { auth } = useAuth();
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const res = await axios.get(
-                    `${import.meta.env.VITE_SERVER_URL}/api/v1/product/seller-product`,
+                    `${
+                        import.meta.env.VITE_SERVER_URL
+                    }/api/v1/product/seller-product`,
                     {
                         headers: {
                             Authorization: auth.token,

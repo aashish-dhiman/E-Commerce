@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const UserProfile = () => {
-    const [auth, setAuth] = useAuth();
+    const {auth, setAuth} = useAuth();
     const [profile, setProfile] = useState(false);
     const [emailSection, setEmailSection] = useState(false);
     const [phoneSection, setPhoneSection] = useState(false);

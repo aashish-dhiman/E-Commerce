@@ -3,7 +3,7 @@ import { useAuth } from "../context/auth";
 import axios from "axios";
 
 const DeleteAllOrder = () => {
-    const [auth] = useAuth();
+    const {auth} = useAuth();
     const [allOrder, setAllOrder] = useState([]);
 
     useEffect(() => {

@@ -16,7 +16,7 @@ const UpdateOrders = () => {
     const [loading, setLoading] = useState(false);
     const [UpdateOrders, setUpdateOrders] = useState([]);
     const [status, setStatus] = useState("");
-    const [auth] = useAuth();
+    const { auth } = useAuth();
     const [reload, setReload] = useState(false);
 
     useEffect(() => {
@@ -25,7 +25,9 @@ const UpdateOrders = () => {
             try {
                 setLoading(true);
                 const response = await axios.get(
-                    `${import.meta.env.VITE_SERVER_URL}/api/v1/user/admin-order-detail?orderId=${orderId}`,
+                    `${
+                        import.meta.env.VITE_SERVER_URL
+                    }/api/v1/user/admin-order-detail?orderId=${orderId}`,
                     {
                         headers: {
                             Authorization: auth?.token,
@@ -56,7 +58,9 @@ const UpdateOrders = () => {
         try {
             e.preventDefault();
             const res = await axios.patch(
-               `${import.meta.env.VITE_SERVER_URL}/api/v1/user/update/order-status`,
+                `${
+                    import.meta.env.VITE_SERVER_URL
+                }/api/v1/user/update/order-status`,
                 { status, orderId },
                 {
                     headers: { Authorization: auth?.token },
