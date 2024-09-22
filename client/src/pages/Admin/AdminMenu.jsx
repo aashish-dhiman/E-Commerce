@@ -4,7 +4,7 @@ import PersonIcon from "@mui/icons-material/Person";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import PowerSettingsNewIcon from "@mui/icons-material/PowerSettingsNew";
 
-const AdminMenu = () => {
+const AdminMenu = ({ toggleMenu }) => {
     const [auth, setAuth, LogOut] = useAuth();
     const navigate = useNavigate();
     const handleLogout = () => {
@@ -19,7 +19,7 @@ const AdminMenu = () => {
     };
     return (
         <div className="flex flex-col gap-4 w-full">
-            <div className="flex gap-4 p-3 bg-white rounded-sm shadow-md">
+            <div className="flex relative items-start gap-4 p-3 bg-white rounded-sm shadow-md">
                 <img
                     src="https://static-assets-web.flixcart.com/fk-p-linchpin-web/fk-cp-zion/img/profile-pic-male_4811a1.svg"
                     alt="user svg"
@@ -31,9 +31,15 @@ const AdminMenu = () => {
                         {auth?.user?.name}
                     </div>
                 </div>
+                <div
+                    className="hover:scale-[1.06] absolute right-4 top-2 cursor-pointer sm:hidden"
+                    onClick={toggleMenu}
+                >
+                    X
+                </div>
             </div>
 
-            <div className="bg-white flex flex-col justify-center rounded-sm shadow-md">
+            <div className="bg-white flex flex-col justify-center rounded-sm sm:shadow-md overflow-y-auto">
                 <div className="flex flex-col justify-center border-b-[1px]">
                     <div className="flex flex-row items-center gap-6 pl-[10px] py-[8px]">
                         <PersonIcon className="text-primaryBlue text-[16px]" />

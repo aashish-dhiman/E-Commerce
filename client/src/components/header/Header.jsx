@@ -59,7 +59,7 @@ const Header = () => {
                 className="container px-4 md:px-[50px]"
                 // onMouseLeave={closeDropdown}
             >
-                <div className=" flex items-center justify-between gap-8 md:gap-14 w-full flex-col md:flex-row sm:flex-row lg:flex-row">
+                <div className=" flex items-center justify-between gap-3 md:gap-14 w-full flex-col md:flex-row sm:flex-row lg:flex-row">
                     {/* primary div */}
                     <div className=" sm:h-[100px] md:h-[60px] lg:h-[60px] flex items-center justify-between w-[100%] max-w-[650px]">
                         <div className=" flex gap-[20px] items-center w-[100%] flex-col md:flex-row sm:flex-row lg:flex-row">

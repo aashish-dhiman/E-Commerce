@@ -29,6 +29,13 @@ const updateProduct = async (req, res) => {
 
         let brandLogo = null; // Initialize brandLogo as null
 
+        // if (req.body.removedImages) {
+        //     const result = cloudinary.v2.uploader
+        //         .destroy(public_id, options)
+        //         .then(callback);
+        //     console.log("result: ", result);
+        // }
+
         if (req.body.logo) {
             // Check if a new logo is provided
             const result = await cloudinary.v2.uploader.upload(req.body.logo, {
