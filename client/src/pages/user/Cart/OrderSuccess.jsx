@@ -12,56 +12,52 @@ const OrderSuccess = () => {
     const [time, setTime] = useState(3);
     const [cartItems, setCartItems] = useCart();
     const [auth] = useAuth();
-    const [sessionId, setSessionId] = useState(null); // Store sessionId in local state
-    const [shippingInfo, setShippingInfo] = useState(null); // Store shippingInfo in local state
+    const [sessionId, setSessionId] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [hasSavedPayment, setHasSavedPayment] = useState(false); // Add a flag to prevent multiple API calls
 
-    // Fetch sessionId and shippingInfo from localStorage once on mount
+    // Fetch sessionId from localStorage once on mount
     useEffect(() => {
         const storedSessionId = localStorage.getItem("sessionId");
-        console.log("storedSessionId: ", storedSessionId);
-        const storedShippingInfo = JSON.parse(
-            localStorage.getItem("shippingInfo")
-        );
-
         setSessionId(storedSessionId);
-        setShippingInfo(storedShippingInfo);
     }, []);
 
     // After order placement, remove items from cart and save details to the database
     useEffect(() => {
-        if (sessionId) {
-            const savePayment = async () => {
-                try {
-                    setLoading(true);
-                    const payment = await axios.post(
-                        `${
-                            import.meta.env.VITE_SERVER_URL
-                        }/api/v1/user/payment-success`,
-                        {
-                            sessionId: sessionId,
-                            orderItems: cartItems,
+        const savePayment = async () => {
+            try {
+                setLoading(true);
+                const payment = await axios.post(
+                    `${
+                        import.meta.env.VITE_SERVER_URL
+                    }/api/v1/user/payment-success`,
+                    {
+                        sessionId: sessionId,
+                        orderItems: cartItems,
+                    },
+                    {
+                        headers: {
+                            Authorization: auth?.token,
                         },
-                        {
-                            headers: {
-                                Authorization: auth?.token,
-                            },
-                        }
-                    );
-                    console.log(payment);
-                    if (payment.data.success) {
-                        localStorage.removeItem("cart");
-                        localStorage.removeItem("sessionId");
-                        setCartItems([]);
-                        setLoading(false);
                     }
-                } catch (error) {
-                    console.log(error);
+                );
+
+                if (payment.status === 200) {
+                    localStorage.removeItem("cart");
+                    localStorage.removeItem("sessionId");
+                    setCartItems([]); // Clear cart items
+                    setLoading(false);
+                    setHasSavedPayment(true); // Mark the payment as saved to prevent further API calls
                 }
-            };
-            savePayment();
+            } catch (error) {
+                console.log(error);
+            }
+        };
+
+        if (sessionId && cartItems.length > 0 && !hasSavedPayment) {
+            savePayment(); // Ensure the API call is only triggered once
         }
-    }, [sessionId, shippingInfo, auth?.token, cartItems, setCartItems]);
+    }, [sessionId, auth?.token, cartItems, hasSavedPayment, setCartItems]);
 
     // Timer to redirect after 3 sec
     let intervalId = useRef(null);

@@ -47,6 +47,7 @@ const createSession = async (req, res) => {
             },
         });
 
+        console.log('session: ', session);
         res.send({ session: session });
     } catch (error) {
         console.log("Error in creating stripe session id: " + error);

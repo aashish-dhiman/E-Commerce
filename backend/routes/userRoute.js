@@ -9,6 +9,7 @@ import getOrders from "../controllers/user/getOrders.js";
 import getOrderDetail from "../controllers/user/getOrderDetail.js";
 import getAdminOrders from "../controllers/user/getAdminOrders.js";
 import updateOrder from "../controllers/user/updateOrder.js";
+import getAllUserOrder from "../controllers/user/getAllUserOrder.js";
 
 //router object
 const router = express.Router();
@@ -38,4 +39,6 @@ router.get("/admin-order-detail", isAdmin, getOrderDetail);
 //update order status
 router.patch("/update/order-status", isAdmin, updateOrder);
 
+//get all order and delete if possible
+router.get("/get-all-order", requireSignIn, getAllUserOrder);
 export default router;

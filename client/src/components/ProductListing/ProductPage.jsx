@@ -101,7 +101,7 @@ const ProductDetails = () => {
 
     const buyNow = () => {
         addToCartHandler();
-        navigate("/shipping");
+        navigate("/cart");
     };
 
     //fetch cart items

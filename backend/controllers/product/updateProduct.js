@@ -5,6 +5,7 @@ const updateProduct = async (req, res) => {
     try {
         // console.log(req.body);
         const productId = req.params.id;
+        console.log("productId: ", productId);
         let images = [];
 
         if (typeof req.body.images === "string") {

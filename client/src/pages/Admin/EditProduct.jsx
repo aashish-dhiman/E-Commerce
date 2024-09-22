@@ -147,7 +147,7 @@ const EditProduct = () => {
             oldImages.forEach((image) => {
                 formData.append("oldImages", image);
             });
-            // console.log([...formData]);
+            console.log([...formData]);
 
             //send a put request to replace data on server
             const response = await axios.put(
@@ -174,55 +174,59 @@ const EditProduct = () => {
         }
     };
 
-    // Request for prefilled values from the server
-    const fetchData = async () => {
-        try {
-            const res = await axios.get(
-                `${import.meta.env.VITE_SERVER_URL}/api/v1/product/${productId}`
-            );
-
-            // Update state with fetched product data
-            setName(res.data.product.name);
-            setDescription(res.data.product.description);
-            setPrice(res.data.product.price);
-            setDiscountPrice(res.data.product.discountPrice);
-            setCategory(res.data.product.category);
-            setStock(res.data.product.stock);
-            setWarranty(res.data.product.warranty);
-            setBrand(res.data.product.brand.name);
-            setHighlights(res.data.product.highlights || []);
-            setSpecs(res.data.product.specifications || []);
-            setOldImages((prevImages) => [
-                ...prevImages,
-                res.data.product.brand.logo.public_id,
-            ]);
-            {
-                res.data.product.images.map((image) => {
-                    setOldImages((prevImages) => [
-                        ...prevImages,
-                        image.public_id,
-                    ]);
-                });
-            }
-
-            setLoading(false);
-        } catch (error) {
-            console.error("Error fetching data:", error);
-
-            // Server error
-            error.response?.status === 500 &&
-                toast.error("Something went wrong! Please try again later.");
-        }
-    };
-
     useEffect(() => {
+        // Request for prefilled values from the server
+        const fetchData = async () => {
+            try {
+                const res = await axios.get(
+                    `${
+                        import.meta.env.VITE_SERVER_URL
+                    }/api/v1/product/${productId}`
+                );
+
+                // Update state with fetched product data
+                setName(res.data.product.name);
+                setDescription(res.data.product.description);
+                setPrice(res.data.product.price);
+                setDiscountPrice(res.data.product.discountPrice);
+                setCategory(res.data.product.category);
+                setStock(res.data.product.stock);
+                setWarranty(res.data.product.warranty);
+                setBrand(res.data.product.brand.name);
+                setHighlights(res.data.product.highlights || []);
+                setSpecs(res.data.product.specifications || []);
+                setOldImages((prevImages) => [
+                    ...prevImages,
+                    res.data.product.brand.logo.url,
+                ]);
+                {
+                    res.data.product.images.map((image) => {
+                        setOldImages((prevImages) => [
+                            ...prevImages,
+                            image.url,
+                        ]);
+                    });
+                }
+                console.log("res.data: ", res.data);
+
+                setLoading(false);
+            } catch (error) {
+                console.error("Error fetching data:", error);
+
+                // Server error
+                error.response?.status === 500 &&
+                    toast.error(
+                        "Something went wrong! Please try again later."
+                    );
+            }
+        };
         // Initial call to fetch data from the server
         fetchData();
-    }, []);
+    }, [productId]);
 
     return (
         <>
-            <SeoData title="New Product | Flipkart" />
+            <SeoData title="New/Update Product | Flipkart" />
             <ScrollToTopOnRouteChange />
 
             {isSubmit || loading ? (
@@ -410,7 +414,7 @@ const EditProduct = () => {
 
                         <h2 className="font-medium">Specifications</h2>
 
-                        <div className="flex justify-evenly gap-2 items-center">
+                        <div className="flex justify-between gap-2 items-center">
                             <TextField
                                 value={specsInput.title}
                                 onChange={handleSpecsChange}
@@ -441,7 +445,7 @@ const EditProduct = () => {
                             {specs?.map((spec, i) => (
                                 <div
                                     key={i}
-                                    className="flex justify-between items-center text-sm rounded bg-blue-50 py-1 px-2"
+                                    className="flex justify-between gap-2 sm:gap-5 items-center text-sm rounded bg-blue-50 py-1 px-2"
                                 >
                                     <p className="text-gray-500 font-medium">
                                         {spec.title}
@@ -459,7 +463,16 @@ const EditProduct = () => {
 
                         <h2 className="font-medium">Product Images</h2>
                         <div className="flex gap-2 overflow-x-auto h-32 border rounded">
-                            {imagesPreview.map((image, i) => (
+                            {oldImages?.map((image, i) => (
+                                <img
+                                    draggable="false"
+                                    src={image}
+                                    alt="Product"
+                                    key={i}
+                                    className="w-full h-full object-contain"
+                                />
+                            ))}
+                            {imagesPreview?.map((image, i) => (
                                 <img
                                     draggable="false"
                                     src={image}
