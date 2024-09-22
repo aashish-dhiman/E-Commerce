@@ -32,7 +32,7 @@ import SeoData from "../../SEO/SeoData";
 
 const ProductDetails = () => {
     const navigate = useNavigate();
-    const {auth, setAuth, LogOut, isAdmin, isContextLoading} = useAuth();
+    const { auth, setAuth, LogOut, isAdmin, isContextLoading } = useAuth();
     const [cartItems, setCartItems, addItems] = useCart();
     // reviews toggle
     const [open, setOpen] = useState(false);
@@ -123,8 +123,8 @@ const ProductDetails = () => {
                 console.error("Error fetching wishlist items:", error);
             }
         };
-        !isContextLoading && fetchWishlistItems();
-    }, [isContextLoading, auth.token]);
+        auth.token && !isAdmin && fetchWishlistItems();
+    }, [isContextLoading, auth.token, auth, isAdmin]);
 
     //fetch product details
     useEffect(() => {
@@ -226,14 +226,14 @@ const ProductDetails = () => {
                     <SeoData title={product?.name} />
                     <ScrollToTopOnRouteChange />
                     <MinCategory />
-                    <main className="mt-12 sm:mt-0">
+                    <main className="mt-5 sm:mt-0">
                         {/* <!-- product image & description container --> */}
-                        <div className="w-full flex flex-col sm:flex-row bg-white sm:p-2 relative">
+                        <div className="w-full flex flex-col lg:flex-row bg-white sm:p-2 relative">
                             {/* <!-- image wrapper --> */}
-                            <div className="w-full sm:w-2/5 sm:sticky top-16 sm:h-screen">
+                            <div className="w-full lg:w-2/5 lg:sticky top-16 lg:h-screen">
                                 {/* <!-- imgBox --> */}
                                 <div className="flex flex-col gap-3 m-3 ">
-                                    <div className="w-full sm:w-[450px] h-full pb-6 border relative">
+                                    <div className="w-full lg:w-[450px] h-full pb-6 border relative">
                                         <Slider {...settings}>
                                             {product?.images.length > 1 ? (
                                                 product?.images?.map(
@@ -258,7 +258,11 @@ const ProductDetails = () => {
                                                 />
                                             )}
                                         </Slider>
-                                        <div className="absolute top-4 right-4 shadow-lg bg-white w-9 h-9 border flex items-center justify-center rounded-full">
+                                        <div
+                                            className={`absolute top-4 right-4 shadow-lg bg-white w-9 h-9 border flex items-center justify-center rounded-full ${
+                                                isAdmin ? "hidden" : ""
+                                            } `}
+                                        >
                                             <span
                                                 onClick={addToWishlistHandler}
                                                 className={`${
@@ -316,10 +320,12 @@ const ProductDetails = () => {
                             {/* <!-- image wrapper --> */}
 
                             {/* <!-- product desc wrapper --> */}
-                            <div className="flex py-2 px-3">
+                            <div className="py-2 px-3 ">
                                 {/* <!-- whole product description --> */}
                                 <div className="flex flex-col gap-3 mb-4">
-                                    <h2 className="text-xl">{product?.name}</h2>
+                                    <h2 className="text-lg sm:text-xl">
+                                        {product?.name}
+                                    </h2>
                                     {/* <!-- rating badge --> */}
                                     <span className="text-md text-gray-500 font-medium flex gap-2 items-center">
                                         <span className="text-xs px-1.5 py-0.5 bg-primaryGreen rounded-sm text-white flex items-center gap-0.5">
@@ -382,34 +388,36 @@ const ProductDetails = () => {
                                         "10% Instant Discount on ICICI Bank Credit Card Txns, up to ₹1250, on orders of ₹5000 and above",
                                         "Flat ₹500 off on HDFC Bank Credit/Debit Card on 6 months EMI Txns, Min Txn Value ₹10,000",
                                     ].map((el, i) => (
-                                        <p
-                                            className="flex gap-2 text-[14px] leading-5"
+                                        <div
+                                            className="flex gap-2 text-xs sm:text-sm leading-4"
                                             key={i}
                                         >
-                                            <LocalOfferIcon
-                                                sx={{
-                                                    fontSize: "16px",
-                                                }}
-                                                style={{
-                                                    color: "#16bd49",
-                                                    marginTop: "2px",
-                                                }}
-                                            />
-                                            <span className="font-[500] text-[14px] flex items-baseline gap-4">
-                                                <span className="min-w-fit">
+                                            <div className="whitespace-nowrap flex items-start">
+                                                <LocalOfferIcon
+                                                    sx={{
+                                                        fontSize: "16px",
+                                                    }}
+                                                    style={{
+                                                        color: "#16bd49",
+                                                        marginTop: "2px",
+                                                    }}
+                                                />
+                                                <span className="ml-1 font-semibold">
                                                     Bank Offer
                                                 </span>
-                                                <span className=" font-[400] ">
+                                            </div>
+                                            <div className="flex items-start text-sm">
+                                                <span>
                                                     {el}
                                                     <Link
                                                         className="text-primaryBlue text-[12px] font-medium ml-1"
-                                                        to="/"
+                                                        to="./"
                                                     >
                                                         T&C
                                                     </Link>
                                                 </span>
-                                            </span>
-                                        </p>
+                                            </div>
+                                        </div>
                                     ))}
                                     {/* <!-- banks offers --> */}
 
@@ -534,14 +542,14 @@ const ProductDetails = () => {
                                     {/* <!-- seller details --> */}
 
                                     {/* <!-- flipkart plus banner --> */}
-                                    <div className="sm:w-1/2 mt-4 border">
+                                    {/* <div className="lg:w-1/2 mt-4 border">
                                         <img
                                             draggable="false"
-                                            className="w-full h-full object-contain"
+                                            className="w-full h-full object-fill"
                                             src="https://rukminim1.flixcart.com/lockin/763/305/images/promotion_banner_v2_active.png"
                                             alt="flipkart plus"
                                         />
-                                    </div>
+                                    </div> */}
                                     {/* <!-- flipkart plus banner --> */}
 
                                     {/* <!-- description details --> */}

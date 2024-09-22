@@ -3,8 +3,9 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import PersonIcon from "@mui/icons-material/Person";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import PowerSettingsNewIcon from "@mui/icons-material/PowerSettingsNew";
+import { GiCrossMark } from "react-icons/gi";
 
-const UserMenu = () => {
+const UserMenu = ({ toggleMenu }) => {
     const { auth, setAuth, LogOut } = useAuth();
     const navigate = useNavigate();
     const handleLogout = () => {
@@ -31,9 +32,15 @@ const UserMenu = () => {
                         {auth?.user?.name}
                     </div>
                 </div>
+                <div
+                    className="hover:scale-[1.06] absolute right-4 top-2 cursor-pointer sm:hidden"
+                    onClick={toggleMenu}
+                >
+                    <GiCrossMark />
+                </div>
             </div>
 
-            <div className="bg-white flex flex-col justify-center rounded-sm shadow-md">
+            <div className="bg-white flex flex-col justify-center rounded-sm sm:shadow-md">
                 <div className="flex flex-col justify-center border-b-[1px]">
                     <div className="flex flex-row items-center gap-6 pl-[10px] py-[8px]">
                         <PersonIcon className="text-primaryBlue text-[16px]" />

@@ -29,18 +29,22 @@ const AdminDashboard = () => {
     return (
         <>
             <SeoData title="Admin Dashboard" />
-            <div className="py-[5px]">
-                <div className="flex items-start justify-between text-[14px] px-2 sm:px-[50px] py-2 sm:py-[40px] gap-5">
+            <div className="py-[5px] h-full">
+                <div className="flex items-start justify-between text-[14px] h-full px-2 sm:px-[50px] py-2 sm:py-[40px] gap-5">
                     <div
                         className={`sm:w-[30%] ${
                             isMenuOpen
-                                ? "absolute top-0 bottom-0 z-10000 left-0 w-[300px] h-full bg-white z-50"
+                                ? "relative w-full h-full bg-white z-50"
                                 : "hidden"
                         } sm:inline-block `}
                     >
                         <AdminMenu toggleMenu={toggleMenu} />
                     </div>
-                    <div className="w-full sm:w-[70%] bg-white shadow-md rounded-sm">
+                    <div
+                        className={`w-full sm:w-[70%] bg-white h-full shadow-md rounded-sm ${
+                            isMenuOpen ? "hidden" : "block"
+                        }`}
+                    >
                         <button
                             onClick={toggleMenu}
                             className="sm:hidden text-blue-400 underline rounded px-2 text-lg py-2"

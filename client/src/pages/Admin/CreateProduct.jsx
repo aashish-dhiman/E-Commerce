@@ -14,7 +14,7 @@ import ScrollToTopOnRouteChange from "./../../utils/ScrollToTopOnRouteChange";
 import SeoData from "../../SEO/SeoData";
 
 const CreateProduct = () => {
-    const {auth} = useAuth();
+    const { auth } = useAuth();
     const navigate = useNavigate();
 
     const [highlights, setHighlights] = useState([]);
@@ -330,7 +330,7 @@ const CreateProduct = () => {
                                 value={brand}
                                 onChange={(e) => setBrand(e.target.value)}
                             />
-                            <div className="w-24 h-10 flex items-center justify-center border rounded-lg">
+                            <div className="w-24 h-10 flex items-center justify-center border rounded-lg relative">
                                 {!logoPreview ? (
                                     <ImageIcon />
                                 ) : (
@@ -341,6 +341,9 @@ const CreateProduct = () => {
                                         className="w-full h-full object-contain"
                                     />
                                 )}
+                                <span className="text-red-500 absolute -top-1 -right-2">
+                                    *
+                                </span>
                             </div>
                             <label className="rounded bg-primaryBlue text-center cursor-pointer text-white py-2 px-2.5 shadow hover:shadow-lg">
                                 <input
@@ -354,9 +357,14 @@ const CreateProduct = () => {
                             </label>
                         </div>
 
-                        <h2 className="font-medium">Specifications</h2>
+                        <h2 className="font-medium">
+                            Specifications{" "}
+                            <span className="text-xs text-gray-600">
+                                (at least 2 required)
+                            </span>
+                        </h2>
 
-                        <div className="flex justify-evenly gap-2 items-center">
+                        <div className="flex justify-between gap-2 items-center">
                             <TextField
                                 value={specsInput.title}
                                 onChange={handleSpecsChange}
@@ -387,7 +395,7 @@ const CreateProduct = () => {
                             {specs.map((spec, i) => (
                                 <div
                                     key={i}
-                                    className="flex justify-between items-center text-sm rounded bg-blue-50 py-1 px-2"
+                                    className="flex justify-between gap-2 sm:gap-5 items-center text-sm rounded bg-blue-50 py-1 px-2"
                                 >
                                     <p className="text-gray-500 font-medium">
                                         {spec.title}
@@ -403,7 +411,12 @@ const CreateProduct = () => {
                             ))}
                         </div>
 
-                        <h2 className="font-medium">Product Images</h2>
+                        <h2 className="font-medium">
+                            Product Images{" "}
+                            <span className="text-xs text-gray-600">
+                                (min 1 , max 4)
+                            </span>
+                        </h2>
                         <div className="flex gap-2 overflow-x-auto h-32 border rounded">
                             {imagesPreview.map((image, i) => (
                                 <img

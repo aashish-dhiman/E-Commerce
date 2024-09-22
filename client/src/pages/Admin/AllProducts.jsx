@@ -187,8 +187,8 @@ const AllProducts = () => {
         });
     });
     return (
-        <div className="relative p-2 w-full h-full">
-            <SeoData title="All Products -  Seller Flipkart" />
+        <div className="relative p-2 w-full h-screen">
+            <SeoData title="All Products - Flipkart Seller" />
 
             {loading ? (
                 <Spinner />

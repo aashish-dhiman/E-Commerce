@@ -80,7 +80,7 @@ const Product = ({
                             ? "text-red-500"
                             : "hover:text-red-500 text-gray-300"
                     }
-                    ${isAdmin ? "hidden" : "block"}
+                    ${isAdmin ? "hidden" : ""}
                     absolute z-10  top-2 right-3 cursor-pointer`}
                 >
                     <FavoriteIcon sx={{ fontSize: "20px" }} />

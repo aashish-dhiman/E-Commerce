@@ -9,9 +9,11 @@ import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useAuth } from "../../context/auth";
 
 const Actions = ({ id, name, updateDeletedProduct }) => {
     const [open, setOpen] = useState(false);
+    const { auth } = useAuth();
 
     const handleClose = () => {
         setOpen(false);
@@ -21,9 +23,17 @@ const Actions = ({ id, name, updateDeletedProduct }) => {
         handleClose();
         try {
             const res = await axios.post(
-                `${import.meta.env.VITE_SERVER_URL}/api/v1/product/delete-product`,
+                `${
+                    import.meta.env.VITE_SERVER_URL
+                }/api/v1/product/delete-product`,
                 {
                     productId: id,
+                },
+                {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                        Authorization: auth?.token,
+                    },
                 }
             );
             if (res.status === 201) {

@@ -38,8 +38,8 @@ const Deactivate = () => {
     return (
         <>
             <ScrollToTopOnRouteChange />
-            <div className="flex w-full items-start p-4 h-full ">
-                <div className="w-[50%] p-2 border-r-2 h-full">
+            <div className="flex flex-col sm:flex-row w-full items-center sm:items-start p-4 h-full ">
+                <div className="sm:w-[50%] p-2 sm:border-r-2 h-full">
                     <div>
                         <div className="text-[16px] font-[500] leading-7 ">
                             When you deactivate your account
@@ -72,7 +72,7 @@ const Deactivate = () => {
                         </div>
                     </div>
                 </div>
-                <div className="w-[50%] flex flex-col gap-5 items-center p-2  ">
+                <div className="sm:w-[50%] flex flex-col gap-5 items-center p-2  ">
                     <div className="w-full font-[500] text-[16px] text-center leading-7">
                         Are you sure you want to leave?
                     </div>
