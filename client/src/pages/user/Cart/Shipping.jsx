@@ -59,10 +59,13 @@ const Shipping = () => {
         const stripe = await loadStripe(publishKey);
 
         const response = await axios.post(
-            `${import.meta.env.VITE_SERVER_URL}/api/v1/user/create-checkout-session`,
+            `${
+                import.meta.env.VITE_SERVER_URL
+            }/api/v1/user/create-checkout-session`,
             {
                 products: cartItems,
                 frontendURL: frontendURL,
+                customerEmail: auth?.user?.email,
             },
             {
                 headers: {
@@ -71,11 +74,13 @@ const Shipping = () => {
             }
         );
         const session = response.data.session;
+        console.log("session: ", session);
         //storing session id to retrieve payment details after successful
         localStorage.setItem("sessionId", session.id);
         const result = stripe.redirectToCheckout({
             sessionId: session.id,
         });
+        console.log("result: ", result);
 
         if (result.error) {
             console.log(result.error);

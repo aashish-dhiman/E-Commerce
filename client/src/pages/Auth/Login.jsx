@@ -31,6 +31,10 @@ const Login = () => {
         e.preventDefault();
         setIsSubmitting(true);
         try {
+            toast(
+                "The backend is starting up, please wait for a minute if the loader is visible."
+            );
+
             const response = await axios.post(
                 `${import.meta.env.VITE_SERVER_URL}/api/v1/auth/login`,
                 {

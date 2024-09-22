@@ -43,6 +43,10 @@ const Products = () => {
     };
 
     useEffect(() => {
+        toast(
+            "The backend is starting up, please wait for a minute if the loader is visible."
+        );
+
         //fetching filtered products from sever
         const fetchFilteredData = async () => {
             try {

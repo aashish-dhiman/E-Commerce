@@ -15,7 +15,12 @@ ReactDOM.createRoot(document.getElementById("root")).render(
                 <App />
             </BrowserRouter>
             <ToastContainer
-                style={{ fontSize: "14px", zIndex: 900 }}
+                style={{
+                    position: "fixed",
+                    bottom: "20px",
+                    fontSize: "14px",
+                    zIndex: 900,
+                }}
                 autoClose={2000}
             />
         </CartProvider>
