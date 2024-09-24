@@ -27,6 +27,15 @@ const ForgotPassword = () => {
     //form submission handler
     const handleFormSubmit = async (e) => {
         e.preventDefault();
+        if (email === "test@test.com" || email === "store@flipkart.com") {
+            toast.error(
+                "Functionality is disabled for testing account! Please create a new one!"
+            );
+            setEmail("");
+            setConfirmPassword("");
+            setPassword("");
+            return;
+        }
         setIsSubmitting(true);
         try {
             if (userFound) {
@@ -35,7 +44,9 @@ const ForgotPassword = () => {
                     return;
                 }
                 const response = await axios.post(
-                `${import.meta.env.VITE_SERVER_URL}/api/v1/auth/forgot-password`,
+                    `${
+                        import.meta.env.VITE_SERVER_URL
+                    }/api/v1/auth/forgot-password`,
                     {
                         email,
                         password,

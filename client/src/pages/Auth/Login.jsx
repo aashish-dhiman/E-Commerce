@@ -15,7 +15,7 @@ const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
-    const { auth, setAuth, LogOut, isAdmin, isContextLoading } = useAuth();
+    const { auth, setAuth, isAdmin } = useAuth();
     const [isSubmitting, setIsSubmitting] = useState(false);
     const location = useLocation();
 
