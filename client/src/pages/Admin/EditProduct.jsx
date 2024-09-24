@@ -45,6 +45,10 @@ const EditProduct = () => {
     //for submit state
     const [isSubmit, setIsSubmit] = useState(false);
 
+    // max image size 500kb
+    const MAX_IMAGE_SIZE = 500 * 1024;
+    const MAX_IMAGES_COUNT = 4; // Maximum number of allowed images
+
     const handleSpecsChange = (e) => {
         setSpecsInput({ ...specsInput, [e.target.name]: e.target.value });
     };
@@ -70,6 +74,13 @@ const EditProduct = () => {
     };
 
     const handleLogoChange = (e) => {
+        const file = e.target.files[0];
+
+        if (file.size > MAX_IMAGE_SIZE) {
+            toast.warning("Logo image size exceeds 500 KB!");
+            return;
+        }
+
         if (oldLogo)
             setRemovedImages((prev) => {
                 return [...prev, oldLogo.public_id];
@@ -89,8 +100,19 @@ const EditProduct = () => {
 
     const handleProductImageChange = (e) => {
         const files = Array.from(e.target.files);
+        // if more than 4 images then show warning
+        if (files.length > MAX_IMAGES_COUNT) {
+            toast.warning("You can only upload up to 4 images");
+            return;
+        }
 
         files.forEach((file) => {
+            // check for image size
+            if (file.size > MAX_IMAGE_SIZE) {
+                toast.warning("One of the product images exceeds 500 KB");
+                // Skip the file if it exceeds the size limit
+                return;
+            }
             const reader = new FileReader();
 
             reader.onload = () => {
@@ -251,7 +273,7 @@ const EditProduct = () => {
                     className="flex flex-col sm:flex-row bg-white rounded-lg shadow p-2 sm:p-4"
                     id="mainForm"
                 >
-                    <div className="flex flex-col gap-3 m-2 ">
+                    <div className="flex flex-col flex-1 gap-3 m-2 ">
                         <TextField
                             label="Name"
                             variant="outlined"
@@ -389,7 +411,7 @@ const EditProduct = () => {
                         </div>
 
                         <h2 className="font-medium">Brand Details</h2>
-                        <div className="flex justify-between gap-4 items-start">
+                        <div className="flex flex-col sm:flex-row justify-between gap-4 items-start">
                             <TextField
                                 label="Brand"
                                 type="text"
@@ -417,8 +439,11 @@ const EditProduct = () => {
                                         className="w-full h-full object-contain"
                                     />
                                 )}
-                                <span className="text-red-500 absolute -top-1 -right-2">
+                                <span className="text-red-500 absolute -top-1 -right-[90px]">
                                     *
+                                    <span className=" text-[10px] text-gray-500">
+                                        (max 500KB)
+                                    </span>
                                 </span>
                             </div>
                             <label className="rounded bg-primaryBlue text-center cursor-pointer text-white py-2 px-2.5 shadow hover:shadow-lg">
@@ -435,7 +460,7 @@ const EditProduct = () => {
 
                         <h2 className="font-medium">
                             Specifications{" "}
-                            <span className="text-xs text-gray-600">
+                            <span className="text-xs text-gray-500">
                                 (at least 2 required)
                             </span>
                         </h2>
@@ -489,8 +514,8 @@ const EditProduct = () => {
 
                         <h2 className="font-medium">
                             Product Images{" "}
-                            <span className="text-xs text-gray-600">
-                                (min 1 , max 4)
+                            <span className="ml-2 text-xs text-gray-500">
+                                (1-4 images, max 500KB each)
                             </span>
                         </h2>
                         <div className="flex gap-2 overflow-x-auto h-36 border rounded bg-gray-200 p-2">

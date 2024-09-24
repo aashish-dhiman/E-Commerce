@@ -73,14 +73,15 @@ const updateProduct = async (req, res) => {
         product.images = [...oldImages, ...imagesLink];
 
         // Update other product fields
-        product.name = req.body.name || product.name; // Update name if provided
-        product.warranty = req.body.warranty || product.warranty; // Update warranty if provided
-        product.stock = req.body.stock || product.stock; // Update stock if provided
-        product.category = req.body.category || product.category; // Update category if provided
+        product.name = req.body.name || product.name;
+        product.warranty = req.body.warranty || product.warranty;
+        product.stock = req.body.stock || product.stock;
+        product.category = req.body.category || product.category;
         product.description = req.body.description || product.description;
         product.price = req.body.price || product.price;
         product.discountPrice = req.body.discountPrice || product.discountPrice;
         product.ratings = req.body.ratings || product.ratings;
+        product.highlights = req.body.highlights || product.highlights;
 
         // Update specifications
         if (Array.isArray(req.body.specifications)) {
