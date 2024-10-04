@@ -13,7 +13,7 @@ const SearchBar = () => {
             const products = await axios.get(
                 `${
                     import.meta.env.VITE_SERVER_URL
-                }api/v1/product/search/${query}`
+                }/api/v1/product/search/${query}`
             );
             setResults(products.data.slice(0, 6));
             setOpen(true);
