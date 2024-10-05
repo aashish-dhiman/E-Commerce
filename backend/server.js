@@ -52,6 +52,10 @@ connectDB();
 //port
 const PORT = process.env.PORT || 8080;
 
+app.get("/", (req, res) => {
+    res.send("Hello there!");
+});
+
 //routes
 app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/product", productRoute);
